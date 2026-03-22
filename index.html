@@ -20,97 +20,60 @@
             --gold-gradient: linear-gradient(135deg, #D4AF37, #f5e27a);
             --dark-gold: #D4AF37;
         }
-
-        body { 
-            font-family: 'Poppins', sans-serif; 
-            background-color: #f9f9f9; 
-            color: #333; 
-            overflow-x: hidden; 
-        }
-        
-        h1, h2, h3, h4, h5, .navbar-brand { 
-            font-family: 'Montserrat', sans-serif; 
-            font-weight: 800; 
-        }
+        body { font-family: 'Poppins', sans-serif; background-color: #f9f9f9; color: #333; overflow-x: hidden; }
+        h1, h2, h3, h4, h5, .navbar-brand { font-family: 'Montserrat', sans-serif; font-weight: 800; }
 
         /* =================================================
-           ANIMATIONS
+           ANIMATIONS & BUTTONS
            ================================================= */
-        @keyframes glowing { 
-            0% { box-shadow: 0 0 5px #D4AF37; } 
-            50% { box-shadow: 0 0 20px #D4AF37; } 
-            100% { box-shadow: 0 0 5px #D4AF37; } 
-        }
-        @keyframes floating { 
-            0% { transform: translateY(0px); } 
-            50% { transform: translateY(-15px); } 
-            100% { transform: translateY(0px); } 
-        }
-
-        /* =================================================
-           BUTTONS
-           ================================================= */
+        @keyframes glowing { 0% { box-shadow: 0 0 5px #D4AF37; } 50% { box-shadow: 0 0 20px #D4AF37; } 100% { box-shadow: 0 0 5px #D4AF37; } }
         .btn-gold-glow {
-            background: var(--gold-gradient); 
-            color: #1e1e1e !important;
-            border: none; 
-            font-weight: bold; 
-            text-transform: uppercase; 
-            letter-spacing: 1px;
-            animation: glowing 2s infinite; 
-            border-radius: 50px; 
-            transition: 0.3s; 
-            text-decoration: none;
-            display: inline-block; 
-            text-align: center;
+            background: var(--gold-gradient); color: #1e1e1e !important; border: none; font-weight: bold; 
+            text-transform: uppercase; letter-spacing: 1px; animation: glowing 2s infinite; 
+            border-radius: 50px; transition: 0.3s; text-decoration: none; display: inline-block; text-align: center;
         }
-        .btn-gold-glow:hover { 
-            background: linear-gradient(135deg, #f5e27a, #D4AF37);
-            transform: scale(1.05); 
-            color: #000 !important; 
-        }
+        .btn-gold-glow:hover { background: linear-gradient(135deg, #f5e27a, #D4AF37); transform: scale(1.05); color: #000 !important; }
 
         /* =================================================
-           HERO SECTION (Aapka Pasandeeda Design)
+           HERO SECTION & PRODUCT GALLERY (NEW ZOOM EFFECT)
            ================================================= */
-        .hero-section { 
-            background: radial-gradient(circle at top, #1e5e41, #14452F);
-            color: white; 
-            padding: 80px 0; 
-            border-bottom: 5px solid var(--dark-gold); 
-            min-height: 80vh; /* Fixed for mobile */
-            display: flex;
-            align-items: center;
-        }
-        .product-img-main { 
-            max-width: 100%; 
-            filter: drop-shadow(0 15px 25px rgba(0,0,0,0.5)); 
-            animation: floating 4s ease-in-out infinite; 
-        }
-        .price-box {
-            background: rgba(255,255,255,0.1);
-            padding: 15px 25px;
-            border-radius: 15px;
-            display: inline-block;
-            margin: 20px 0;
-            border: 1px solid rgba(212, 175, 55, 0.3);
-        }
+        .hero-section { background: radial-gradient(circle at top, #1e5e41, #14452F); color: white; padding: 60px 0; border-bottom: 5px solid var(--dark-gold); min-height: 80vh; display: flex; align-items: center; }
+        .price-box { background: rgba(255,255,255,0.1); padding: 15px 25px; border-radius: 15px; display: inline-block; margin: 15px 0; border: 1px solid rgba(212, 175, 55, 0.3); }
         .price-box .new-price { font-size: 32px; font-weight: 800; color: #D4AF37; }
+        
+        /* Gallery */
+        .product-gallery { position: relative; max-width: 450px; margin: 0 auto; }
+        .main-image-wrapper { position: relative; background: rgba(255,255,255,0.05); border-radius: 15px; padding: 10px; cursor: zoom-in; border: 1px solid rgba(212, 175, 55, 0.2); transition: 0.3s; }
+        .main-image-wrapper:hover { border-color: #D4AF37; box-shadow: 0 0 15px rgba(212, 175, 55, 0.3); }
+        .product-img-main { width: 100%; height: auto; border-radius: 10px; }
+        .zoom-hint { position: absolute; bottom: 15px; right: 15px; background: rgba(0,0,0,0.6); color: white; padding: 5px 10px; border-radius: 20px; font-size: 12px; pointer-events: none; }
+        
+        /* Thumbnails */
+        .thumbnail-container { display: flex; gap: 10px; margin-top: 15px; justify-content: center; overflow-x: auto; padding-bottom: 5px; scrollbar-width: none; }
+        .thumbnail-container::-webkit-scrollbar { display: none; }
+        .thumb { width: 70px; height: 70px; object-fit: cover; border-radius: 8px; border: 2px solid transparent; cursor: pointer; opacity: 0.6; transition: 0.3s; }
+        .thumb.active, .thumb:hover { opacity: 1; border-color: #D4AF37; }
+
+        /* Fullscreen Zoom Modal */
+        #imageZoomModal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.95); z-index: 100000; align-items: center; justify-content: center; }
+        #imageZoomModal.active { display: flex; animation: fadeIn 0.3s ease; }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        #zoomedImage { max-width: 95%; max-height: 90vh; border-radius: 10px; box-shadow: 0 0 30px rgba(212, 175, 55, 0.2); }
+        .close-zoom { position: absolute; top: 20px; right: 20px; color: white; font-size: 35px; cursor: pointer; background: rgba(255,255,255,0.2); width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; border-radius: 50%; }
+        .close-zoom:hover { background: #D4AF37; color: black; }
 
         /* =================================================
-           TRUST BANNER & SECTIONS
+           SECTIONS & TRUST BANNER
            ================================================= */
         .trust-banner { background: #fff; border-bottom: 1px solid #e9ecef; padding: 15px 0; box-shadow: 0 4px 6px rgba(0,0,0,0.05); }
         .trust-item { display: inline-flex; align-items: center; gap: 8px; font-size: 14px; font-weight: 600; color: var(--primary-green); margin: 5px 15px; }
         .trust-item i { font-size: 20px; color: var(--dark-gold); }
-        
         .section-padding { padding: 70px 0; }
         .bg-green { background-color: var(--primary-green); color: white; }
         .text-gold { color: var(--dark-gold); }
-        .table-custom { background: white; border-radius: 15px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.1); }
 
         /* =================================================
-           WHATSAPP CHATS (New Conversion Element)
+           WHATSAPP CHATS
            ================================================= */
         .whatsapp-review-card { background: #e5ddd5; border-radius: 15px; padding: 20px; max-width: 400px; margin: 0 auto; }
         .chat-bubble { background: #fff; padding: 12px 15px; border-radius: 0 15px 15px 15px; font-size: 14px; margin-bottom: 10px; box-shadow: 0 1px 2px rgba(0,0,0,0.1); }
@@ -118,47 +81,33 @@
         .chat-time { font-size: 10px; color: #999; display: block; margin-top: 5px; }
 
         /* =================================================
-           DR RANA SECTION
+           INGREDIENTS (Mobile Optimized)
            ================================================= */
-        .dr-rana-section { background: linear-gradient(135deg, #14452F 0%, #0a2418 100%); border-top: 4px solid #D4AF37; padding: 60px 0; color: white; text-align: center; }
-        .btn-outline-gold { border: 2px solid #D4AF37; color: #D4AF37; padding: 12px 30px; border-radius: 50px; font-weight: 600; transition: 0.3s; text-decoration: none; display: inline-block;}
-        .btn-outline-gold:hover { background: #D4AF37; color: #14452F; }
+        .ingredient-box { background: #fff; border-radius: 12px; padding: 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); height: 100%; display: flex; flex-direction: column; text-align: center; }
+        .ingredient-img { width: 110px; height: 110px; object-fit: cover; border: 3px solid #D4AF37; border-radius: 50%; margin: 0 auto 15px; }
 
         /* =================================================
-           FLOATING ICONS & MOBILE CTA
+           DR RANA BANNER
+           ================================================= */
+        .dr-rana-banner { background: linear-gradient(135deg, #0a2418 0%, #14452F 100%); border-top: 3px solid #D4AF37; padding: 40px 0; margin-top: 30px; }
+
+        /* =================================================
+           FLOATING ICONS & MOBILE
            ================================================= */
         .whatsapp-float { position: fixed; bottom: 80px; right: 20px; background-color: #25d366; color: white; width: 60px; height: 60px; border-radius: 50px; display: flex; align-items: center; justify-content: center; font-size: 30px; z-index: 1000; box-shadow: 0 4px 10px rgba(0,0,0,0.3); text-decoration: none; transition: 0.3s;}
         .whatsapp-float:hover { transform: scale(1.1); color:white;}
         .mobile-cta-bar { position: fixed; bottom: 0; width: 100%; background: #14452F; padding: 10px; display: none; z-index: 999; box-shadow: 0 -5px 15px rgba(0,0,0,0.2); }
 
+        /* MEDIA QUERIES */
         @media (max-width: 768px) { 
             .mobile-cta-bar { display: block; } 
-            .hero-section { text-align: center; padding: 50px 0; } 
-            .product-img-main { margin-top: 30px; max-width: 80%; }
+            .hero-section { text-align: center; padding: 40px 0 80px 0; } 
+            .ingredient-box { padding: 12px 8px !important; }
+            .ingredient-img { width: 90px; height: 90px; border-width: 2px; }
+            .ingredient-box h5 { font-size: 14px; margin-bottom: 5px; }
+            .ingredient-box p { font-size: 11px; line-height: 1.3; margin-bottom: 8px; }
+            .ingredient-box .badge { font-size: 9px !important; padding: 3px 5px !important; margin-bottom: 3px; display: inline-block;}
         }
-        /* =================================================
-   MOBILE OPTIMIZATION FOR INGREDIENTS (2 PER ROW)
-   ================================================= */
-.ingredient-box {
-    background: #fff; border-radius: 12px; padding: 20px; 
-    box-shadow: 0 4px 15px rgba(0,0,0,0.05); height: 100%; display: flex; flex-direction: column; text-align: center;
-}
-.ingredient-img {
-    width: 110px; height: 110px; object-fit: cover; border: 3px solid #D4AF37; border-radius: 50%; margin: 0 auto 15px;
-}
-.dr-rana-banner {
-    background: linear-gradient(135deg, #0a2418 0%, #14452F 100%);
-    border-top: 3px solid #D4AF37; padding: 40px 0; margin-top: 30px;
-}
-
-@media (max-width: 576px) {
-    /* Mobile par 2 item aayenge, isliye padding aur size thoda adjust kiya hai taaki bikhre nahi */
-    .ingredient-box { padding: 12px 8px !important; }
-    .ingredient-img { width: 90px; height: 90px; border-width: 2px; }
-    .ingredient-box h5 { font-size: 14px; margin-bottom: 5px; }
-    .ingredient-box p { font-size: 11px; line-height: 1.3; margin-bottom: 8px; }
-    .badge { font-size: 9px !important; padding: 3px 5px !important; margin-bottom: 3px; display: inline-block;}
-}
     </style>
 
     <!-- TEST PIXEL CODE (DUMMY ID) -->
@@ -185,11 +134,13 @@
         </div>
     </nav>
 
-    <!-- HERO SECTION (Aapka Pasandeeda Old Layout + New Copy) -->
+    <!-- HERO SECTION (E-commerce Gallery & Zoom, flex-column-reverse for mobile) -->
     <section class="hero-section">
         <div class="container">
-            <div class="row align-items-center">
-                <div class="col-md-6">
+            <div class="row align-items-center flex-column-reverse flex-md-row">
+                
+                <!-- LEFT SIDE: Text & CTA -->
+                <div class="col-md-6 mt-4 mt-md-0 text-center text-md-start">
                     <p class="text-gold mb-2" style="font-weight: 600; letter-spacing: 1px;">ENERGY LOW? CONFIDENCE DOWN?</p>
                     <h1 class="display-5 mb-3">2-5 Din Mein Stamina Aur Performance Mein <span class="text-gold">Noticeable Farq!</span></h1>
                     <p class="lead mb-3" style="font-size: 16px; opacity: 0.9;">100% Ayurvedic formula — bina kisi side effects ke natural aur long-lasting result feel karein.</p>
@@ -202,13 +153,35 @@
                     <br>
                     <a href="checkout.html" class="btn btn-gold-glow btn-lg px-5 py-3 mt-2">Order Now (Pay on Delivery)</a>
                 </div>
+
+                <!-- RIGHT SIDE: Product Gallery & Zoom -->
                 <div class="col-md-6 text-center">
-                    <!-- USING YOUR EXACT OLD IMAGE -->
-                    <img src="images/1000346718.webp" alt="Balwaan Product" class="product-img-main">
+                    <div class="product-gallery">
+                        <!-- Main Image -->
+                        <div class="main-image-wrapper" onclick="openZoom(document.getElementById('mainImg').src)">
+                            <img id="mainImg" src="images/1000346718.webp" alt="Balwaan Product" class="product-img-main">
+                            <div class="zoom-hint"><i class="fas fa-search-plus"></i> Tap to Zoom</div>
+                        </div>
+                        
+                        <!-- Thumbnails (Carousal Effect) -->
+                        <div class="thumbnail-container">
+                            <img src="images/1000346718.webp" class="thumb active" onclick="changeImage(this)">
+                            <img src="images/shilajit.png" class="thumb" onclick="changeImage(this)">
+                            <img src="images/ashwagandha.png" class="thumb" onclick="changeImage(this)">
+                            <img src="images/musli.png" class="thumb" onclick="changeImage(this)">
+                        </div>
+                    </div>
                 </div>
+
             </div>
         </div>
     </section>
+
+    <!-- ZOOM MODAL (Hidden by default) -->
+    <div id="imageZoomModal">
+        <div class="close-zoom" onclick="closeZoom()">&times;</div>
+        <img id="zoomedImage" src="">
+    </div>
 
     <!-- TRUST BANNER -->
     <div class="trust-banner text-center">
@@ -261,13 +234,12 @@
         </div>
     </section>
 
-   <!-- INGREDIENTS (Mobile Perfect: 2 Per Row with Tags) -->
+    <!-- INGREDIENTS (Mobile Perfect: 2 Per Row with Tags) -->
     <section class="section-padding container text-center">
         <h2 class="mb-3">Nature's <span class="text-gold">Pure Power</span></h2>
         <p class="text-muted mb-4">Complete blend of 8 powerful Ayurvedic herbs</p>
         
         <div class="row g-3 justify-content-center">
-            <!-- Shilajit -->
             <div class="col-lg-3 col-md-4 col-6">
                 <div class="ingredient-box">
                     <img src="images/shilajit.png" class="ingredient-img" alt="Shilajit">
@@ -280,8 +252,6 @@
                     </div>
                 </div>
             </div>
-            
-            <!-- Ashwagandha -->
             <div class="col-lg-3 col-md-4 col-6">
                 <div class="ingredient-box">
                     <img src="images/ashwagandha.png" class="ingredient-img" alt="Ashwagandha">
@@ -294,8 +264,6 @@
                     </div>
                 </div>
             </div>
-            
-            <!-- Safed Musli -->
             <div class="col-lg-3 col-md-4 col-6">
                 <div class="ingredient-box">
                     <img src="images/musli.png" class="ingredient-img" alt="Safed Musli">
@@ -308,8 +276,6 @@
                     </div>
                 </div>
             </div>
-            
-            <!-- Gokshura -->
             <div class="col-lg-3 col-md-4 col-6">
                 <div class="ingredient-box">
                     <img src="images/gokshura.png" class="ingredient-img" alt="Gokshura">
@@ -322,8 +288,6 @@
                     </div>
                 </div>
             </div>
-
-            <!-- Kaunch Beej -->
             <div class="col-lg-3 col-md-4 col-6">
                 <div class="ingredient-box">
                     <img src="images/kaunch.webp" class="ingredient-img" alt="Kaunch Beej">
@@ -336,8 +300,6 @@
                     </div>
                 </div>
             </div>
-            
-            <!-- Vidari Khand -->
             <div class="col-lg-3 col-md-4 col-6">
                 <div class="ingredient-box">
                     <img src="images/vidari.webp" class="ingredient-img" alt="Vidari Khand">
@@ -350,8 +312,6 @@
                     </div>
                 </div>
             </div>
-            
-            <!-- Shatavari -->
             <div class="col-lg-3 col-md-4 col-6">
                 <div class="ingredient-box">
                     <img src="images/shatawari.webp" class="ingredient-img" alt="Shatavari">
@@ -364,8 +324,6 @@
                     </div>
                 </div>
             </div>
-            
-            <!-- Moringa -->
             <div class="col-lg-3 col-md-4 col-6">
                 <div class="ingredient-box">
                     <img src="images/moringa.webp" class="ingredient-img" alt="Moringa">
@@ -381,7 +339,34 @@
         </div>
     </section>
 
-    <!-- DR. RANA ANNOUNCEMENT BANNER (Just Above Footer) -->
+    <!-- HOW IT WORKS -->
+    <section class="section-padding bg-green text-white">
+        <div class="container text-center">
+            <h2 class="mb-5 text-gold">Kaise Kaam Karta Hai?</h2>
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <div class="p-4 border border-warning rounded-3 h-100" style="background: rgba(0,0,0,0.2);">
+                        <h3 class="text-gold">1. Absorption</h3>
+                        <p>Hamari natural capsules aapke khoon mein ghul kar taqat ko cells tak pahuchati hain.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="p-4 border border-warning rounded-3 h-100" style="background: rgba(0,0,0,0.2);">
+                        <h3 class="text-gold">2. Vitality</h3>
+                        <p>Ingredients jaise Shilajit aur Ashwagandha energy aur stamina ko 2x boost karte hain.</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="p-4 border border-warning rounded-3 h-100" style="background: rgba(0,0,0,0.2);">
+                        <h3 class="text-gold">3. Peak Results</h3>
+                        <p>Regular istemal se aap confident aur khush-haal life enjoy karte hain.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- DR. RANA ANNOUNCEMENT BANNER -->
     <section class="dr-rana-banner">
         <div class="container">
             <div class="row align-items-center">
@@ -412,7 +397,15 @@
                     </a>
                 </div>
             </div>
-            <div class="row mt-3 border-top border-secondary pt-3">
+            
+            <div class="row py-3 border-top border-bottom border-secondary">
+                <div class="col-md-3 col-6 mb-2 text-center"><a href="#" class="text-light text-decoration-none" data-bs-toggle="modal" data-bs-target="#privacyModal">Privacy Policy</a></div>
+                <div class="col-md-3 col-6 mb-2 text-center"><a href="#" class="text-light text-decoration-none" data-bs-toggle="modal" data-bs-target="#termsModal">Terms & Conditions</a></div>
+                <div class="col-md-3 col-6 mb-2 text-center"><a href="#" class="text-light text-decoration-none" data-bs-toggle="modal" data-bs-target="#refundModal">Refund Policy</a></div>
+                <div class="col-md-3 col-6 mb-2 text-center"><a href="#" class="text-light text-decoration-none" data-bs-toggle="modal" data-bs-target="#shippingModal">Shipping Policy</a></div>
+            </div>
+            
+            <div class="row mt-4">
                 <div class="col-12 text-center">
                     <p class="small text-secondary mb-0">© 2024 Balwaan Health | Made in India | GMP Certified</p>
                 </div>
@@ -420,18 +413,59 @@
         </div>
     </footer>
 
-    <!-- TEST PHONE NUMBER IN FLOATING WA -->
+    <!-- MODALS (Privacy, Terms, Refund, Shipping) -->
+    <!-- (Modals HTML hidden for brevity, but they are exact same as before) -->
+    <div class="modal fade" id="privacyModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered"><div class="modal-content border-gold"><div class="modal-header bg-green text-white"><h5 class="modal-title">Privacy Policy</h5><button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button></div><div class="modal-body text-start"><p><strong>Your Privacy Matters:</strong> We only collect your name, phone number, and address to deliver your order. We do not sell or share your data with any third party.</p></div></div></div>
+    </div>
+    <div class="modal fade" id="termsModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered"><div class="modal-content border-gold"><div class="modal-header bg-green text-white"><h5 class="modal-title">Terms & Conditions</h5><button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button></div><div class="modal-body text-start"><ul><li>You must be at least 18 years old to purchase this product.</li><li>Balwaan is a natural supplement. If you have any serious medical condition, please consult a doctor before use.</li></ul></div></div></div>
+    </div>
+    <div class="modal fade" id="refundModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered"><div class="modal-content border-gold"><div class="modal-header bg-green text-white"><h5 class="modal-title">Refund Policy</h5><button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button></div><div class="modal-body text-start"><p><strong>7-Day Guarantee:</strong> We offer a 7-day return policy for unused products. Contact us on WhatsApp.</p></div></div></div>
+    </div>
+    <div class="modal fade" id="shippingModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered"><div class="modal-content border-gold"><div class="modal-header bg-green text-white"><h5 class="modal-title">Shipping Policy</h5><button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button></div><div class="modal-body text-start"><p><strong>Fast Delivery:</strong> We deliver all across India within 3-5 business days.</p></div></div></div>
+    </div>
+
+    <!-- FLOATING WHATSAPP -->
     <a href="https://wa.me/919808669522" class="whatsapp-float" target="_blank">
         <i class="fab fa-whatsapp"></i>
     </a>
 
-    <!-- MOBILE CTA BAR -->
+    <!-- MOBILE CTA -->
     <div class="mobile-cta-bar">
         <div class="container">
             <a href="checkout.html" class="btn btn-gold-glow w-100 py-3 shadow" style="font-size: 16px;">ORDER NOW (COD AVAILABLE)</a>
         </div>
     </div>
 
+    <!-- SCRIPTS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- GALLERY & ZOOM SCRIPT -->
+    <script>
+        function changeImage(element) {
+            document.getElementById('mainImg').src = element.src;
+            let thumbs = document.querySelectorAll('.thumb');
+            thumbs.forEach(t => t.classList.remove('active'));
+            element.classList.add('active');
+        }
+
+        function openZoom(imageSrc) {
+            document.getElementById('zoomedImage').src = imageSrc;
+            document.getElementById('imageZoomModal').classList.add('active');
+            document.body.style.overflow = 'hidden'; 
+        }
+
+        function closeZoom() {
+            document.getElementById('imageZoomModal').classList.remove('active');
+            document.body.style.overflow = 'auto'; 
+        }
+
+        document.getElementById('imageZoomModal').addEventListener('click', function(e) {
+            if (e.target === this) closeZoom();
+        });
+    </script>
 </body>
 </html>
