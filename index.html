@@ -136,6 +136,29 @@
             .hero-section { text-align: center; padding: 50px 0; } 
             .product-img-main { margin-top: 30px; max-width: 80%; }
         }
+        /* =================================================
+   MOBILE OPTIMIZATION FOR INGREDIENTS (2 PER ROW)
+   ================================================= */
+.ingredient-box {
+    background: #fff; border-radius: 12px; padding: 20px; 
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05); height: 100%; display: flex; flex-direction: column; text-align: center;
+}
+.ingredient-img {
+    width: 110px; height: 110px; object-fit: cover; border: 3px solid #D4AF37; border-radius: 50%; margin: 0 auto 15px;
+}
+.dr-rana-banner {
+    background: linear-gradient(135deg, #0a2418 0%, #14452F 100%);
+    border-top: 3px solid #D4AF37; padding: 40px 0; margin-top: 30px;
+}
+
+@media (max-width: 576px) {
+    /* Mobile par 2 item aayenge, isliye padding aur size thoda adjust kiya hai taaki bikhre nahi */
+    .ingredient-box { padding: 12px 8px !important; }
+    .ingredient-img { width: 90px; height: 90px; border-width: 2px; }
+    .ingredient-box h5 { font-size: 14px; margin-bottom: 5px; }
+    .ingredient-box p { font-size: 11px; line-height: 1.3; margin-bottom: 8px; }
+    .badge { font-size: 9px !important; padding: 3px 5px !important; margin-bottom: 3px; display: inline-block;}
+}
     </style>
 
     <!-- TEST PIXEL CODE (DUMMY ID) -->
@@ -238,100 +261,138 @@
         </div>
     </section>
 
-    <!-- INGREDIENTS (Aapka exact circular layout) -->
+   <!-- INGREDIENTS (Mobile Perfect: 2 Per Row with Tags) -->
     <section class="section-padding container text-center">
         <h2 class="mb-3">Nature's <span class="text-gold">Pure Power</span></h2>
-        <p class="text-muted mb-5">Complete blend of Ayurvedic herbs & ingredients</p>
+        <p class="text-muted mb-4">Complete blend of 8 powerful Ayurvedic herbs</p>
         
-        <div class="row g-4 justify-content-center">
-            <div class="col-lg-3 col-md-6 col-6">
-                <div class="bg-white rounded-3 p-3 shadow-sm h-100 d-flex flex-column align-items-center">
-                    <div class="mb-3">
-                        <img src="images/shilajit.png" class="rounded-circle border border-warning" width="100" height="100" alt="Shilajit" style="object-fit: cover;">
-                    </div>
-                    <h5 class="text-gold mb-2">Shilajit</h5>
-                    <p class="small text-muted mb-3 d-none d-md-block">Natural testosterone booster</p>
+        <div class="row g-3 justify-content-center">
+            <!-- Shilajit -->
+            <div class="col-lg-3 col-md-4 col-6">
+                <div class="ingredient-box">
+                    <img src="images/shilajit.png" class="ingredient-img" alt="Shilajit">
+                    <h5 class="text-gold">Shilajit</h5>
+                    <p class="small text-muted d-none d-sm-block">Natural testosterone booster, energy ka source</p>
                     <div class="mt-auto">
-                        <span class="badge bg-warning bg-opacity-25 text-dark small">Stamina</span>
+                        <span class="badge bg-warning bg-opacity-25 text-dark">Energy</span>
+                        <span class="badge bg-warning bg-opacity-25 text-dark">Stamina</span>
+                        <span class="badge bg-warning bg-opacity-25 text-dark">Immunity</span>
                     </div>
                 </div>
             </div>
             
-            <div class="col-lg-3 col-md-6 col-6">
-                <div class="bg-white rounded-3 p-3 shadow-sm h-100 d-flex flex-column align-items-center">
-                    <div class="mb-3">
-                        <img src="images/ashwagandha.png" class="rounded-circle border border-warning" width="100" height="100" alt="Ashwagandha" style="object-fit: cover;">
-                    </div>
-                    <h5 class="text-gold mb-2">Ashwagandha</h5>
-                    <p class="small text-muted mb-3 d-none d-md-block">Stress kam kare, sleep improve kare</p>
+            <!-- Ashwagandha -->
+            <div class="col-lg-3 col-md-4 col-6">
+                <div class="ingredient-box">
+                    <img src="images/ashwagandha.png" class="ingredient-img" alt="Ashwagandha">
+                    <h5 class="text-gold">Ashwagandha</h5>
+                    <p class="small text-muted d-none d-sm-block">Stress kam kare, sleep improve kare, mental peace</p>
                     <div class="mt-auto">
-                        <span class="badge bg-warning bg-opacity-25 text-dark small">Stress Relief</span>
+                        <span class="badge bg-warning bg-opacity-25 text-dark">Stress</span>
+                        <span class="badge bg-warning bg-opacity-25 text-dark">Sleep</span>
+                        <span class="badge bg-warning bg-opacity-25 text-dark">Focus</span>
                     </div>
                 </div>
             </div>
             
-            <div class="col-lg-3 col-md-6 col-6">
-                <div class="bg-white rounded-3 p-3 shadow-sm h-100 d-flex flex-column align-items-center">
-                    <div class="mb-3">
-                        <img src="images/musli.png" class="rounded-circle border border-warning" width="100" height="100" alt="Safed Musli" style="object-fit: cover;">
-                    </div>
-                    <h5 class="text-gold mb-2">Safed Musli</h5>
-                    <p class="small text-muted mb-3 d-none d-md-block">Physical capacity badhaye</p>
+            <!-- Safed Musli -->
+            <div class="col-lg-3 col-md-4 col-6">
+                <div class="ingredient-box">
+                    <img src="images/musli.png" class="ingredient-img" alt="Safed Musli">
+                    <h5 class="text-gold">Safed Musli</h5>
+                    <p class="small text-muted d-none d-sm-block">Physical capacity badhaye, semen quality improve kare</p>
                     <div class="mt-auto">
-                        <span class="badge bg-warning bg-opacity-25 text-dark small">Vitality</span>
+                        <span class="badge bg-warning bg-opacity-25 text-dark">Semen</span>
+                        <span class="badge bg-warning bg-opacity-25 text-dark">Vitality</span>
+                        <span class="badge bg-warning bg-opacity-25 text-dark">Energy</span>
                     </div>
                 </div>
             </div>
             
-            <div class="col-lg-3 col-md-6 col-6">
-                <div class="bg-white rounded-3 p-3 shadow-sm h-100 d-flex flex-column align-items-center">
-                    <div class="mb-3">
-                        <img src="images/gokshura.png" class="rounded-circle border border-warning" width="100" height="100" alt="Gokshura" style="object-fit: cover;">
-                    </div>
-                    <h5 class="text-gold mb-2">Gokshura</h5>
-                    <p class="small text-muted mb-3 d-none d-md-block">Muscles ko strong kare</p>
+            <!-- Gokshura -->
+            <div class="col-lg-3 col-md-4 col-6">
+                <div class="ingredient-box">
+                    <img src="images/gokshura.png" class="ingredient-img" alt="Gokshura">
+                    <h5 class="text-gold">Gokshura</h5>
+                    <p class="small text-muted d-none d-sm-block">Muscles ko strong kare, endurance badhaye</p>
                     <div class="mt-auto">
-                        <span class="badge bg-warning bg-opacity-25 text-dark small">Endurance</span>
+                        <span class="badge bg-warning bg-opacity-25 text-dark">Muscles</span>
+                        <span class="badge bg-warning bg-opacity-25 text-dark">Endurance</span>
+                        <span class="badge bg-warning bg-opacity-25 text-dark">Recovery</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Kaunch Beej -->
+            <div class="col-lg-3 col-md-4 col-6">
+                <div class="ingredient-box">
+                    <img src="images/kaunch.webp" class="ingredient-img" alt="Kaunch Beej">
+                    <h5 class="text-gold">Kaunch Beej</h5>
+                    <p class="small text-muted d-none d-sm-block">Sex drive badhaye, hormones balance kare</p>
+                    <div class="mt-auto">
+                        <span class="badge bg-warning bg-opacity-25 text-dark">Libido</span>
+                        <span class="badge bg-warning bg-opacity-25 text-dark">Hormones</span>
+                        <span class="badge bg-warning bg-opacity-25 text-dark">Mood</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Vidari Khand -->
+            <div class="col-lg-3 col-md-4 col-6">
+                <div class="ingredient-box">
+                    <img src="images/vidari.webp" class="ingredient-img" alt="Vidari Khand">
+                    <h5 class="text-gold">Vidari Khand</h5>
+                    <p class="small text-muted d-none d-sm-block">Body ko phir se young kare, energy ka store</p>
+                    <div class="mt-auto">
+                        <span class="badge bg-warning bg-opacity-25 text-dark">Youth</span>
+                        <span class="badge bg-warning bg-opacity-25 text-dark">Energy</span>
+                        <span class="badge bg-warning bg-opacity-25 text-dark">Power</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Shatavari -->
+            <div class="col-lg-3 col-md-4 col-6">
+                <div class="ingredient-box">
+                    <img src="images/shatawari.webp" class="ingredient-img" alt="Shatavari">
+                    <h5 class="text-gold">Shatavari</h5>
+                    <p class="small text-muted d-none d-sm-block">Nutrition provide kare, body ko strength de</p>
+                    <div class="mt-auto">
+                        <span class="badge bg-warning bg-opacity-25 text-dark">Nourish</span>
+                        <span class="badge bg-warning bg-opacity-25 text-dark">Strength</span>
+                        <span class="badge bg-warning bg-opacity-25 text-dark">Health</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Moringa -->
+            <div class="col-lg-3 col-md-4 col-6">
+                <div class="ingredient-box">
+                    <img src="images/moringa.webp" class="ingredient-img" alt="Moringa">
+                    <h5 class="text-gold">Moringa</h5>
+                    <p class="small text-muted d-none d-sm-block">65+ nutrients se bharpur, natural multivitamin</p>
+                    <div class="mt-auto">
+                        <span class="badge bg-warning bg-opacity-25 text-dark">Nutrition</span>
+                        <span class="badge bg-warning bg-opacity-25 text-dark">Immunity</span>
+                        <span class="badge bg-warning bg-opacity-25 text-dark">Active</span>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- HOW IT WORKS -->
-    <section class="section-padding bg-green text-white">
-        <div class="container text-center">
-            <h2 class="mb-5 text-gold">Kaise Kaam Karta Hai?</h2>
-            <div class="row g-4">
-                <div class="col-md-4">
-                    <div class="p-4 border border-warning rounded-3 h-100" style="background: rgba(0,0,0,0.2);">
-                        <h3 class="text-gold">1. Absorption</h3>
-                        <p>Hamari natural capsules aapke khoon mein ghul kar taqat ko cells tak pahuchati hain.</p>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="p-4 border border-warning rounded-3 h-100" style="background: rgba(0,0,0,0.2);">
-                        <h3 class="text-gold">2. Vitality</h3>
-                        <p>Ingredients jaise Shilajit aur Ashwagandha energy aur stamina ko 2x boost karte hain.</p>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="p-4 border border-warning rounded-3 h-100" style="background: rgba(0,0,0,0.2);">
-                        <h3 class="text-gold">3. Peak Results</h3>
-                        <p>Regular istemal se aap confident aur khush-haal life enjoy karte hain.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- DR RANA PREMIUM SECTION -->
-    <section class="dr-rana-section">
+    <!-- DR. RANA ANNOUNCEMENT BANNER (Just Above Footer) -->
+    <section class="dr-rana-banner">
         <div class="container">
-            <i class="fas fa-user-md fa-4x mb-3" style="color: #D4AF37;"></i>
-            <h2>Dr. Rana Personal Vitality Programme</h2>
-            <p>Kya aap purani samasya se pareshan hain jiska normal supplement se asar nahi ho raha? Hamare expert Ayurvedic doctor se 50-din ka fully customized treatment plan lijiye.</p>
-            <a href="dr-rana-program.html" class="btn-outline-gold">Learn More About Programme</a>
+            <div class="row align-items-center">
+                <div class="col-md-8 text-center text-md-start mb-4 mb-md-0">
+                    <h3 class="text-gold mb-2"><i class="fas fa-user-md me-2"></i> Dr. Rana Personal Vitality Programme</h3>
+                    <p class="text-light mb-0" style="font-size: 15px; opacity: 0.9;">Kya normal supplements asar nahi kar rahe? Get a 50-day fully customized Ayurvedic treatment plan from our senior expert doctor.</p>
+                </div>
+                <div class="col-md-4 text-center text-md-end">
+                    <a href="dr-rana-program.html" class="btn btn-gold-glow px-4 py-3" style="font-size: 14px;">Learn More <i class="fas fa-arrow-right ms-1"></i></a>
+                </div>
+            </div>
         </div>
     </section>
 
