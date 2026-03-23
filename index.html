@@ -76,12 +76,6 @@
         .bg-green { background-color: var(--primary-green); color: white; }
         .text-gold { color: var(--dark-gold); }
 
-        /* WHATSAPP CHATS */
-        .whatsapp-review-card { background: #e5ddd5; border-radius: 15px; padding: 20px; max-width: 400px; margin: 0 auto; }
-        .chat-bubble { background: #fff; padding: 12px 15px; border-radius: 0 15px 15px 15px; font-size: 14px; margin-bottom: 10px; box-shadow: 0 1px 2px rgba(0,0,0,0.1); }
-        .chat-bubble.right { background: #dcf8c6; border-radius: 15px 15px 0 15px; text-align: right; margin-left: auto; }
-        .chat-time { font-size: 10px; color: #999; display: block; margin-top: 5px; }
-
         /* INGREDIENTS (Mobile Optimized) */
         .ingredient-box { background: #fff; border-radius: 12px; padding: 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); height: 100%; display: flex; flex-direction: column; text-align: center; }
         .ingredient-img { width: 110px; height: 110px; object-fit: cover; border: 3px solid #D4AF37; border-radius: 50%; margin: 0 auto 15px; }
@@ -263,7 +257,7 @@
         </div>
     </section>
 
-    <!-- NEW: Scientific Proof Section (Imported from 1.html) -->
+    <!-- Scientific Proof Section -->
     <section class="section-padding bg-light">
         <div class="container">
             <div class="row">
@@ -295,7 +289,7 @@
         </div>
     </section>
 
-    <!-- NEW: FAQ Section (Imported from 1.html) -->
+    <!-- FAQ Section -->
     <section class="section-padding bg-white">
         <div class="container">
             <h2 class="text-center mb-5">Aksar Pooche Jane Wale Sawal</h2>
@@ -359,7 +353,7 @@
         </div>
     </section>
 
-    <!-- NEW: DETAILED FOOTER (Imported & Updated) -->
+    <!-- DETAILED FOOTER (No Direct Contact Links) -->
     <footer class="footer-main bg-dark text-white pt-5 pb-3">
         <div class="container">
             <div class="row mb-4">
@@ -369,22 +363,34 @@
                     <div class="mt-3">
                         <a href="#" class="text-white me-3"><i class="fab fa-facebook fa-lg"></i></a>
                         <a href="#" class="text-white me-3"><i class="fab fa-instagram fa-lg"></i></a>
-                        <a href="https://wa.me/919808669522" class="text-white me-3" target="_blank"><i class="fab fa-whatsapp fa-lg"></i></a>
-                        <a href="tel:+919808669522" class="text-white"><i class="fas fa-phone fa-lg"></i></a>
+                        
+                        <!-- These icons now open the form instead of direct dial/chat -->
+                        <a href="#" class="text-white me-3" data-bs-toggle="modal" data-bs-target="#leadGateModal" title="Chat with us"><i class="fab fa-whatsapp fa-lg"></i></a>
+                        <a href="#" class="text-white" data-bs-toggle="modal" data-bs-target="#leadGateModal" title="Request a Call"><i class="fas fa-phone fa-lg"></i></a>
                     </div>
                 </div>
-               <div class="col-md-4 mb-4">
-                    <h5 class="text-gold mb-3">Consult Support Team</h5>
-                    <ul class="list-unstyled text-light">
-                        <li class="mb-2"><i class="fas fa-phone-alt me-2 text-gold"></i> +91 9808669522</li>
-                        <li class="mb-2"><i class="fas fa-envelope me-2 text-gold"></i> support@balwaanhealth.com</li>
-                        <li><i class="fas fa-clock me-2 text-gold"></i> Support: Mon-Sat, 10 AM - 7 PM</li>
+                <div class="col-md-4 mb-4">
+                    <h5 class="text-gold mb-3">Quick Links</h5>
+                    <ul class="list-unstyled">
+                        <li class="mb-2"><a href="checkout.html" class="text-light text-decoration-none">Products</a></li>
+                        <li class="mb-2"><a href="#" class="text-light text-decoration-none" data-bs-toggle="modal" data-bs-target="#privacyModal">Privacy Policy</a></li>
+                        <li class="mb-2"><a href="#" class="text-light text-decoration-none" data-bs-toggle="modal" data-bs-target="#termsModal">Terms & Conditions</a></li>
+                        <li><a href="#" class="text-light text-decoration-none" data-bs-toggle="modal" data-bs-target="#refundModal">Refund Policy</a></li>
                     </ul>
-                    <p class="small text-muted mb-2">Connect with our experts securely.</p>
+                </div>
+                
+                <!-- Consult Support Team Section (Highly Restricted) -->
+                <div class="col-md-4 mb-4">
+                    <h5 class="text-gold mb-3">Consult Support Team</h5>
+                    <p class="small text-light mb-3">Consultation ke liye hamare Ayurvedic Experts se connect karein. Humari team aapki puri sahayata karegi.</p>
+                    <ul class="list-unstyled text-light mb-3">
+                        <li class="mb-2"><i class="fas fa-clock me-2 text-gold"></i> Support: Mon-Sat, 10 AM - 7 PM</li>
+                        <li><i class="fas fa-shield-alt me-2 text-gold"></i> 100% Secure & Private Chat</li>
+                    </ul>
                     
-                    <!-- Opens Lead Gate securely -->
-                    <button class="btn btn-sm btn-success mt-2" data-bs-toggle="modal" data-bs-target="#leadGateModal">
-                        <i class="fab fa-whatsapp me-1"></i> Chat on WhatsApp
+                    <!-- Only button to open Lead Gate -->
+                    <button class="btn btn-gold-glow mt-2 w-100 py-2" style="font-size: 14px; text-transform: none; border-radius: 8px;" data-bs-toggle="modal" data-bs-target="#leadGateModal">
+                        <i class="fab fa-whatsapp me-2"></i> Click Here to Chat on WhatsApp
                     </button>
                 </div>
             </div>
