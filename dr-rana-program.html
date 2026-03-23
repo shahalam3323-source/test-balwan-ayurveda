@@ -1,11 +1,11 @@
 <!DOCTYPE html>
-<html lang="hi">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dr. Rana VIP Treatment | Balwaan</title>
+    <title>VIP Customized Plan | Balwaan Gold</title>
     
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;700;800&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     
@@ -25,7 +25,19 @@
             background: linear-gradient(rgba(10, 36, 24, 0.9), rgba(20, 69, 47, 0.8)), url('https://images.unsplash.com/photo-1579684385127-1ef15d508118?auto=format&fit=crop&q=80') center/cover;
             color: white; padding: 60px 0 80px 0; border-bottom: 5px solid var(--gold);
         }
-        .badge-premium { background: var(--gold); color: var(--primary-dark); padding: 8px 15px; border-radius: 50px; font-weight: bold; letter-spacing: 1px; font-size: 12px; display: inline-block;}
+        
+        /* Signature 50-Day Badge */
+        .badge-premium { 
+            background: linear-gradient(135deg, var(--gold), var(--light-gold)); 
+            color: var(--primary-dark); 
+            padding: 10px 25px; 
+            border-radius: 50px; 
+            font-weight: 800; 
+            letter-spacing: 1px; 
+            font-size: 14px; 
+            display: inline-block;
+            box-shadow: 0 4px 10px rgba(212, 175, 55, 0.3);
+        }
         
         /* Application Form */
         .application-form { background: white; border-radius: 20px; padding: 35px 25px; box-shadow: 0 20px 40px rgba(0,0,0,0.1); border: 1px solid #e0e0e0; margin-top: -50px; position: relative;}
@@ -47,8 +59,20 @@
         .invoice-row { display: flex; justify-content: space-between; margin-bottom: 8px; font-size: 14px; color: #555; }
         .invoice-total { display: flex; justify-content: space-between; margin-top: 12px; padding-top: 12px; border-top: 2px solid #eee; font-size: 16px; font-weight: 700; color: var(--primary-dark); }
         
-        .btn-gold { background: linear-gradient(135deg, var(--gold), var(--light-gold)); color: var(--primary-dark); font-weight: bold; padding: 16px; border-radius: 50px; border: none; width: 100%; font-size: 16px; transition: 0.3s; text-transform: uppercase; box-shadow: 0 5px 15px rgba(212, 175, 55, 0.3);}
-        .btn-gold:hover { transform: translateY(-2px); box-shadow: 0 10px 20px rgba(212, 175, 55, 0.4); color: black; }
+        /* Glowing Submit Button ONLY */
+        @keyframes glowingBtn { 
+            0% { box-shadow: 0 0 5px #D4AF37; } 
+            50% { box-shadow: 0 0 25px #D4AF37; } 
+            100% { box-shadow: 0 0 5px #D4AF37; } 
+        }
+        .btn-submit-glow { 
+            background: linear-gradient(135deg, var(--gold), var(--light-gold)); 
+            color: var(--primary-dark); font-weight: bold; padding: 16px; 
+            border-radius: 50px; border: none; width: 100%; font-size: 16px; 
+            transition: 0.3s; text-transform: uppercase; 
+            animation: glowingBtn 2s infinite; 
+        }
+        .btn-submit-glow:hover { transform: scale(1.02); color: black; }
         
         .price-tag { font-size: 38px; color: var(--primary-green); font-weight: 800; font-family: 'Montserrat', sans-serif; line-height: 1;}
         
@@ -61,14 +85,19 @@
 </head>
 <body>
 
-    <!-- Header (With Back Intercept) -->
-    <nav class="navbar navbar-dark" style="background: var(--primary-dark);">
-        <div class="container d-flex justify-content-between align-items-center">
-            <!-- Back button triggers popup -->
-            <a href="javascript:void(0)" onclick="handleBackClick()" class="text-white text-decoration-none fw-bold" style="font-family: 'Montserrat', sans-serif;">
-                <i class="fas fa-arrow-left me-2 text-gold"></i> BACK
+    <!-- Header (Centered VIP Care & Arrow Only) -->
+    <nav class="navbar navbar-dark" style="background: var(--primary-dark); position: relative;">
+        <div class="container d-flex align-items-center" style="height: 50px;">
+            <!-- Left Arrow Only -->
+            <a href="javascript:void(0)" onclick="handleBackClick()" class="text-white text-decoration-none" style="position: absolute; left: 20px; z-index: 10;">
+                <i class="fas fa-arrow-left text-gold" style="font-size: 22px;"></i>
             </a>
-            <span class="text-white small"><i class="fas fa-user-md text-gold me-1"></i> VIP Care</span>
+            <!-- Centered Text -->
+            <div class="w-100 text-center">
+                <span class="text-white fw-bold" style="font-size: 18px; letter-spacing: 1px;">
+                    <i class="fas fa-user-md text-gold me-2"></i> VIP CARE
+                </span>
+            </div>
         </div>
     </nav>
 
@@ -77,9 +106,13 @@
         <div class="container">
             <div class="row align-items-center">
                 <div class="col-md-7">
-                    <span class="badge-premium mb-3">50-DAY CUSTOMIZED PLAN</span>
-                    <h1 class="display-5 mb-3">Purani Samasya Ka Sahi Aur Pakka Ilaaj</h1>
-                    <p class="lead mb-4" style="opacity: 0.9; font-size: 15px;">Dr. Rana ki nigrani mein aapki body ke hisaab se special Bhasma (Gold/Makardhwaj) wali medicines lab mein tayyar ki jayengi.</p>
+                    <!-- Updated Signature Badge -->
+                    <div class="mb-4">
+                        <span class="badge-premium">50-DAY CUSTOMIZED PLAN</span>
+                    </div>
+                    <!-- Short, Easy English, No Medical Claims -->
+                    <h1 class="display-5 mb-3">Normal Supplements Not Working?</h1>
+                    <p class="lead mb-4" style="opacity: 0.9; font-size: 16px;">Get a 50-day personalized Ayurvedic plan. Custom herbs selected by senior experts for your specific body needs.</p>
                 </div>
             </div>
         </div>
@@ -153,10 +186,10 @@
                             </div>
 
                             <div class="alert alert-warning border-0 small" style="background: #fff8e1; border-left: 4px solid var(--gold) !important; color: #555;">
-                                <i class="fas fa-info-circle me-1"></i> <strong>Note:</strong> Aapki medicine custom banegi isliye ₹500 advance zaroori hai. Baaki amount (₹7200) parcel aane par Dakiya (Delivery Boy) ko dena hoga.
+                                <i class="fas fa-info-circle me-1"></i> <strong>Note:</strong> Your herbs will be custom prepared. A ₹500 advance is required to start the process. The remaining ₹7200 can be paid on delivery (COD).
                             </div>
 
-                            <button type="submit" class="btn-gold"><i class="fas fa-lock me-2"></i> Submit My Case File</button>
+                            <button type="submit" class="btn-submit-glow"><i class="fas fa-lock me-2"></i> Submit My Case File</button>
                             <p class="text-center text-muted small mt-3" style="font-size: 11px;"><i class="fas fa-shield-alt me-1"></i> Details are 100% End-to-End Encrypted & Private</p>
                         </form>
                     </div>
@@ -170,7 +203,7 @@
         <div class="exit-content">
             <i class="fas fa-gift text-danger mb-3" style="font-size: 40px;"></i>
             <h3 style="color: var(--primary-dark);">Wait! Don't leave yet.</h3>
-            <p class="text-muted small mb-4">Submit your case file today and get a <strong>FREE Customized Diet Chart</strong> worth ₹1500 directly from Dr. Rana.</p>
+            <p class="text-muted small mb-4">Submit your case file today and get a <strong>FREE Customized Diet Chart</strong> worth ₹1500 directly from our senior experts.</p>
             
             <button class="btn btn-dark w-100 py-3 mb-2 rounded-pill fw-bold" onclick="closeExitModal()">I WANT FREE DIET CHART</button>
             <a href="index.html" class="text-muted small text-decoration-underline">No thanks, I want to exit</a>
