@@ -32,75 +32,82 @@
     src="https://www.facebook.com/tr?id=0000000000000000&ev=PageView&noscript=1"
     /></noscript>
 
-    <style>
-        /* GLOBAL BASE & FONTS */
+  <style>
+        /* 1. GLOBAL BRAND BASE & VARIABLES */
         :root { 
             --primary-green: #14452F; 
-            --gold-gradient: linear-gradient(135deg, #D4AF37, #f5e27a); 
             --dark-gold: #D4AF37; 
-            --standard-radius: 16px; /* Ek Universal Curve Set Kiya Hai */
+            --gold-gradient: linear-gradient(135deg, #D4AF37, #f5e27a);
+            --standard-radius: 16px; /* Universal Curve for all boxes */
         }
         
         body { font-family: 'Poppins', sans-serif; background-color: #ffffff; color: #333; overflow-x: hidden; }
-        h1, h2, h3, h4, h5, .navbar-brand { font-family: 'Montserrat', sans-serif; font-weight: 800; }
+        h1, h2, h3, h4, h5 { font-family: 'Montserrat', sans-serif; font-weight: 800; }
 
-        /* BUTTONS */
+        /* 2. HEADER & PREMIUM LOGO IMAGE */
+        .navbar-brand { margin: 0; padding: 0 !important; display: flex; align-items: center; }
+        .navbar-brand img { max-height: 55px; width: auto; border-radius: 4px; transition: 0.3s; }
+        
+        /* 3. BUTTONS & GLOW EFFECTS */
         @keyframes glowing { 0% { box-shadow: 0 0 5px #D4AF37; } 50% { box-shadow: 0 0 20px #D4AF37; } 100% { box-shadow: 0 0 5px #D4AF37; } }
-        .btn-gold-glow {
+        .btn-gold-glow { 
             background: var(--gold-gradient); color: #1e1e1e !important; border: none; font-weight: bold; 
             text-transform: uppercase; letter-spacing: 1px; animation: glowing 2s infinite; 
-            border-radius: 50px; transition: 0.3s; text-decoration: none; display: inline-block; text-align: center;
+            border-radius: 50px; transition: 0.3s; text-decoration: none; display: inline-block; text-align: center; 
         }
         .btn-gold-glow:hover { background: linear-gradient(135deg, #f5e27a, #D4AF37); transform: scale(1.05); color: #000 !important; cursor: pointer; }
 
-        /* HERO SECTION */
+        /* 4. LAYOUT & SECTIONS (Fixed Padding & Colors) */
+        .section-padding { padding: 80px 0; }
+        .bg-light { background-color: #f0f4f8 !important; border-top: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; }
+        .bg-white { background-color: #ffffff !important; }
+        .bg-green { background-color: var(--primary-green); color: white; }
+        .text-gold { color: var(--dark-gold); }
+
+        /* 5. UNIVERSAL ROUNDING FOR EDGES */
+        .price-box, .product-gallery, .product-img-main, #zoomedImage, .problem-card, .ingredient-box, .card, .p-4.shadow-sm.rounded.bg-white, .accordion-item, .modal-content, .table-responsive {
+            border-radius: var(--standard-radius) !important;
+        }
+
+        /* 6. HERO SECTION & GALLERY */
         .hero-section { background: radial-gradient(circle at top, #1e5e41, #14452F); color: white; padding: 60px 0; border-bottom: 5px solid var(--dark-gold); min-height: 80vh; display: flex; align-items: center; }
-        .price-box { background: rgba(255,255,255,0.1); padding: 15px 25px; border-radius: var(--standard-radius); display: inline-block; margin: 15px 0; border: 1px solid rgba(212, 175, 55, 0.3); }
+        .price-box { background: rgba(255,255,255,0.1); padding: 15px 25px; display: inline-block; margin: 15px 0; border: 1px solid rgba(212, 175, 55, 0.3); }
         .price-box .new-price { font-size: 32px; font-weight: 800; color: #D4AF37; }
-        
-        /* GALLERY */
         .product-gallery { position: relative; max-width: 450px; margin: 0 auto; }
-        .main-image-wrapper { position: relative; background: rgba(255,255,255,0.05); border-radius: var(--standard-radius); padding: 10px; cursor: zoom-in; border: 1px solid rgba(212, 175, 55, 0.2); transition: 0.3s; }
+        .main-image-wrapper { position: relative; background: rgba(255,255,255,0.05); padding: 10px; cursor: zoom-in; border: 1px solid rgba(212, 175, 55, 0.2); transition: 0.3s; }
         .main-image-wrapper:hover { border-color: #D4AF37; box-shadow: 0 0 15px rgba(212, 175, 55, 0.3); }
-        .product-img-main { width: 100%; height: auto; border-radius: 12px; }
+        .product-img-main { width: 100%; height: auto; }
         .zoom-hint { position: absolute; bottom: 15px; right: 15px; background: rgba(0,0,0,0.6); color: white; padding: 5px 10px; border-radius: 20px; font-size: 12px; pointer-events: none; }
         .thumbnail-container { display: flex; gap: 10px; margin-top: 15px; justify-content: center; overflow-x: auto; padding-bottom: 5px; scrollbar-width: none; }
         .thumbnail-container::-webkit-scrollbar { display: none; }
         .thumb { width: 70px; height: 70px; object-fit: cover; border-radius: 8px; border: 2px solid transparent; cursor: pointer; opacity: 0.6; transition: 0.3s; }
         .thumb.active, .thumb:hover { opacity: 1; border-color: #D4AF37; }
 
-        /* ZOOM MODAL */
+        /* 7. ZOOM MODAL */
         #imageZoomModal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.95); z-index: 100000; align-items: center; justify-content: center; }
         #imageZoomModal.active { display: flex; animation: fadeIn 0.3s ease; }
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-        #zoomedImage { max-width: 95%; max-height: 90vh; border-radius: var(--standard-radius); box-shadow: 0 0 30px rgba(212, 175, 55, 0.2); }
+        #zoomedImage { max-width: 95%; max-height: 90vh; box-shadow: 0 0 30px rgba(212, 175, 55, 0.2); }
         .close-zoom { position: absolute; top: 20px; right: 20px; color: white; font-size: 35px; cursor: pointer; background: rgba(255,255,255,0.2); width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; border-radius: 50%; }
 
-        /* TRUST BANNER */
+        /* 8. TRUST BANNER */
         .trust-banner { background: #fff; border-bottom: 1px solid #e9ecef; padding: 15px 0; box-shadow: 0 4px 6px rgba(0,0,0,0.05); }
         .trust-item { display: inline-flex; align-items: center; gap: 8px; font-size: 14px; font-weight: 600; color: var(--primary-green); margin: 5px 15px; }
         .trust-item i { font-size: 20px; color: var(--dark-gold); }
 
-        /* LAYOUT & SECTIONS (Fixed Padding & Colors) */
-        .section-padding { padding: 80px 0; }
-        .bg-light { background-color: #f0f4f8 !important; border-top: 1px solid #e2e8f0; border-bottom: 1px solid #e2e8f0; } /* Clear section divider */
-        .bg-white { background-color: #ffffff !important; }
-        .bg-green { background-color: var(--primary-green); color: white; }
-        .text-gold { color: var(--dark-gold); }
-
-        /* UNIVERSAL ROUNDING FOR ALL BOXES */
-        .problem-card, .ingredient-box, .card, .p-4.shadow-sm.rounded.bg-white, .accordion-item, .p-4.bg-white.rounded-3, .modal-content {
-            border-radius: var(--standard-radius) !important;
-        }
-
-        /* PROBLEM CARDS */
+        /* 9. PROBLEM CARDS (With Faint Gold Border & Hover) */
         .issue-badge { font-size: 16px; letter-spacing: 1px; padding: 10px 25px !important; text-transform: uppercase; font-weight: 700; box-shadow: 0 4px 15px rgba(220, 53, 69, 0.3); margin-bottom: 20px !important; display: inline-block; }
-        .problem-card { background: #fff; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.08); transition: 0.3s; height: 100%; display: flex; flex-direction: column; text-align: center; border: 1px solid #eee;}
+        .problem-card { 
+            background: #fff; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.05); 
+            transition: 0.3s; height: 100%; display: flex; flex-direction: column; text-align: center; 
+            border: 1px solid rgba(212, 175, 55, 0.4); /* Faint Gold Border */
+        }
         .problem-card:hover { transform: translateY(-5px); box-shadow: 0 15px 35px rgba(212, 175, 55, 0.2); border-color: #D4AF37;}
         
         .problem-header { position: relative; padding: 35px 20px; background-size: cover; background-position: center; color: white; z-index: 1; border-bottom: 3px solid #D4AF37;}
         .problem-header::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.7); z-index: -1; }
         
+        /* Background images for cards */
         .bg-prob-1 { background-image: url('images/fatigue.webp'); }
         .bg-prob-2 { background-image: url('images/intimacy.webp'); }
         .bg-prob-3 { background-image: url('images/stress.webp'); }
@@ -114,22 +121,24 @@
         .btn-reveal { background: #14452F; color: #fff; border: 2px solid #14452F; border-radius: 50px; padding: 10px 20px; font-weight: 600; font-size: 14px; transition: 0.3s; width: 100%; }
         .btn-reveal:hover { background: #D4AF37; border-color: #D4AF37; color: #000; box-shadow: 0 0 10px rgba(212, 175, 55, 0.5);}
         
-        /* MODALS */
+        /* 10. SOLUTION MODALS */
         .solution-modal-header { background: linear-gradient(135deg, #14452F, #0a2418); color: white; border-bottom: 3px solid #D4AF37; border-top-left-radius: var(--standard-radius); border-top-right-radius: var(--standard-radius); }
         .herb-highlight { display: inline-block; background: #fdf5d3; color: #856404; padding: 5px 12px; border-radius: 20px; font-weight: bold; font-size: 13px; margin-bottom: 10px; border: 1px solid #ffeeba;}
 
-        /* INGREDIENTS */
-        .ingredient-box { background: #fff; padding: 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); height: 100%; display: flex; flex-direction: column; text-align: center; border: 1px solid #eee; }
+        /* 11. INGREDIENT BOXES (With Faint Gold Border & Hover) */
+        .ingredient-box { 
+            background: #fff; padding: 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); 
+            height: 100%; display: flex; flex-direction: column; text-align: center; 
+            border: 1px solid rgba(212, 175, 55, 0.4); /* Faint Gold Border */
+        }
         .ingredient-box:hover { box-shadow: 0 10px 25px rgba(212, 175, 55, 0.15); border-color: #D4AF37; }
         .ingredient-img { width: 110px; height: 110px; object-fit: cover; border: 3px solid #D4AF37; border-radius: 50%; margin: 0 auto 15px; }
 
-        /* TABLE FIXES (Edges Curved) */
-        .table-responsive { border-radius: var(--standard-radius); overflow: hidden; box-shadow: 0 5px 15px rgba(0,0,0,0.05); border: 1px solid #e0e0e0; }
-        .table-custom { margin-bottom: 0; } /* Removes extra gap under table */
-
+        /* 12. TABLES & BANNERS */
+        .table-responsive { overflow: hidden; box-shadow: 0 5px 15px rgba(0,0,0,0.05); border: 1px solid #e0e0e0; margin-bottom: 0; }
         .dr-rana-banner { background: linear-gradient(135deg, #0a2418 0%, #14452F 100%); border-top: 3px solid #D4AF37; padding: 40px 0; margin-top: 30px; }
 
-        /* FLOATING CTAs */
+        /* 13. FLOATING CTAs & LEAD GATE */
         .whatsapp-float { position: fixed; bottom: 80px; right: 20px; background-color: #25d366; color: white; width: 60px; height: 60px; border-radius: 50px; display: flex; align-items: center; justify-content: center; font-size: 30px; z-index: 1000; box-shadow: 0 4px 10px rgba(0,0,0,0.3); text-decoration: none; cursor: pointer; transition: 0.3s;}
         .whatsapp-float:hover { transform: scale(1.1); color:white;}
         .mobile-cta-bar { position: fixed; bottom: 0; width: 100%; background: #14452F; padding: 10px; display: none; z-index: 999; box-shadow: 0 -5px 15px rgba(0,0,0,0.2); }
@@ -138,11 +147,12 @@
         .lead-input { border: 2px solid #eee; padding: 12px; border-radius: 8px; width: 100%; margin-bottom: 15px; }
         .lead-input:focus { border-color: #D4AF37; outline: none; }
 
-        /* RESPONSIVE PADDING & SIZES */
+        /* 14. RESPONSIVE QUERIES (Mobile Balances) */
         @media (max-width: 768px) { 
+            .navbar-brand img { max-height: 42px; } /* Resize logo for mobile */
             .mobile-cta-bar { display: block; } 
             .hero-section { text-align: center; padding: 40px 0 80px 0; } 
-            .section-padding { padding: 50px 0; } /* Mobile par padding balance kar di */
+            .section-padding { padding: 50px 0; } /* Balance vertical spacing */
             .ingredient-box { padding: 12px 8px !important; }
             .ingredient-img { width: 90px; height: 90px; border-width: 2px; }
             .ingredient-box h5 { font-size: 14px; margin-bottom: 5px; }
