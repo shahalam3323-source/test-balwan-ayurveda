@@ -1,197 +1,589 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Check Your Situation</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Custom Protocol – Balwaan Vitality Program</title>
+    <link rel="icon" type="image/png" href="images/favicon.png">
+    
+    <!-- Fonts & Bootstrap -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;700;800;900&family=Poppins:wght@300;400;600;700&family=Noto+Sans+Devanagari:wght@400;600&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <!-- Facebook Pixel (same as original) -->
+    <script>
+    !function(f,b,e,v,n,t,s)
+    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+    n.queue=[];t=b.createElement(e);t.async=!0;
+    t.src=v;s=b.getElementsByTagName(e)[0];
+    s.parentNode.insertBefore(t,s)}(window, document,'script',
+    'https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init', '916924051189893'); 
+    fbq('track', 'PageView');
+    </script>
+    <noscript><img height="1" width="1" style="display:none"
+    src="https://www.facebook.com/tr?id=916924051189893&ev=PageView&noscript=1"
+    /></noscript>
 
-<!-- Dummy Pixel -->
-<script>
-!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-n.queue=[];t=b.createElement(e);t.async=!0;
-t.src=v;s=b.getElementsByTagName(e)[0];
-s.parentNode.insertBefore(t,s)}(window, document,'script',
-'https://connect.facebook.net/en_US/fbevents.js');
-fbq('init', '0000000000000');
-fbq('track', 'PageView');
-</script>
-
-<style>
-body{margin:0;font-family:Arial;background:#111;color:#eee}
-.container{max-width:520px;margin:auto;padding:20px}
-h1,h2,h3{margin-bottom:10px}
-p{opacity:.8;line-height:1.5}
-
-.btn{
-background:#1f8f4d;
-color:#fff;
-padding:14px;
-border:none;
-border-radius:6px;
-width:100%;
-font-size:15px;
-margin-top:15px;
-cursor:pointer;
-}
-
-.box{
-background:#1a1a1a;
-padding:18px;
-border-radius:8px;
-margin-bottom:15px;
-border:1px solid #222;
-}
-
-.option{
-padding:12px;
-border:1px solid #333;
-border-radius:6px;
-margin-bottom:10px;
-cursor:pointer;
-}
-
-.option.selected{
-background:#1f8f4d;
-border:none;
-color:#fff;
-}
-
-.input{
-width:100%;
-padding:12px;
-margin-top:10px;
-border-radius:6px;
-border:none;
-}
-
-.hidden{display:none}
-.center{text-align:center}
-</style>
+    <style>
+        :root {
+            --primary-green: #14452F;
+            --dark-gold: #D4AF37;
+            --light-bg: #f9fafb;
+            --card-shadow: 0 20px 35px -12px rgba(0,0,0,0.1);
+        }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: var(--light-bg);
+            color: #1e2a2e;
+            overflow-x: hidden;
+        }
+        .devnagari {
+            font-family: 'Noto Sans Devanagari', sans-serif;
+            font-size: 0.9rem;
+            color: #5a6e6c;
+        }
+        .gold-text {
+            color: var(--dark-gold);
+        }
+        .green-bg {
+            background: var(--primary-green);
+        }
+        
+        /* Step Progress Bar */
+        .step-progress {
+            display: flex;
+            justify-content: space-between;
+            max-width: 500px;
+            margin: 0 auto 30px;
+            position: relative;
+        }
+        .step-progress::before {
+            content: '';
+            position: absolute;
+            top: 24px;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: #e0e4e8;
+            z-index: 0;
+        }
+        .step {
+            background: white;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            font-size: 1.2rem;
+            border: 3px solid #e0e4e8;
+            position: relative;
+            z-index: 1;
+            background: white;
+            transition: all 0.3s;
+        }
+        .step.active {
+            border-color: var(--dark-gold);
+            background: var(--dark-gold);
+            color: var(--primary-green);
+            box-shadow: 0 0 0 5px rgba(212,175,55,0.2);
+        }
+        .step.completed {
+            border-color: var(--primary-green);
+            background: var(--primary-green);
+            color: white;
+        }
+        .step-label {
+            position: absolute;
+            top: 60px;
+            font-size: 12px;
+            font-weight: 600;
+            white-space: nowrap;
+            color: #2c3e2f;
+        }
+        
+        /* Cards & Sections */
+        .journey-card {
+            background: white;
+            border-radius: 28px;
+            padding: 30px 25px;
+            box-shadow: var(--card-shadow);
+            margin-bottom: 30px;
+            transition: 0.3s;
+            border: 1px solid rgba(212,175,55,0.2);
+        }
+        .hero-info {
+            background: linear-gradient(135deg, var(--primary-green) 0%, #0b2f21 100%);
+            color: white;
+            border-radius: 28px;
+            padding: 40px 30px;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .btn-gold {
+            background: linear-gradient(95deg, #D4AF37, #f5e27a);
+            color: #1e1e1e;
+            font-weight: 800;
+            border: none;
+            padding: 14px 28px;
+            border-radius: 60px;
+            transition: 0.2s;
+            box-shadow: 0 8px 20px rgba(212,175,55,0.3);
+        }
+        .btn-gold:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 25px rgba(212,175,55,0.4);
+            color: #000;
+        }
+        .btn-outline-gold {
+            border: 2px solid var(--dark-gold);
+            background: transparent;
+            color: var(--dark-gold);
+            font-weight: 600;
+            border-radius: 60px;
+            padding: 12px 28px;
+        }
+        .btn-outline-gold:hover {
+            background: var(--dark-gold);
+            color: var(--primary-green);
+        }
+        
+        /* Form Elements */
+        .option-label {
+            display: block;
+            padding: 12px 15px;
+            border: 2px solid #e2e8f0;
+            border-radius: 16px;
+            cursor: pointer;
+            transition: 0.2s;
+            background: #fff;
+            margin-bottom: 12px;
+            font-weight: 500;
+        }
+        .option-label:hover {
+            border-color: var(--dark-gold);
+            background: #fffaf0;
+        }
+        .form-check-input:checked + .option-label {
+            border-color: var(--primary-green);
+            background: #eef5f1;
+            box-shadow: 0 4px 12px rgba(20,69,47,0.1);
+        }
+        .form-check-input {
+            display: none;
+        }
+        .quiz-card {
+            background: white;
+            border-radius: 24px;
+            padding: 20px;
+            margin-bottom: 20px;
+            border: 1px solid #edf2f7;
+        }
+        .q-number {
+            font-weight: 900;
+            color: var(--primary-green);
+            font-size: 1.2rem;
+            margin-right: 8px;
+        }
+        
+        /* Loader & Offer */
+        #loaderScreen, #resultScreen {
+            display: none;
+            text-align: center;
+            padding: 40px 15px;
+        }
+        .offer-box {
+            background: linear-gradient(135deg, #14452F 0%, #0a2418 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 28px;
+            box-shadow: 0 20px 35px -12px rgba(0,0,0,0.25);
+            border: 1px solid var(--dark-gold);
+            text-align: left;
+        }
+        .scarcity-badge {
+            background: #dc3545;
+            color: white;
+            padding: 8px 20px;
+            border-radius: 60px;
+            font-weight: 700;
+            font-size: 0.85rem;
+            display: inline-block;
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.02); }
+            100% { transform: scale(1); }
+        }
+        .btn-action {
+            background: #25D366;
+            color: white;
+            font-weight: 800;
+            padding: 16px;
+            border-radius: 60px;
+            font-size: 1.1rem;
+            width: 100%;
+            border: none;
+            transition: 0.3s;
+            margin-top: 20px;
+        }
+        .btn-action:hover {
+            background: #1da851;
+            transform: translateY(-2px);
+        }
+        .bot-trap {
+            display: none;
+        }
+        
+        /* Responsive */
+        @media (max-width: 640px) {
+            .journey-card {
+                padding: 20px 18px;
+            }
+            .hero-info {
+                padding: 30px 20px;
+            }
+            .step-label {
+                font-size: 10px;
+                top: 55px;
+            }
+            .step {
+                width: 40px;
+                height: 40px;
+                font-size: 1rem;
+            }
+            .step-progress::before {
+                top: 19px;
+            }
+        }
+    </style>
 </head>
-
 <body>
 
-<div class="container">
+    <!-- Header -->
+    <div class="green-bg text-white py-3 text-center sticky-top" style="border-bottom: 3px solid var(--dark-gold);">
+        <h5 class="mb-0" style="font-weight: 900;">BALWAAN CLINICAL PROTOCOL</h5>
+        <small class="devnagari">Medical Advisory Board (25+ Years Experience)</small>
+    </div>
 
-<!-- HERO -->
-<div class="box center">
-<h2>Sach bolo… kya ye problem aapke saath ho rahi hai?</h2>
-<p>Agar haan, to aage badhne se pehle 5 simple sawal ka jawab de do</p>
-<button class="btn" onclick="goQuiz()">Mujhe check karna hai</button>
-</div>
+    <div class="container py-4" style="max-width: 700px;">
+        
+        <!-- Step Progress Indicator -->
+        <div class="step-progress mb-4">
+            <div class="step" id="step1Icon">1</div>
+            <div class="step" id="step2Icon">2</div>
+            <div class="step" id="step3Icon">3</div>
+        </div>
 
-<!-- REAL TALK -->
-<div class="box">
-<h3>Zyada log yahin galti karte hain…</h3>
-<p>bina samjhe capsule lena<br>
-2–3 din me change kar dena<br>
-asli problem samajhna hi nahi</p>
-</div>
+        <!-- ========== STEP 1 : INFORM / INTRO ========== -->
+        <div id="step1Container">
+            <div class="hero-info">
+                <i class="fas fa-stethoscope fa-3x mb-3 gold-text"></i>
+                <h2 class="fw-bold">Your Personalised <span class="gold-text">Vitality Protocol</span></h2>
+                <p class="mt-3">Based on 25+ years of Ayurvedic expertise, we create a custom plan <strong>just for your body type, age & lifestyle</strong>.</p>
+                <div class="row mt-4 text-start bg-dark bg-opacity-25 p-3 rounded-3">
+                    <div class="col-6">
+                        <i class="fas fa-check-circle gold-text me-2"></i> 100% Ayurvedic<br>
+                        <i class="fas fa-check-circle gold-text me-2"></i> No Side Effects
+                    </div>
+                    <div class="col-6">
+                        <i class="fas fa-check-circle gold-text me-2"></i> 1M+ Men Helped<br>
+                        <i class="fas fa-check-circle gold-text me-2"></i> Discreet Packaging
+                    </div>
+                </div>
+                <button class="btn btn-gold mt-4 px-5 py-3 fw-bold" id="startAssessmentBtn">
+                    Start Free Assessment <i class="fas fa-arrow-right ms-2"></i>
+                </button>
+            </div>
+            <div class="journey-card text-center">
+                <i class="fas fa-shield-alt fa-2x gold-text mb-3"></i>
+                <h5>What to expect?</h5>
+                <p class="small text-muted">This 2‑minute clinical assessment helps our experts identify the root cause. After analysis, you'll get a <strong>customised protocol + special offer</strong>.</p>
+                <div class="d-flex justify-content-center gap-3 flex-wrap">
+                    <span class="badge bg-light text-dark p-2"><i class="fas fa-lock me-1"></i> Secure</span>
+                    <span class="badge bg-light text-dark p-2"><i class="fas fa-chart-line me-1"></i> Science‑backed</span>
+                </div>
+            </div>
+        </div>
 
-<!-- LOGIC -->
-<div class="box">
-<h3>Har problem ka reason alag hota hai</h3>
-<p>kisi me weakness<br>
-kisi me stress<br>
-kisi me lifestyle</p>
-</div>
+        <!-- ========== STEP 2 : ASSESSMENT FORM ========== -->
+        <div id="step2Container" style="display: none;">
+            <div class="journey-card">
+                <h4 class="text-center mb-3 fw-bold">Clinical Assessment <span class="gold-text">Form</span></h4>
+                <p class="text-center text-muted small mb-4">Please fill accurate details – your protocol depends on it.</p>
+                
+                <form id="clinicalQuizForm">
+                    <input type="text" id="spam_trap_field" class="bot-trap" autocomplete="off" tabindex="-1">
+                    
+                    <!-- Personal Info -->
+                    <div class="quiz-card">
+                        <div class="mb-3">
+                            <label class="fw-bold"><i class="fas fa-user me-2 gold-text"></i>Full Name <span class="devnagari">(पूरा नाम)</span> *</label>
+                            <input type="text" class="form-control form-control-lg mt-1" id="userName" placeholder="Enter your name" required>
+                        </div>
+                        <div>
+                            <label class="fw-bold"><i class="fab fa-whatsapp me-2 gold-text"></i>WhatsApp Number <span class="devnagari">(10 अंक)</span> *</label>
+                            <input type="tel" class="form-control form-control-lg mt-1" id="userMobile" placeholder="e.g. 9876543210" maxlength="10" required>
+                            <div id="mobileError" class="text-danger small mt-2 fw-bold" style="display: none;"><i class="fas fa-exclamation-circle me-1"></i> Please enter a valid 10-digit Indian mobile number.</div>
+                        </div>
+                    </div>
+                    
+                    <!-- Q1 Age -->
+                    <div class="quiz-card">
+                        <div class="fw-bold"><span class="q-number">1.</span> What is your age?</div>
+                        <div class="devnagari mb-2 ms-3">आपकी उम्र क्या है?</div>
+                        <div class="row">
+                            <div class="col-6"><label><input type="radio" name="q1_age" value="18-25" class="form-check-input" required><div class="option-label text-center">18 - 25 <br><span class="devnagari">१८-२५ साल</span></div></label></div>
+                            <div class="col-6"><label><input type="radio" name="q1_age" value="26-35" class="form-check-input"><div class="option-label text-center">26 - 35 <br><span class="devnagari">२६-३५ साल</span></div></label></div>
+                            <div class="col-6"><label><input type="radio" name="q1_age" value="36-45" class="form-check-input"><div class="option-label text-center">36 - 45 <br><span class="devnagari">३६-४५ साल</span></div></label></div>
+                            <div class="col-6"><label><input type="radio" name="q1_age" value="45+" class="form-check-input"><div class="option-label text-center">45+ <br><span class="devnagari">४५+ साल</span></div></label></div>
+                        </div>
+                    </div>
+                    
+                    <!-- Q2 Goal -->
+                    <div class="quiz-card">
+                        <div class="fw-bold"><span class="q-number">2.</span> Your primary health goal?</div>
+                        <div class="devnagari mb-2 ms-3">आपकी मुख्य परेशानी या लक्ष्य</div>
+                        <label><input type="radio" name="q2_goal" value="Boost Stamina" class="form-check-input" required><div class="option-label">Boost Stamina <span class="devnagari">(स्टैमिना)</span></div></label>
+                        <label><input type="radio" name="q2_goal" value="Better Control & Timing" class="form-check-input"><div class="option-label">Better Control & Timing <span class="devnagari">(कंट्रोल और टाइमिंग)</span></div></label>
+                        <label><input type="radio" name="q2_goal" value="Erectile Dysfunction" class="form-check-input"><div class="option-label">Erectile Dysfunction <span class="devnagari">(इरेक्शन की समस्या)</span></div></label>
+                        <label><input type="radio" name="q2_goal" value="Hardness" class="form-check-input"><div class="option-label">Hardness <span class="devnagari">(सख्ती)</span></div></label>
+                        <label><input type="radio" name="q2_goal" value="Increase Sperm Count" class="form-check-input"><div class="option-label">Increase Sperm Count <span class="devnagari">(स्पर्म काउंट)</span></div></label>
+                        <label><input type="radio" name="q2_goal" value="Overcome Daily Fatigue" class="form-check-input"><div class="option-label">Overcome Daily Fatigue <span class="devnagari">(थकान)</span></div></label>
+                        <label><input type="radio" name="q2_goal" value="Focus & Deep Sleep" class="form-check-input"><div class="option-label">Focus & Deep Sleep <span class="devnagari">(फोकस और नींद)</span></div></label>
+                    </div>
+                    
+                    <!-- Q3 Lifestyle -->
+                    <div class="quiz-card">
+                        <div class="fw-bold"><span class="q-number">3.</span> Daily routine / lifestyle?</div>
+                        <div class="devnagari mb-2 ms-3">दिनचर्या या काम का प्रकार</div>
+                        <label><input type="radio" name="q3_life" value="Heavy Physical Work" class="form-check-input" required><div class="option-label">Heavy Physical Work <span class="devnagari">(भारी शारीरिक मेहनत)</span></div></label>
+                        <label><input type="radio" name="q3_life" value="Desk Job / Sitting" class="form-check-input"><div class="option-label">Desk Job / Sitting <span class="devnagari">(बैठकर काम)</span></div></label>
+                        <label><input type="radio" name="q3_life" value="High Stress" class="form-check-input"><div class="option-label">High Stress / Tension <span class="devnagari">(अत्यधिक तनाव)</span></div></label>
+                    </div>
+                    
+                    <!-- Q4 Medical -->
+                    <div class="quiz-card">
+                        <div class="fw-bold"><span class="q-number">4.</span> Any existing medical issues?</div>
+                        <div class="devnagari mb-2 ms-3">कोई अन्य स्वास्थ्य समस्या?</div>
+                        <div class="row">
+                            <div class="col-4"><label><input type="radio" name="q4_med" value="None" class="form-check-input" required><div class="option-label text-center">None</div></label></div>
+                            <div class="col-4"><label><input type="radio" name="q4_med" value="Diabetes" class="form-check-input"><div class="option-label text-center">Diabetes</div></label></div>
+                            <div class="col-4"><label><input type="radio" name="q4_med" value="BP" class="form-check-input"><div class="option-label text-center">B.P.</div></label></div>
+                        </div>
+                    </div>
+                    
+                    <!-- Q5 Married + years -->
+                    <div class="quiz-card">
+                        <div class="fw-bold"><span class="q-number">5.</span> Are you married?</div>
+                        <div class="devnagari mb-2 ms-3">शादीशुदा हैं?</div>
+                        <div class="row">
+                            <div class="col-6"><label><input type="radio" name="q5_married" value="Yes" class="form-check-input" required><div class="option-label text-center">Yes</div></label></div>
+                            <div class="col-6"><label><input type="radio" name="q5_married" value="No" class="form-check-input"><div class="option-label text-center">No</div></label></div>
+                        </div>
+                        <div id="yearsBox" style="display: none; margin-top: 15px;">
+                            <div class="fw-bold small">Marriage duration?</div>
+                            <div class="devnagari mb-2">शादी को कितने साल?</div>
+                            <div class="row g-2">
+                                <div class="col-4"><label><input type="radio" name="q5_years" value="1-3 Years" class="form-check-input"><div class="option-label text-center">1-3 Years</div></label></div>
+                                <div class="col-4"><label><input type="radio" name="q5_years" value="3-7 Years" class="form-check-input"><div class="option-label text-center">3-7 Years</div></label></div>
+                                <div class="col-4"><label><input type="radio" name="q5_years" value="7+ Years" class="form-check-input"><div class="option-label text-center">7+ Years</div></label></div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <button type="submit" class="btn btn-gold w-100 py-3 mt-2 fw-bold">
+                        Analyze My Profile <i class="fas fa-file-medical ms-2"></i>
+                    </button>
+                    <div class="text-center mt-3 small text-muted"><i class="fas fa-lock me-1"></i> Secure & encrypted</div>
+                </form>
+            </div>
+        </div>
 
-<!-- CTA -->
-<div class="box center">
-<button class="btn" onclick="goQuiz()">Theek hai, check karte hain</button>
-</div>
+        <!-- Loader (Step 2 → Step 3 transition) -->
+        <div id="loaderScreen">
+            <div class="spinner-border mb-4" style="color: var(--dark-gold); width: 3rem; height: 3rem;" role="status"></div>
+            <h3 style="color: var(--primary-green); font-weight: 800;">Analyzing Your Dosha...</h3>
+            <p class="text-muted fw-bold">Our clinical system is preparing your custom protocol.</p>
+            <div class="bg-white rounded-4 p-3 mt-4 mx-auto shadow-sm" style="max-width: 280px;">
+                <p class="text-success fw-bold mb-2"><i class="fas fa-check-circle me-2"></i> Age & Lifestyle Analyzed</p>
+                <p class="text-success fw-bold mb-2"><i class="fas fa-check-circle me-2"></i> Root Cause Identified</p>
+                <p class="text-secondary fw-bold"><i class="fas fa-cog fa-spin me-2"></i> Preparing Protocol...</p>
+            </div>
+        </div>
 
-<!-- QUIZ -->
-<div id="quiz" class="hidden">
+        <!-- ========== STEP 3 : OFFER / RESULT ========== -->
+        <div id="resultScreen">
+            <div class="text-center mb-3">
+                <i class="fas fa-check-circle fa-3x text-success"></i>
+                <h2 class="fw-bold mt-2" style="color: var(--primary-green);">Your Protocol is Ready</h2>
+                <p class="text-muted">Based on your responses, our advisory board has created a <strong>customised plan</strong>.</p>
+            </div>
+            <div class="offer-box">
+                <div class="text-center">
+                    <div class="scarcity-badge shadow-sm"><i class="fas fa-fire me-1"></i> Limited Stock – Only 5 Packs Left Today!</div>
+                </div>
+                <h4 class="text-center mt-3" style="color: var(--dark-gold); font-weight: 800;">30‑Day Custom Protocol + Starter Pack</h4>
+                <div class="mt-4">
+                    <p><i class="fas fa-prescription-bottle-alt text-warning me-2 fa-lg"></i> <strong>Balwaan Gold (Made-to-order)</strong> – formulated for your exact needs.</p>
+                    <p><i class="fas fa-file-pdf text-danger me-2 fa-lg"></i> <strong>FREE VIP Diet Guide PDF</strong> – Ayurvedic food plan for faster results.</p>
+                    <p><i class="fas fa-book text-info me-2 fa-lg"></i> <strong>FREE Secret Stamina Guide</strong> – expert tips for lasting energy.</p>
+                </div>
+                <div class="bg-dark bg-opacity-25 p-4 rounded-4 text-center mt-3">
+                    <span class="text-decoration-line-through text-light opacity-75">Regular ₹2,999</span>
+                    <h1 class="display-5 fw-bold text-white">₹1,499</h1>
+                    <div class="d-flex justify-content-center gap-2 my-2">
+                        <span class="badge bg-dark border"><i class="fas fa-truck"></i> Free Shipping</span>
+                        <span class="badge bg-dark border"><i class="fas fa-box"></i> Discreet Packing</span>
+                    </div>
+                    <div class="alert alert-warning py-2 small">⚠️ <strong>Why prepaid?</strong> This protocol is custom compounded for your body – we don’t offer COD on special packs.</div>
+                </div>
+                <button id="whatsappOrderBtn" class="btn-action">
+                    <i class="fab fa-whatsapp fa-lg me-2"></i> Confirm Prepaid Order (WhatsApp)
+                </button>
+            </div>
+            <a href="index.html" class="d-block text-center mt-4 text-muted text-decoration-none fw-bold small"><i class="fas fa-arrow-left me-1"></i> Back to Home</a>
+        </div>
 
-<div class="box">
-<h3>Age</h3>
-<div class="option" onclick="select(this,'age','18-25')">18-25</div>
-<div class="option" onclick="select(this,'age','26-35')">26-35</div>
-</div>
+    </div>
 
-<div class="box">
-<h3>Problem</h3>
-<div class="option" onclick="select(this,'problem','stamina')">Stamina kam hai</div>
-<div class="option" onclick="select(this,'problem','weakness')">Weakness hai</div>
-</div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // ----- Multi-Step Navigation -----
+        const step1Container = document.getElementById('step1Container');
+        const step2Container = document.getElementById('step2Container');
+        const loaderScreen = document.getElementById('loaderScreen');
+        const resultScreen = document.getElementById('resultScreen');
+        const step1Icon = document.getElementById('step1Icon');
+        const step2Icon = document.getElementById('step2Icon');
+        const step3Icon = document.getElementById('step3Icon');
 
-<div class="box">
-<h3>Lifestyle</h3>
-<div class="option" onclick="select(this,'life','work')">Heavy work</div>
-<div class="option" onclick="select(this,'life','desk')">Desk job</div>
-</div>
+        function showStep(step) {
+            step1Container.style.display = 'none';
+            step2Container.style.display = 'none';
+            loaderScreen.style.display = 'none';
+            resultScreen.style.display = 'none';
+            if(step === 1) step1Container.style.display = 'block';
+            if(step === 2) step2Container.style.display = 'block';
+            if(step === 3) loaderScreen.style.display = 'block';
+            if(step === 4) resultScreen.style.display = 'block';
+            
+            // Update icons
+            step1Icon.classList.remove('active', 'completed');
+            step2Icon.classList.remove('active', 'completed');
+            step3Icon.classList.remove('active', 'completed');
+            if(step >= 2) step1Icon.classList.add('completed');
+            if(step === 2) step2Icon.classList.add('active');
+            if(step === 3) step2Icon.classList.add('completed');
+            if(step === 3 || step === 4) step3Icon.classList.add('active');
+            if(step === 4) {
+                step3Icon.classList.add('completed');
+                step3Icon.classList.remove('active');
+            }
+        }
 
-<div class="box">
-<input class="input" id="name" placeholder="Name">
-<input class="input" id="phone" placeholder="WhatsApp Number">
-</div>
+        document.getElementById('startAssessmentBtn').addEventListener('click', () => {
+            showStep(2);
+        });
 
-<button class="btn" onclick="submitForm()">Mera result dikhao</button>
+        // ----- Marriage years toggle -----
+        document.querySelectorAll('input[name="q5_married"]').forEach(radio => {
+            radio.addEventListener('change', function() {
+                if(this.value === 'Yes') {
+                    document.getElementById('yearsBox').style.display = 'block';
+                } else {
+                    document.getElementById('yearsBox').style.display = 'none';
+                    document.querySelectorAll('input[name="q5_years"]').forEach(r => r.checked = false);
+                }
+            });
+        });
 
-</div>
+        // ----- Form Submit -----
+        let userData = {};
+        const form = document.getElementById('clinicalQuizForm');
 
-<!-- LOADER -->
-<div id="loader" class="hidden center">
-<p>Aapke jawab samjhe ja rahe hain...</p>
-</div>
-
-<!-- RESULT -->
-<div id="result" class="hidden">
-
-<div class="box">
-<h3>Aapke answers ke hisaab se…</h3>
-<p>aapki problem simple nahi hai<br>
-isliye random capsule kaam nahi karta</p>
-
-<p>aapko targeted approach chahiye</p>
-</div>
-
-<div class="box center">
-<h2>Custom Pack – ₹1900</h2>
-<p>Prepaid only</p>
-<button class="btn" onclick="order()">Mujhe ye pack chahiye</button>
-</div>
-
-</div>
-
-</div>
-
-<script>
-let data={}
-
-function goQuiz(){
-document.getElementById('quiz').classList.remove('hidden')
-window.scrollTo(0,document.body.scrollHeight)
-}
-
-function select(el,key,val){
-data[key]=val
-let p=el.parentNode
-p.querySelectorAll('.option').forEach(o=>o.classList.remove('selected'))
-el.classList.add('selected')
-}
-
-function submitForm(){
-data.name=document.getElementById('name').value
-data.phone=document.getElementById('phone').value
-
-document.getElementById('quiz').classList.add('hidden')
-document.getElementById('loader').classList.remove('hidden')
-
-setTimeout(()=>{
-document.getElementById('loader').classList.add('hidden')
-document.getElementById('result').classList.remove('hidden')
-fbq('track','Lead')
-},2500)
-}
-
-function order(){
-alert("Add payment link here")
-}
-</script>
-
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Honeypot
+            if(document.getElementById('spam_trap_field').value !== '') return;
+            
+            // Mobile validation
+            const mobile = document.getElementById('userMobile').value.trim();
+            const indianMobileRegex = /^[6789]\d{9}$/;
+            const isAllSame = mobile.split('').every(char => char === mobile[0]);
+            const errorDiv = document.getElementById('mobileError');
+            if(!indianMobileRegex.test(mobile) || isAllSame) {
+                errorDiv.style.display = 'block';
+                document.getElementById('userMobile').focus();
+                return;
+            }
+            errorDiv.style.display = 'none';
+            
+            // Collect data
+            userData.name = document.getElementById('userName').value.trim();
+            userData.mobile = mobile;
+            userData.age = document.querySelector('input[name="q1_age"]:checked').value;
+            userData.goal = document.querySelector('input[name="q2_goal"]:checked').value;
+            const marriedStatus = document.querySelector('input[name="q5_married"]:checked').value;
+            let marriageYears = "";
+            if(marriedStatus === 'Yes') {
+                const yr = document.querySelector('input[name="q5_years"]:checked');
+                if(yr) marriageYears = " (" + yr.value + ")";
+            }
+            userData.fullGoal = userData.goal + " | Married: " + marriedStatus + marriageYears;
+            
+            // Send lead to Google Sheet (no-cors)
+            const googleFormURL = "https://docs.google.com/forms/d/e/1FAIpQLSeZSFeTXwo6QnZ6NfKs1V2ZFK9YBP29FEQ0YvI0AzPceL0UFw/formResponse";
+            const formData = new FormData();
+            formData.append("entry.108304216", "QUIZ-" + Date.now().toString().slice(-4));
+            formData.append("entry.2108179602", userData.name);
+            formData.append("entry.1684860991", userData.mobile);
+            formData.append("entry.1774647451", "Custom Protocol Quiz");
+            formData.append("entry.1664049382", userData.fullGoal + " | Age: " + userData.age);
+            formData.append("entry.1326902597", "Quiz Completed");
+            fetch(googleFormURL, { method: "POST", mode: "no-cors", body: formData });
+            
+            // Facebook pixel event
+            if (typeof fbq === 'function') { fbq('track', 'Customize_Profile_Completed'); }
+            
+            // Show loader and then result after 2.5s
+            showStep(3);
+            setTimeout(() => {
+                showStep(4);
+                // Also track order intent event
+                if (typeof fbq === 'function') { fbq('track', 'AddToCart'); }
+            }, 2500);
+        });
+        
+        // WhatsApp Order Button (with updated number + prepaid message)
+        document.getElementById('whatsappOrderBtn').addEventListener('click', function() {
+            // Send final order intent to sheet
+            const googleFormURL = "https://docs.google.com/forms/d/e/1FAIpQLSeZSFeTXwo6QnZ6NfKs1V2ZFK9YBP29FEQ0YvI0AzPceL0UFw/formResponse";
+            const fd = new FormData();
+            fd.append("entry.108304216", "PREPAID-" + Date.now().toString().slice(-4));
+            fd.append("entry.2108179602", userData.name);
+            fd.append("entry.1684860991", userData.mobile);
+            fd.append("entry.1774647451", "1499 Prepaid Order Click");
+            fd.append("entry.1664049382", userData.goal + " (Age:" + userData.age + ")");
+            fd.append("entry.1326902597", "High Intent Prepaid");
+            fetch(googleFormURL, { method: "POST", mode: "no-cors", body: fd });
+            
+            const msg = `Hi, I have completed the clinical assessment and want to confirm my *Prepaid Order for ₹1,499*.\n\n*Name:* ${userData.name}\n*Age:* ${userData.age}\n*Goal:* ${userData.goal}\n\nPlease share payment QR code.`;
+            // WhatsApp number as per original (Hakeem Basit / support)
+            window.open(`https://wa.me/919897371502?text=${encodeURIComponent(msg)}`, '_blank');
+        });
+    </script>
 </body>
 </html>
