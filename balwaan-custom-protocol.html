@@ -1,334 +1,197 @@
 <!DOCTYPE html>
-<html lang="hi">
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Free Dosha Test | Balwaan Ayurveda</title>
-    
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800;900&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet"> <script>
-    !function(f,b,e,v,n,t,s)
-    {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-    n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-    n.queue=[];t=b.createElement(e);t.async=!0;
-    t.src=v;s=b.getElementsByTagName(e)[0];
-    s.parentNode.insertBefore(t,s)}(window, document,'script',
-    'https://connect.facebook.net/en_US/fbevents.js');
-    fbq('init', '000000000000000'); /* Asli Pixel ID */
-    fbq('track', 'PageView');
-    </script>
-    <noscript><img height="1" width="1" style="display:none"
-    src="https://www.facebook.com/tr?id=000000000000000&ev=PageView&noscript=1"
-    /></noscript>
-    <style>
-        :root {
-            --primary-green: #14452F;
-            --dark-gold: #D4AF37;
-        }
-        body { font-family: 'Poppins', sans-serif; background-color: #fdfbf5; color: #333; margin: 0; }
-        h1, h2, h3, h4, h5 { font-family: 'Montserrat', sans-serif; }
-        .btn-green { background-color: var(--primary-green); color: white; transition: 0.3s; }
-        .btn-green:hover { background-color: #0d2e1f; color: var(--dark-gold); transform: translateY(-2px); }
-        .btn-gold { background: linear-gradient(135deg, #D4AF37, #f5e27a); color: #000; font-weight: bold; }
-        
-        /* Custom Radio & Checkbox Styling */
-        .btn-outline-success { border-color: #28a745; color: #28a745; }
-        .btn-check:checked + .btn-outline-success { background-color: #28a745; color: white; border-color: #28a745; }
-        .btn-outline-secondary { border-color: #ccc; color: #555; }
-        .btn-check:checked + .btn-outline-secondary { background-color: var(--primary-green); color: white; border-color: var(--primary-green); }
-        
-        .custom-checkbox-box { cursor: pointer; transition: 0.2s; background: white; }
-        .custom-checkbox-box:hover { border-color: var(--primary-green) !important; background: #f0fdf4; }
-        .form-check-input:checked ~ .form-check-label { color: var(--primary-green); }
-        
-        /* Loader Overlay & AI Terminal */
-        #loaderOverlay {
-            display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(10, 20, 15, 0.99); z-index: 9999; flex-direction: column;
-            justify-content: center; align-items: center; text-align: center;
-        }
-        #terminalBox {
-            width: 90%; max-width: 600px; height: 320px; background: #000;
-            border: 2px solid #25D366; border-radius: 10px; padding: 20px;
-            text-align: left; overflow: hidden; box-shadow: 0 0 20px rgba(37, 211, 102, 0.2);
-            color: #25D366; font-family: 'VT323', monospace; font-size: 22px; line-height: 1.5;
-            position: relative;
-        }
-        .expert-note {
-            margin-top: 15px; font-family: 'Poppins', sans-serif; font-size: 13px; color: #888;
-            max-width: 600px; text-align: center; padding: 0 15px;
-        }
-        
-        /* Hidden Result Section initially */
-        #resultSection { display: none; }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Check Your Situation</title>
+
+<!-- Dummy Pixel -->
+<script>
+!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window, document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', '0000000000000');
+fbq('track', 'PageView');
+</script>
+
+<style>
+body{margin:0;font-family:Arial;background:#111;color:#eee}
+.container{max-width:520px;margin:auto;padding:20px}
+h1,h2,h3{margin-bottom:10px}
+p{opacity:.8;line-height:1.5}
+
+.btn{
+background:#1f8f4d;
+color:#fff;
+padding:14px;
+border:none;
+border-radius:6px;
+width:100%;
+font-size:15px;
+margin-top:15px;
+cursor:pointer;
+}
+
+.box{
+background:#1a1a1a;
+padding:18px;
+border-radius:8px;
+margin-bottom:15px;
+border:1px solid #222;
+}
+
+.option{
+padding:12px;
+border:1px solid #333;
+border-radius:6px;
+margin-bottom:10px;
+cursor:pointer;
+}
+
+.option.selected{
+background:#1f8f4d;
+border:none;
+color:#fff;
+}
+
+.input{
+width:100%;
+padding:12px;
+margin-top:10px;
+border-radius:6px;
+border:none;
+}
+
+.hidden{display:none}
+.center{text-align:center}
+</style>
 </head>
+
 <body>
 
-    <nav class="navbar bg-white shadow-sm py-3">
-        <div class="container justify-content-center">
-            <a class="navbar-brand fw-bold mb-0" href="#" style="color: var(--primary-green); font-size: 24px;">
-                <i class="fas fa-leaf" style="color: var(--dark-gold);"></i> BALWAAN <span style="font-weight: 400;">AYURVEDA</span>
-            </a>
-        </div>
-    </nav>
+<div class="container">
 
-    <div id="formContainer">
+<!-- HERO -->
+<div class="box center">
+<h2>Sach bolo… kya ye problem aapke saath ho rahi hai?</h2>
+<p>Agar haan, to aage badhne se pehle 5 simple sawal ka jawab de do</p>
+<button class="btn" onclick="goQuiz()">Mujhe check karna hai</button>
+</div>
 
-        <div class="container mt-4 text-center">
-            <img src="http://googleusercontent.com/image_generation_content/4" alt="Custom Protocol Journey" class="img-fluid rounded shadow-sm" style="max-width: 100%; border: 3px solid var(--primary-green);">
-        </div>
+<!-- REAL TALK -->
+<div class="box">
+<h3>Zyada log yahin galti karte hain…</h3>
+<p>bina samjhe capsule lena<br>
+2–3 din me change kar dena<br>
+asli problem samajhna hi nahi</p>
+</div>
 
-        <div class="container mt-5 mb-4">
-            <div class="row justify-content-center">
-                <div class="col-lg-8 text-center">
-                    
-                    <span class="badge bg-danger text-white px-3 py-2 fw-bold text-uppercase mb-3" style="font-size: 12px; letter-spacing: 1px; border-radius: 50px;">
-                        <i class="fas fa-stopwatch me-1"></i> Sirf 1 Minute Ka Test
-                    </span>
-                    
-                    <h2 class="fw-bold mb-3" style="color: var(--primary-green); font-size: 28px;">
-                        आम 'ताकत की गोलियां' आप पर काम क्यों नहीं करतीं?
-                    </h2>
-                    
-                    <p class="text-muted mb-4" style="font-size: 16px; line-height: 1.6;">
-                        आयुर्वेद के अनुसार हर इंसान का शरीर (वात, पित्त, कफ) अलग होता है। बिना अपना <strong>'दोष' (Dosha)</strong> जाने कोई भी सप्लीमेंट खाना पैसा बर्बाद करना है। 
-                        <br><br>
-                        नीचे दिए गए 3 आसान सवालों के जवाब दें और हमारी एक्सपर्ट मेडिकल टीम आपको बताएगी कि <strong>आपके शरीर के लिए कौन सी जड़ी-बूटियां सही हैं।</strong>
-                    </p>
+<!-- LOGIC -->
+<div class="box">
+<h3>Har problem ka reason alag hota hai</h3>
+<p>kisi me weakness<br>
+kisi me stress<br>
+kisi me lifestyle</p>
+</div>
 
-                    <div class="row text-center mb-5 g-3">
-                        <div class="col-4">
-                            <div class="p-3 bg-white shadow-sm rounded border-top border-warning border-3">
-                                <i class="fas fa-list-check fa-2x mb-2" style="color: var(--primary-green);"></i>
-                                <h6 class="fw-bold mb-0" style="font-size: 13px;">1. टेस्ट भरें</h6>
-                            </div>
-                        </div>
-                        <div class="col-4">
-                            <div class="p-3 bg-white shadow-sm rounded border-top border-warning border-3">
-                                <i class="fas fa-user-md fa-2x mb-2" style="color: var(--primary-green);"></i>
-                                <h6 class="fw-bold mb-0" style="font-size: 13px;">2. दोष चेकअप</h6>
-                            </div>
-                        </div>
-                        <div class="col-4">
-                            <div class="p-3 bg-white shadow-sm rounded border-top border-warning border-3">
-                                <i class="fas fa-box-open fa-2x mb-2" style="color: var(--primary-green);"></i>
-                                <h6 class="fw-bold mb-0" style="font-size: 13px;">3. कस्टम दवा</h6>
-                            </div>
-                        </div>
-                    </div>
+<!-- CTA -->
+<div class="box center">
+<button class="btn" onclick="goQuiz()">Theek hai, check karte hain</button>
+</div>
 
-                </div>
-            </div>
-        </div>
+<!-- QUIZ -->
+<div id="quiz" class="hidden">
 
-        <div class="container mb-5">
-            <div class="row justify-content-center">
-                <div class="col-lg-8">
-                    
-                    <div class="card shadow-lg border-0" style="border-radius: 15px; background-color: #fcfcfc; border-top: 5px solid var(--primary-green) !important;">
-                        <div class="card-body p-4 p-md-5">
-                            
-                            <form id="doshaTestForm">
-                                
-                                <div class="mb-4 pb-3 border-bottom">
-                                    <h5 class="fw-bold mb-3" style="color: #333;">1. आपकी उम्र कितनी है?</h5>
-                                    <div class="row g-2">
-                                        <div class="col-6">
-                                            <input type="radio" class="btn-check" name="ageGroup" id="age1" value="18-25" required>
-                                            <label class="btn btn-outline-success w-100 py-2 fw-bold" for="age1">18 - 25 साल</label>
-                                        </div>
-                                        <div class="col-6">
-                                            <input type="radio" class="btn-check" name="ageGroup" id="age2" value="26-35">
-                                            <label class="btn btn-outline-success w-100 py-2 fw-bold" for="age2">26 - 35 साल</label>
-                                        </div>
-                                        <div class="col-6">
-                                            <input type="radio" class="btn-check" name="ageGroup" id="age3" value="36-45">
-                                            <label class="btn btn-outline-success w-100 py-2 fw-bold" for="age3">36 - 45 साल</label>
-                                        </div>
-                                        <div class="col-6">
-                                            <input type="radio" class="btn-check" name="ageGroup" id="age4" value="46+">
-                                            <label class="btn btn-outline-success w-100 py-2 fw-bold" for="age4">46+ साल</label>
-                                        </div>
-                                    </div>
-                                </div>
+<div class="box">
+<h3>Age</h3>
+<div class="option" onclick="select(this,'age','18-25')">18-25</div>
+<div class="option" onclick="select(this,'age','26-35')">26-35</div>
+</div>
 
-                                <div class="mb-4 pb-3 border-bottom">
-                                    <h5 class="fw-bold mb-1" style="color: #333;">2. आपको मुख्य रूप से क्या दिक्कत आ रही है?</h5>
-                                    <p class="text-danger small mb-3 fw-bold"><i class="fas fa-info-circle"></i> (ज़्यादा से ज़्यादा 2 चुनें)</p>
-                                    
-                                    <div class="row g-2">
-                                        <div class="col-md-6">
-                                            <div class="form-check custom-checkbox-box p-3 border rounded text-start">
-                                                <input class="form-check-input problem-checkbox ms-1" type="checkbox" name="problem" value="Thakan" id="prob1">
-                                                <label class="form-check-label fw-bold ms-2 w-100" for="prob1">जल्दी थकान व कमज़ोरी</label>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="form-check custom-checkbox-box p-3 border rounded text-start">
-                                                <input class="form-check-input problem-checkbox ms-1" type="checkbox" name="problem" value="Stamina" id="prob2">
-                                                <label class="form-check-label fw-bold ms-2 w-100" for="prob2">स्टैमिना और ताक़त की कमी</label>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="form-check custom-checkbox-box p-3 border rounded text-start">
-                                                <input class="form-check-input problem-checkbox ms-1" type="checkbox" name="problem" value="Stress" id="prob3">
-                                                <label class="form-check-label fw-bold ms-2 w-100" for="prob3">स्ट्रेस / नींद न आना</label>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-6">
-                                            <div class="form-check custom-checkbox-box p-3 border rounded text-start">
-                                                <input class="form-check-input problem-checkbox ms-1" type="checkbox" name="problem" value="Focus" id="prob4">
-                                                <label class="form-check-label fw-bold ms-2 w-100" for="prob4">काम में मन न लगना / सुस्ती</label>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+<div class="box">
+<h3>Problem</h3>
+<div class="option" onclick="select(this,'problem','stamina')">Stamina kam hai</div>
+<div class="option" onclick="select(this,'problem','weakness')">Weakness hai</div>
+</div>
 
-                                <div class="mb-5">
-                                    <h5 class="fw-bold mb-3" style="color: #333;">3. आपका रोज़ाना का रूटीन (Lifestyle) कैसा है?</h5>
-                                    <div class="row g-2 text-start">
-                                        <div class="col-12">
-                                            <input type="radio" class="btn-check" name="lifestyle" id="life1" value="Sitting" required>
-                                            <label class="btn btn-outline-secondary w-100 p-3 text-start fw-bold" for="life1">🪑 दिन भर बैठे रहने का काम है (Desk Job)</label>
-                                        </div>
-                                        <div class="col-12">
-                                            <input type="radio" class="btn-check" name="lifestyle" id="life2" value="Active">
-                                            <label class="btn btn-outline-secondary w-100 p-3 text-start fw-bold" for="life2">🏃‍♂️ मेहनत या भाग-दौड़ वाला काम है</label>
-                                        </div>
-                                        <div class="col-12">
-                                            <input type="radio" class="btn-check" name="lifestyle" id="life3" value="Stressed">
-                                            <label class="btn btn-outline-secondary w-100 p-3 text-start fw-bold" for="life3">🤯 काफी मानसिक तनाव (Mental Stress) रहता है</label>
-                                        </div>
-                                    </div>
-                                </div>
+<div class="box">
+<h3>Lifestyle</h3>
+<div class="option" onclick="select(this,'life','work')">Heavy work</div>
+<div class="option" onclick="select(this,'life','desk')">Desk job</div>
+</div>
 
-                                <button type="button" id="analyzeBtn" class="btn btn-green w-100 py-3 fw-bold shadow-sm" style="font-size: 18px; border-radius: 50px;">
-                                    <i class="fas fa-cogs me-2"></i> मेरा डोज़ (Dosha) चेक करें
-                                </button>
+<div class="box">
+<input class="input" id="name" placeholder="Name">
+<input class="input" id="phone" placeholder="WhatsApp Number">
+</div>
 
-                            </form>
-                        </div>
-                    </div>
+<button class="btn" onclick="submitForm()">Mera result dikhao</button>
 
-                </div>
-            </div>
-        </div>
-    </div> <div id="loaderOverlay">
-        <h3 class="fw-bold text-white mb-3" style="font-family: 'Montserrat', sans-serif;">Balwaan AI Core Active</h3>
-        
-        <div id="terminalBox">
-            <div id="terminalContent"></div>
-        </div>
-        
-        <p class="expert-note">
-            <i class="fas fa-user-md"></i> <strong>Note:</strong> Hamara AI system sirf aapki body ka Base Matrix nikalta hai. Final dawai hamare Ayurvedic Experts (Medical Board) dwara hi aapke order ke baad haath se tayyar ki jati hai.
-        </p>
-    </div>
+</div>
 
-    <div id="resultSection" class="container py-5 text-center">
-        <div class="row justify-content-center">
-            <div class="col-lg-7">
-                <i class="fas fa-check-circle fa-4x mb-3" style="color: #28a745;"></i>
-                <h2 class="fw-bold mb-2" style="color: var(--primary-green);">बधाई हो! आपका बेस प्रोटोकॉल तैयार है</h2>
-                <p class="lead text-muted mb-4">AI सिस्टम ने आपके जवाबों के आधार पर आपके लिए <strong>Shilajit, Ashwagandha और Safed Musli</strong> का एकदम सही रेशियो कैलकुलेट कर लिया है।</p>
-                
-                <div class="card border-success border-2 shadow-sm mb-4">
-                    <div class="card-body p-4 bg-light">
-                        <h5 class="fw-bold text-success mb-3">✅ Your 50-Day Custom Program Includes:</h5>
-                        <ul class="list-unstyled text-start mx-auto mb-0" style="max-width: 320px; font-weight: 500;">
-                            <li class="mb-2"><i class="fas fa-pills text-warning me-2"></i> Expert-Compounded Balwaan Gold</li>
-                            <li class="mb-2"><i class="fas fa-apple-alt text-danger me-2"></i> Free VIP Diet Plan</li>
-                            <li><i class="fas fa-headset text-primary me-2"></i> 24/7 Expert Support</li>
-                        </ul>
-                    </div>
-                </div>
+<!-- LOADER -->
+<div id="loader" class="hidden center">
+<p>Aapke jawab samjhe ja rahe hain...</p>
+</div>
 
-                <a href="checkout.html" class="btn btn-gold btn-lg w-100 py-3 shadow" style="border-radius: 50px; font-size: 20px;">
-                    ORDER MY CUSTOM PROTOCOL <i class="fas fa-arrow-right ms-2"></i>
-                </a>
-                <p class="mt-3 small text-muted"><i class="fas fa-shield-alt me-1"></i> 100% Privacy Guaranteed. Shipped in plain box.</p>
-            </div>
-        </div>
-    </div>
+<!-- RESULT -->
+<div id="result" class="hidden">
 
-    <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            // 1. LIMIT CHECKBOXES TO 2
-            const checkboxes = document.querySelectorAll('.problem-checkbox');
-            let maxAllowed = 2;
+<div class="box">
+<h3>Aapke answers ke hisaab se…</h3>
+<p>aapki problem simple nahi hai<br>
+isliye random capsule kaam nahi karta</p>
 
-            checkboxes.forEach(box => {
-                box.addEventListener('change', function() {
-                    let checkedCount = document.querySelectorAll('.problem-checkbox:checked').length;
-                    if (checkedCount > maxAllowed) {
-                        this.checked = false;
-                        alert("आप अधिकतम " + maxAllowed + " दिक्कतें ही चुन सकते हैं, ताकि हम सटीक दवा बना सकें।");
-                    }
-                });
-            });
+<p>aapko targeted approach chahiye</p>
+</div>
 
-            // 2. AI TERMINAL LOADER LOGIC & PIXEL EVENT
-            document.getElementById('analyzeBtn').addEventListener('click', function() {
-                
-                // Form validation
-                let ageSelected = document.querySelector('input[name="ageGroup"]:checked');
-                let lifeSelected = document.querySelector('input[name="lifestyle"]:checked');
-                let problemsSelected = document.querySelectorAll('.problem-checkbox:checked').length;
+<div class="box center">
+<h2>Custom Pack – ₹1900</h2>
+<p>Prepaid only</p>
+<button class="btn" onclick="order()">Mujhe ye pack chahiye</button>
+</div>
 
-                if (!ageSelected || !lifeSelected || problemsSelected === 0) {
-                    alert("कृपया अपनी सटीक दवा के लिए सभी सवालों के जवाब दें!");
-                    return;
-                }
+</div>
 
-                // Hide Form, Show Loader
-                document.getElementById('formContainer').style.display = 'none';
-                document.getElementById('loaderOverlay').style.display = 'flex';
-                window.scrollTo(0,0);
+</div>
 
-                // AI Terminal Text lines
-                const aiLines = [
-                    "> Initializing Dosha Matrix...",
-                    "> Scanning Age & Lifestyle Profile...",
-                    "> Analyzing Vata/Pitta/Kapha Imbalance...",
-                    "> Querying Ayurvedic Herb Database...",
-                    "> Calculating Shilajit/Ashwagandha Ratio...",
-                    "> Generating Base AI Protocol...",
-                    "> Sending data to Medical Board for Final Review...",
-                    "> SUCCESS: Custom Formula Ready for Compounding!"
-                ];
-                
-                const terminalContent = document.getElementById('terminalContent');
-                terminalContent.innerHTML = ""; // Clear existing
-                
-                let lineIndex = 0;
-                
-                // Add a new line every 600ms (Total ~4.8 seconds for 8 lines)
-                let typingInterval = setInterval(() => {
-                    if(lineIndex < aiLines.length) {
-                        terminalContent.innerHTML += `<div style="margin-bottom: 5px;">${aiLines[lineIndex]}</div>`;
-                        lineIndex++;
-                    }
-                }, 600);
+<script>
+let data={}
 
-                // After 5 seconds, hide terminal, show Result Section AND Fire Facebook Pixel
-                setTimeout(() => {
-                    clearInterval(typingInterval);
-                    document.getElementById('loaderOverlay').style.display = 'none';
-                    document.getElementById('resultSection').style.display = 'block';
-                    window.scrollTo(0,0);
-                    
-                    // 🔥 FIRE FACEBOOK PIXEL LEAD EVENT 🔥
-                    if (typeof fbq === 'function') {
-                        fbq('track', 'Lead');
-                    }
-                }, 5000);
+function goQuiz(){
+document.getElementById('quiz').classList.remove('hidden')
+window.scrollTo(0,document.body.scrollHeight)
+}
 
-            });
-        });
-    </script>
+function select(el,key,val){
+data[key]=val
+let p=el.parentNode
+p.querySelectorAll('.option').forEach(o=>o.classList.remove('selected'))
+el.classList.add('selected')
+}
+
+function submitForm(){
+data.name=document.getElementById('name').value
+data.phone=document.getElementById('phone').value
+
+document.getElementById('quiz').classList.add('hidden')
+document.getElementById('loader').classList.remove('hidden')
+
+setTimeout(()=>{
+document.getElementById('loader').classList.add('hidden')
+document.getElementById('result').classList.remove('hidden')
+fbq('track','Lead')
+},2500)
+}
+
+function order(){
+alert("Add payment link here")
+}
+</script>
+
 </body>
 </html>
