@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+  <title>Balwaan Gold | 2-Minute Vitality Check</title>
+  <style>
+    :root{
+      --bg:#07120d;
+      --bg-2:#0d1b14;
+      --card:#0f1f18;
+      --card-2:#12251d;
+      --line:rgba(255,255,255,.08);
+      --gold:#d8b56c;
+      --gold-2:#f0d7a0;
+      --cream:#f7f2e8;
+      --muted:rgba(247,242,232,.72);
+      --text:#fffdf8;
+      --green:#7f9f67;
+      --shadow:0 24px 80px rgba(0,0,0,.42);
+      --radius:28px;
+      --radius-sm:18px;
+      --font: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+    }
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body{
+      margin:0;
+      font-family:var(--font);
+      color:var(--text);
+      background:radial-gradient(circle at top left, rgba(216,181,108,.16), transparent 25%),
+                  radial-gradient(circle at top right, rgba(127,159,103,.10), transparent 20%),
+                  linear-gradient(180deg, #06100c 0%, #07120d 55%, #050d09 100%);
+      overflow-x:hidden;
+    }
+    .wrap{min-height:100%;display:flex;align-items:center;justify-content:center;padding:22px;position:relative}
+    .glow{position:fixed;width:340px;height:340px;border-radius:50%;filter:blur(65px);opacity:.20;pointer-events:none;z-index:0}
+    .glow.one{top:-70px;left:-90px;background:rgba(216,181,108,.7)}
+    .glow.two{right:-110px;bottom:-80px;background:rgba(127,159,103,.65)}
+    .shell{width:min(980px,100%);position:relative;z-index:1;display:grid;grid-template-columns:1.05fr .95fr;gap:20px;align-items:stretch}
+    .hero,.panel{background:linear-gradient(180deg, rgba(18,37,29,.94), rgba(9,18,14,.96));border:1px solid var(--line);box-shadow:var(--shadow);border-radius:var(--radius);overflow:hidden;position:relative}
+    .hero{padding:28px;display:flex;flex-direction:column;justify-content:space-between;min-height:760px;background:linear-gradient(180deg, rgba(10,21,16,.9), rgba(7,14,11,.97)),radial-gradient(circle at 20% 0%, rgba(216,181,108,.12), transparent 28%)}
+    .brand{display:flex;align-items:center;gap:12px;margin-bottom:20px}
+    .brand-mark{width:52px;height:52px;border-radius:16px;background:linear-gradient(145deg, rgba(216,181,108,.22), rgba(127,159,103,.18));border:1px solid rgba(216,181,108,.35);display:grid;place-items:center;font-weight:800;letter-spacing:.08em;color:var(--gold-2);box-shadow:inset 0 1px 0 rgba(255,255,255,.08)}
+    .brand-copy h1{margin:0;font-size:18px;letter-spacing:.08em;text-transform:uppercase;color:var(--gold-2)}
+    .brand-copy p{margin:4px 0 0;color:var(--muted);font-size:13px}
+    .eyebrow{display:inline-flex;align-items:center;gap:8px;padding:10px 14px;border-radius:999px;background:rgba(216,181,108,.09);border:1px solid rgba(216,181,108,.18);color:var(--gold-2);font-size:12px;letter-spacing:.04em;width:max-content}
+    .hero h2{margin:18px 0 14px;font-size:clamp(34px,4vw,54px);line-height:1.02;letter-spacing:-.03em;max-width:12ch}
+    .hero h2 span{color:var(--gold-2)}
+    .hero .lead{margin:0;color:var(--muted);font-size:16px;line-height:1.7;max-width:56ch}
+    .feature-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px;margin-top:24px}
+    .feature{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06);border-radius:22px;padding:16px;min-height:100px}
+    .feature strong{display:block;color:var(--gold-2);margin-bottom:6px;font-size:14px}
+    .feature span{color:var(--muted);font-size:13px;line-height:1.55}
+    .footnote{margin-top:24px;color:rgba(247,242,232,.58);font-size:12px;line-height:1.6}
+    .panel{padding:0;display:flex;flex-direction:column;min-height:760px}
+    .panel-top{padding:18px 22px 14px;border-bottom:1px solid var(--line);background:linear-gradient(180deg, rgba(255,255,255,.02), rgba(255,255,255,0))}
+    .progress-meta{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:10px;font-size:12px;color:var(--muted)}
+    .progressbar{height:10px;background:rgba(255,255,255,.06);border-radius:999px;overflow:hidden;border:1px solid rgba(255,255,255,.05)}
+    .progressbar > span{display:block;height:100%;width:0%;background:linear-gradient(90deg, var(--green), var(--gold));border-radius:inherit;transition:width .35s ease}
+    .survey{padding:22px;flex:1;display:flex;flex-direction:column;justify-content:space-between;gap:18px}
+    .question-head h3{margin:0;font-size:28px;line-height:1.1;letter-spacing:-.03em}
+    .question-head p{margin:10px 0 0;color:var(--muted);line-height:1.6;font-size:14px}
+    .name-pill{display:inline-flex;align-items:center;gap:8px;margin-top:12px;padding:10px 14px;border-radius:999px;background:rgba(216,181,108,.08);border:1px solid rgba(216,181,108,.16);color:var(--gold-2);font-size:13px}
+    .options{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-top:8px}
+    .opt{min-height:64px;padding:14px 16px;border-radius:18px;border:1px solid rgba(255,255,255,.08);background:linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,.02));color:var(--cream);text-align:left;font-size:15px;cursor:pointer;transition:all .16s ease}
+    .opt:hover{transform:translateY(-1px);border-color:rgba(216,181,108,.48);box-shadow:0 14px 30px rgba(0,0,0,.2)}
+    .opt.selected{background:linear-gradient(180deg, rgba(216,181,108,.18), rgba(216,181,108,.10));border-color:rgba(216,181,108,.65);color:#fff}
+    .input-wrap{display:grid;gap:10px;margin-top:4px}
+    .textinput{width:100%;height:54px;border-radius:16px;border:1px solid rgba(255,255,255,.1);background:rgba(255,255,255,.04);color:var(--text);padding:0 15px;outline:none;font-size:15px}
+    .textinput::placeholder{color:rgba(247,242,232,.38)}
+    .textinput:focus{border-color:rgba(216,181,108,.65);box-shadow:0 0 0 4px rgba(216,181,108,.12)}
+    .actions{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;padding-top:8px}
+    .btn{height:52px;border:none;padding:0 18px;border-radius:16px;font-weight:700;cursor:pointer;transition:all .16s ease;font-size:15px}
+    .btn:hover{transform:translateY(-1px)}
+    .btn.primary{background:linear-gradient(135deg, var(--gold) 0%, var(--gold-2) 100%);color:#16120a;box-shadow:0 12px 26px rgba(216,181,108,.25)}
+    .btn.ghost{background:transparent;border:1px solid rgba(255,255,255,.12);color:var(--cream)}
+    .btn:disabled{opacity:.45;cursor:not-allowed;transform:none}
+    .fineprint{color:rgba(247,242,232,.56);font-size:12px;line-height:1.55;margin-top:8px}
+    .result{display:none;padding:24px 22px 22px}
+    .result-card{border-radius:24px;background:linear-gradient(180deg, rgba(216,181,108,.12), rgba(255,255,255,.03));border:1px solid rgba(216,181,108,.16);padding:22px;margin-bottom:16px}
+    .badge{display:inline-flex;align-items:center;gap:8px;padding:8px 12px;border-radius:999px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.08);color:var(--gold-2);font-size:12px;letter-spacing:.05em;text-transform:uppercase}
+    .score{font-size:42px;line-height:1;margin:14px 0 8px;letter-spacing:-.04em}
+    .category{font-size:20px;color:var(--gold-2);margin:0 0 8px}
+    .summary{color:var(--cream);line-height:1.65;font-size:14px}
+    .insights{display:grid;gap:10px;margin:16px 0 20px}
+    .insight{padding:14px 15px;border-radius:18px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07);color:var(--muted);font-size:14px;line-height:1.55}
+    .insight strong{color:#fff}
+    .result-actions{display:grid;gap:10px}
+    .wa-btn{display:flex;align-items:center;justify-content:center;width:100%;text-decoration:none;min-height:54px;border-radius:16px;background:linear-gradient(135deg, #25d366, #1da851);color:#fff;font-weight:800;box-shadow:0 14px 24px rgba(37,211,102,.18)}
+    .hidden{display:none !important}
+    @media (max-width: 920px){.shell{grid-template-columns:1fr}.hero,.panel{min-height:auto}.hero{order:2}.panel{order:1}}
+    @media (max-width: 600px){.wrap{padding:12px}.hero,.panel{border-radius:22px}.hero{padding:20px}.panel-top,.survey,.result{padding-left:16px;padding-right:16px}.question-head h3{font-size:24px}.options{grid-template-columns:1fr}.feature-grid{grid-template-columns:1fr}.hero h2{font-size:34px;max-width:100%}.score{font-size:36px}}
+  </style>
+</head>
+<body>
+  <div class="glow one"></div>
+  <div class="glow two"></div>
+
+  <main class="wrap">
+    <section class="shell">
+      <aside class="hero">
+        <div>
+          <div class="brand">
+            <div class="brand-mark">BG</div>
+            <div class="brand-copy">
+              <h1>BALWAAN — GOLD —<br>— AYURVEDA —</h1>
+              <p>2-minute private vitality check</p>
+            </div>
+          </div>
+
+          <div class="eyebrow">ARE YOU AN ALPHA MALE? OR JUST AVERAGE?</div>
+          <h2>Discover your <span>vitality</span> level in 2 minutes.</h2>
+          <p class="lead">अपनी ENERGY, STAMINA, FOCUS और VITALITY LEVEL को जानिए 2 मिनट में!</p>
+
+          <div class="feature-grid">
+            <div class="feature"><strong>⚡ STRENGTH</strong><span>Real‑time assessment of your core power</span></div>
+            <div class="feature"><strong>🎯 FOCUS</strong><span>Mental clarity and attention span</span></div>
+            <div class="feature"><strong>🏃 STAMINA</strong><span>Endurance and daily energy levels</span></div>
+            <div class="feature"><strong>💪 CONFIDENCE</strong><span>Inner drive and self‑belief</span></div>
+          </div>
+        </div>
+        <div class="footnote">☎️ 100% PRIVATE & SECURE • Results shared only with you</div>
+      </aside>
+
+      <section class="panel">
+        <div class="panel-top">
+          <div class="progress-meta">
+            <span id="stepLabel">Step 1 of 9</span>
+            <span id="stepHint">Approx. 2 minutes</span>
+          </div>
+          <div class="progressbar" aria-hidden="true"><span id="progressFill"></span></div>
+        </div>
+
+        <div class="survey" id="survey">
+          <div>
+            <div class="question-head">
+              <div class="name-pill" id="welcomePill">Hi there 👋</div>
+              <h3 id="qText">Loading…</h3>
+              <p id="qSub">Let's begin your private vitality check.</p>
+            </div>
+            <div id="options" class="options"></div>
+            <div id="inputArea" class="input-wrap hidden">
+              <input id="textAnswer" class="textinput" type="text" placeholder="Type here…" />
+            </div>
+          </div>
+          <div>
+            <div class="actions">
+              <button id="backBtn" class="btn ghost" type="button">Back</button>
+              <button id="nextBtn" class="btn primary" type="button" disabled>Continue</button>
+            </div>
+            <div class="fineprint">Your answers are private. The result is calculated instantly.</div>
+          </div>
+        </div>
+
+        <div class="result" id="resultView">
+          <div class="result-card">
+            <div class="badge">Your Vitality Profile</div>
+            <div class="score" id="scoreValue">—</div>
+            <h4 class="category" id="categoryValue">—</h4>
+            <div class="summary" id="summaryValue"></div>
+          </div>
+          <div class="insights" id="insightsBox"></div>
+          <div class="result-actions">
+            <a href="#" id="waLink" class="wa-btn" target="_blank" rel="noopener">Send Result on WhatsApp</a>
+            <button id="restartBtn" class="btn ghost" type="button">Start Again</button>
+          </div>
+        </div>
+      </section>
+    </section>
+  </main>
+
+  <script>
+    // ========== CONFIGURATION (DUMMY SYSTEM) ==========
+    // 🔴 REPLACE WITH YOUR REAL SHEET.BEST URL LATER
+    const SHEET_BEST_URL = "https://sheet.best/api/sheets/YOUR_SHEET-ID";
+    // ✅ OFFICIAL WHATSAPP NUMBER (as provided)
+    const BUSINESS_WHATSAPP_NUMBER = "9557133307";
+
+    // ========== PRE-FILL LEAD DATA FROM URL (OR DEFAULT DUMMY) ==========
+    const params = new URLSearchParams(window.location.search);
+    let leadName = (params.get("name") || "").trim();
+    let leadPhone = (params.get("phone") || "").trim();
+
+    // If no URL parameters, use dummy lead (Shahalam Ansari)
+    if (!leadName && !leadPhone) {
+      leadName = "Shahalam Ansari";
+      leadPhone = "9808669522";
+    } else if (leadName && !leadPhone) {
+      leadPhone = "9808669522"; // fallback
+    } else if (!leadName && leadPhone) {
+      leadName = "Shahalam Ansari";
+    }
+
+    const welcomePill = document.getElementById("welcomePill");
+    welcomePill.textContent = `Hi ${leadName} 👋`;
+
+    // ========== QUESTION STEPS (with branching) ==========
+    const steps = [
+      { id: "gender", text: "Select your gender", sub: "Start simple.", type: "single", options: ["Male", "Female"] },
+      { id: "age", text: "Select your age group", sub: "Age shapes the profile.", type: "single", options: ["18–24", "25–34", "35–44", "45+"] },
+      { id: "lifestyle", text: "Which lifestyle describes you best?", sub: "Daily routine matters.", type: "single", options: ["Mostly seated", "Moderately active", "Highly active"] },
+      { id: "energy", text: "How is your daily energy level?", sub: "Tells us a lot.", type: "single", options: ["High", "Moderate", "Low"] },
+      { id: "energy_followup_high", text: "Do you want to take your performance to the next level?", sub: "", type: "single", options: ["Yes, definitely", "Just exploring"] },
+      { id: "energy_followup_low", text: "Since when have you felt this issue?", sub: "", type: "single", options: ["Less than 3 months", "3–12 months", "1+ year"] },
+      { id: "stamina", text: "How is your stamina during the day?", sub: "Practical signal.", type: "single", options: ["Strong", "Average", "Weak"] },
+      { id: "focus", text: "How is your focus and mental clarity?", sub: "Clear thinking matters.", type: "single", options: ["Sharp", "Fluctuating", "Low"] },
+      { id: "recovery", text: "How fast do you recover from fatigue?", sub: "Recovery speed tells resilience.", type: "single", options: ["Fast", "Moderate", "Slow"] },
+      { id: "intent", text: "If a personalized plan fits you, are you open to taking action?", sub: "Helps separate curiosity from intent.", type: "single", options: ["Yes, serious", "Need to understand first", "Not sure yet"] }
+    ];
+
+    let currentIndex = 0;
+    let answers = {};
+    let selectedOption = "";
+    let finished = false;
+
+    const stepLabel = document.getElementById("stepLabel");
+    const qText = document.getElementById("qText");
+    const qSub = document.getElementById("qSub");
+    const optionsEl = document.getElementById("options");
+    const inputArea = document.getElementById("inputArea");
+    const backBtn = document.getElementById("backBtn");
+    const nextBtn = document.getElementById("nextBtn");
+    const progressFill = document.getElementById("progressFill");
+    const survey = document.getElementById("survey");
+    const resultView = document.getElementById("resultView");
+    const scoreValue = document.getElementById("scoreValue");
+    const categoryValue = document.getElementById("categoryValue");
+    const summaryValue = document.getElementById("summaryValue");
+    const insightsBox = document.getElementById("insightsBox");
+    const waLink = document.getElementById("waLink");
+    const restartBtn = document.getElementById("restartBtn");
+
+    function getCurrentQuestion() { return steps[currentIndex]; }
+
+    function updateProgress() {
+      const total = steps.length;
+      const completed = Math.min(currentIndex + 1, total);
+      const pct = ((completed - 1) / (total - 1)) * 100;
+      progressFill.style.width = `${Math.max(6, pct)}%`;
+      stepLabel.textContent = `Step ${completed} of ${total}`;
+    }
+
+    function renderQuestion() {
+      const q = getCurrentQuestion();
+      if (!q) return;
+      qText.textContent = q.text;
+      qSub.textContent = q.sub || "";
+      optionsEl.innerHTML = "";
+      inputArea.classList.add("hidden");
+      nextBtn.disabled = true;
+      selectedOption = "";
+
+      q.options.forEach((opt) => {
+        const btn = document.createElement("button");
+        btn.type = "button";
+        btn.className = "opt";
+        btn.textContent = opt;
+        btn.addEventListener("click", () => {
+          selectedOption = opt;
+          document.querySelectorAll(".opt").forEach(el => el.classList.remove("selected"));
+          btn.classList.add("selected");
+          nextBtn.disabled = false;
+        });
+        optionsEl.appendChild(btn);
+      });
+
+      backBtn.disabled = (currentIndex === 0);
+      updateProgress();
+    }
+
+    function answerValueForScore(key, value) {
+      const map = {
+        "High":3,"Moderate":2,"Low":1,
+        "Strong":3,"Average":2,"Weak":1,
+        "Sharp":3,"Fluctuating":2,"Low":1,
+        "Fast":3,"Moderate":2,"Slow":1,
+        "Yes, serious":3,"Yes, definitely":3,"Need to understand first":2,"Just exploring":2,"Not sure yet":1,
+        "Less than 3 months":1,"3–12 months":2,"1+ year":3,
+        "Mostly seated":1,"Moderately active":2,"Highly active":3,
+        "18–24":1,"25–34":2,"35–44":3,"45+":3
+      };
+      return map[value] || 0;
+    }
+
+    function computeResult() {
+      let total = 0;
+      Object.entries(answers).forEach(([k,v]) => {
+        if (k === "gender") return;
+        if (k === "energy_followup_high" || k === "energy_followup_low") return;
+        total += answerValueForScore(k, v);
+      });
+      const intent = answers.intent || "";
+      const energy = answers.energy || "";
+      const focus = answers.focus || "";
+      const stamina = answers.stamina || "";
+      const recovery = answers.recovery || "";
+      let bonus = 0;
+      if (intent === "Yes, serious" || intent === "Yes, definitely") bonus += 2;
+      if (energy === "High") bonus += 1;
+      if (focus === "Sharp") bonus += 1;
+      if (stamina === "Strong") bonus += 1;
+      if (recovery === "Fast") bonus += 1;
+      const score = total + bonus;
+      let category = "Average Zone", summary = "Your profile shows a balanced starting point.", insights = ["Keep the plan simple and consistent.", "A personalized path usually works better."];
+      if (score >= 20) { category = "Apex Zone"; summary = "You are in the top tier. Strong self-discipline and performance mindset."; insights = ["Your energy and recovery are strong. Refinement is the next step.", "A premium personalized plan can maintain momentum."]; }
+      else if (score >= 15) { category = "Prime Zone"; summary = "Solid position. A few targeted improvements can make you excellent."; insights = ["Room for optimization in one or two areas.", "A private plan can identify the most important lever."]; }
+      else { category = "Average Zone"; summary = "Your answers suggest need for more structure. A better system can help."; insights = ["Fastest gains come from one focused change.", "A short private assessment gives clarity without guesswork."]; }
+      return { score, category, summary, insights };
+    }
+
+    async function saveLead(result) {
+      const payload = {
+        name: leadName, phone: leadPhone,
+        gender: answers.gender || "", age: answers.age || "", lifestyle: answers.lifestyle || "",
+        energy: answers.energy || "", energy_followup: answers.energy_followup_high || answers.energy_followup_low || "",
+        stamina: answers.stamina || "", focus: answers.focus || "", recovery: answers.recovery || "", intent: answers.intent || "",
+        result_category: result.category, result_score: result.score,
+        timestamp: new Date().toISOString(), source: "survey"
+      };
+      try { await fetch(SHEET_BEST_URL, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(payload) }); } catch(e) { console.warn("Sheet save failed (dummy):", e); }
+    }
+
+    function buildWhatsAppLink(result) {
+      const msg = `Hi Balwaan Gold team, I completed my 2-minute vitality check.\nName: ${leadName}\nPhone: ${leadPhone}\nResult: ${result.category}\nScore: ${result.score}\nPlease share my personalized guidance.`;
+      return `https://wa.me/${BUSINESS_WHATSAPP_NUMBER}?text=${encodeURIComponent(msg)}`;
+    }
+
+    async function finishSurvey() {
+      finished = true;
+      const result = computeResult();
+      await saveLead(result);
+      survey.classList.add("hidden");
+      resultView.style.display = "block";
+      scoreValue.textContent = `${result.score}`;
+      categoryValue.textContent = result.category;
+      summaryValue.textContent = result.summary;
+      insightsBox.innerHTML = result.insights.map(item => `<div class="insight"><strong>Insight:</strong> ${item}</div>`).join("");
+      waLink.href = buildWhatsAppLink(result);
+      progressFill.style.width = "100%";
+      stepLabel.textContent = "Result ready";
+    }
+
+    function goNext() {
+      const q = getCurrentQuestion();
+      if (!q) return;
+      answers[q.id] = selectedOption;
+      if (q.id === "energy") {
+        currentIndex = (selectedOption === "High") ? 4 : 5;
+      } else if (q.id === "energy_followup_high" || q.id === "energy_followup_low") {
+        currentIndex = 6;
+      } else if (currentIndex < steps.length - 1) {
+        currentIndex++;
+      } else {
+        finishSurvey();
+        return;
+      }
+      renderQuestion();
+    }
+
+    function goBack() {
+      if (currentIndex === 0) return;
+      if (currentIndex === 4 || currentIndex === 5) {
+        currentIndex = 3;
+      } else if (currentIndex === 6 && (answers.energy === "High" || answers.energy === "Moderate" || answers.energy === "Low")) {
+        currentIndex = (answers.energy === "High") ? 4 : 5;
+      } else if (currentIndex > 0) {
+        currentIndex--;
+      }
+      renderQuestion();
+    }
+
+    nextBtn.addEventListener("click", goNext);
+    backBtn.addEventListener("click", goBack);
+    restartBtn.addEventListener("click", () => window.location.reload());
+    renderQuestion();
+  </script>
+</body>
+</html>
