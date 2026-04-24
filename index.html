@@ -296,7 +296,79 @@
     background: radial-gradient(circle, rgba(212, 175, 55, 0.25) 0%, rgba(255,255,255,0) 75%);
     z-index: 1;
 }
-        
+ /* FLEX LAYOUT */
+.variant-flex {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+/* IMAGE */
+.variant-img {
+    max-width: 130px;
+}
+
+/* PREMIUM BIGGER */
+.premium .variant-img {
+    max-width: 160px;
+}
+
+/* INFO SIDE */
+.variant-info {
+    max-width: 200px;
+}
+
+/* FEATURES CLEAN */
+.variant-features {
+    list-style: none;
+    padding: 0;
+    margin-bottom: 10px;
+    border: none;
+}
+
+.variant-features li {
+    font-size: 13px;
+    margin-bottom: 6px;
+    display: flex;
+    align-items: start;
+}
+
+.variant-features i {
+    margin-right: 6px;
+    margin-top: 3px;
+}
+
+/* CAPSULE HIGHLIGHT */
+.capsule-highlight {
+    margin-top: 5px;
+}
+
+.capsule-highlight img {
+    width: 18px;
+    margin: 2px;
+    filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2));
+}
+
+/* MOBILE OPTIMIZATION */
+@media (max-width: 768px) {
+
+    .variant-flex {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .variant-info {
+        text-align: center;
+    }
+
+    .variant-img {
+        max-width: 110px;
+    }
+
+    .premium .variant-img {
+        max-width: 130px;
+    }
+}       
     </style>
 </head>
 <body>
@@ -384,68 +456,104 @@
         </div>
     </div>
 <section class="variant-section">
-    <div class="container">
-        <div class="text-center mb-5">
-            <h2 style="font-weight: 800;">Choose Your <span class="text-gold">Balwaan Pack</span></h2>
-            <p class="text-muted">Select the best option for your wellness journey.</p>
-        </div>
-
-        <div class="row justify-content-center g-4">
-            <div class="col-lg-4 col-md-6">
-                <div class="variant-card mt-3">
-                    <span class="badge bg-dark text-white mb-3 mx-auto" style="width: max-content; padding: 8px 20px; font-size: 14px;">STARTER PACK</span>
-                    <h3 class="fw-bold mb-0 text-success">30 CAPSULES</h3>
-                    
-                    <div class="variant-img-wrapper mt-4">
-                        <img src="images/gallery-1.webp" alt="30 Capsules Jar" class="variant-img">
-                    </div>
-
-                    <ul class="variant-features">
-                        <li><i class="fas fa-calendar-alt"></i> 15 Days Support</li>
-                        <li><i class="fas fa-user"></i> Good for First-time Users</li>
-                        <li><i class="fas fa-leaf"></i> Perfect to try & feel the difference</li>
-                        <li><i class="fas fa-shield-alt"></i> Start your wellness journey</li>
-                    </ul>
-
-                    <div class="mt-auto">
-                        <div class="variant-price">₹550</div>
-                        <a href="checkout.html" class="btn variant-btn btn-starter">Try & Save</a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-lg-4 col-md-6">
-                <div class="variant-card premium mt-3">
-                    <div class="recommended-badge"><i class="fas fa-star me-1"></i> MOST RECOMMENDED</div>
-                    <span class="badge bg-warning text-dark mb-3 mx-auto" style="width: max-content; padding: 8px 20px; font-size: 14px;">REGULAR PACK</span>
-                    <h3 class="fw-bold mb-0 text-gold">60 CAPSULES</h3>
-                    
-                    <div class="variant-img-wrapper mt-4">
-                        <div class="halo-effect"></div>
-                        <img src="images/gallery-1.webp" alt="60 Capsules Jar" class="variant-img">
-                    </div>
-
-                    <ul class="variant-features">
-                        <li><i class="fas fa-calendar-check"></i> 30 Days Support</li>
-                        <li><i class="fas fa-bullseye"></i> Noticeable & Consistent Results</li>
-                        <li><i class="fas fa-user-md"></i> Recommended Duration by Experts</li>
-                        <li><i class="fas fa-piggy-bank"></i> Better Value & More Savings</li>
-                    </ul>
-
-                    <div class="mt-auto">
-                        <div class="variant-price">₹990</div>
-                        <a href="checkout.html" class="btn variant-btn btn-gold-glow">Buy Now - Best Value</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-        
-        <div class="text-center mt-4">
-            <div class="badge bg-light text-dark border p-3 shadow-sm" style="font-size: 14px;">
-                <i class="fas fa-rupee-sign text-gold me-2"></i> <strong>SMART CHOICE:</strong> Save more with the <strong>60 Capsules</strong> pack & stay consistent for better results!
-            </div>
-        </div>
+  <div class="container">
+    
+    <div class="text-center mb-5">
+      <h2 style="font-weight: 800;">
+        Choose Your <span class="text-gold">Balwaan Pack</span>
+      </h2>
+      <p class="text-muted">Har body alag hoti hai — sahi duration choose karein</p>
     </div>
+
+    <div class="row justify-content-center g-4">
+
+      <!-- 🟢 STARTER -->
+      <div class="col-lg-5 col-md-6">
+        <div class="variant-card">
+
+          <span class="badge bg-dark text-white mb-2 mx-auto">STARTER PACK</span>
+          <h4 class="fw-bold text-success">30 CAPSULES</h4>
+
+          <div class="variant-flex mt-4">
+
+            <!-- Image -->
+            <div class="variant-img-wrapper">
+              <img src="images/gallery-1.webp" class="variant-img">
+              
+              <div class="capsule-highlight">
+                <img src="images/capsule.png">
+                <img src="images/capsule.png">
+              </div>
+            </div>
+
+            <!-- Info -->
+            <div class="variant-info text-start">
+
+              <ul class="variant-features">
+                <li><i class="fas fa-calendar-alt"></i> 15 Days Support</li>
+                <li><i class="fas fa-user"></i> First-time users</li>
+                <li><i class="fas fa-leaf"></i> Feel initial improvement</li>
+              </ul>
+
+              <div class="variant-price">₹550</div>
+
+              <a href="checkout.html?plan=starter" class="btn variant-btn btn-starter">
+                Begin 15-Day Test
+              </a>
+
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 🟡 REGULAR -->
+      <div class="col-lg-5 col-md-6">
+        <div class="variant-card premium">
+
+          <div class="recommended-badge">
+            <i class="fas fa-star me-1"></i> MOST RECOMMENDED
+          </div>
+
+          <span class="badge bg-warning text-dark mb-2 mx-auto">REGULAR PACK</span>
+          <h4 class="fw-bold text-gold">60 CAPSULES</h4>
+
+          <div class="variant-flex mt-4">
+
+            <!-- Image -->
+            <div class="variant-img-wrapper">
+              <div class="halo-effect"></div>
+              <img src="images/gallery-1.webp" class="variant-img">
+
+              <div class="capsule-highlight">
+                <img src="images/capsule.png">
+                <img src="images/capsule.png">
+                <img src="images/capsule.png">
+              </div>
+            </div>
+
+            <!-- Info -->
+            <div class="variant-info text-start">
+
+              <ul class="variant-features">
+                <li><i class="fas fa-calendar-check"></i> 30 Days Support</li>
+                <li><i class="fas fa-bullseye"></i> Noticeable results</li>
+                <li><i class="fas fa-user-md"></i> Expert recommended</li>
+              </ul>
+
+              <div class="variant-price">₹990</div>
+
+              <a href="checkout.html?plan=regular" class="btn variant-btn btn-gold-glow">
+                Upgrade to Full Power
+              </a>
+
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
 </section>
     <!-- Core Issues Section -->
     <section class="section-padding bg-light">
