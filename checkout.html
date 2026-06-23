@@ -5,19 +5,53 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Checkout - Balwaan Gold (Dummy)</title>
     
-    <!-- Removed favicon for dummy, add later -->
-    
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: 'Poppins', sans-serif; background: #f0f4f7; min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 20px; }
-        .container { max-width: 480px; width: 100%; background: white; border-radius: 28px; box-shadow: 0 20px 40px rgba(0,0,0,0.08); overflow: hidden; }
-        .header { background: #14452F; padding: 30px; text-align: center; border-bottom: 4px solid #D4AF37; }
-        .header h1 { color: white; font-family: 'Montserrat', sans-serif; font-size: 26px; }
+        .container { max-width: 480px; width: 100%; background: white; border-radius: 28px; box-shadow: 0 20px 40px rgba(0,0,0,0.08); overflow: hidden; position: relative; }
+        
+        /* ----- HEADER WITH BACK BUTTON ----- */
+        .header { 
+            background: #14452F; 
+            padding: 20px 20px; 
+            text-align: center; 
+            border-bottom: 4px solid #D4AF37; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center;
+            position: relative;
+        }
+        .back-btn {
+            position: absolute;
+            left: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: white;
+            font-size: 22px;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-weight: 600;
+            font-size: 16px;
+            opacity: 0.8;
+            transition: 0.2s;
+            background: rgba(255,255,255,0.1);
+            padding: 6px 14px;
+            border-radius: 30px;
+            border: 1px solid rgba(255,255,255,0.15);
+        }
+        .back-btn:hover { opacity: 1; background: rgba(255,255,255,0.2); }
+        .back-btn i { font-size: 14px; }
+        
+        .header h1 { color: white; font-family: 'Montserrat', sans-serif; font-size: 22px; margin: 0; }
         .header h1 span { color: #D4AF37; }
-        .body { padding: 30px; }
+        .header p { color: #ddd; font-size: 12px; margin: 0; }
+        
+        .body { padding: 25px; }
         
         /* Product Card */
         .product-card { background: #f9f9f9; border-radius: 16px; padding: 15px; display: flex; align-items: center; gap: 15px; margin-bottom: 20px; border: 1px solid #eee; flex-wrap: wrap; }
@@ -27,28 +61,35 @@
         .product-card .price { font-weight: 800; color: #D4AF37; font-size: 20px; }
         .product-card .badge-cod { background: #25D366; color: white; font-size: 11px; padding: 2px 10px; border-radius: 20px; font-weight: 600; }
         
-        /* Variant Selector - 3 Options with Per Day Cost */
+        /* Variant Selector - 3 Options with Capsule Quantity & Per Day Cost */
         .variant-selector { display: flex; flex-direction: column; gap: 10px; margin: 15px 0 20px; }
         .variant-btn { 
-            padding: 12px 15px; 
-            border: 2px solid #e0e0e0; 
+            padding: 14px 16px; 
+            border: 2px solid #e8ecf0; 
             border-radius: 14px; 
             cursor: pointer; 
-            transition: 0.2s; 
+            transition: 0.25s ease; 
             background: white; 
             font-weight: 600; 
             text-align: left; 
             display: flex;
             flex-direction: column;
-            line-height: 1.4;
+            line-height: 1.5;
         }
-        .variant-btn.active { border-color: #D4AF37; background: #fffbe6; box-shadow: 0 0 0 2px #D4AF37; }
+        .variant-btn.active { border-color: #D4AF37; background: #fffcf0; box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.15); }
         .variant-btn .main-row { display: flex; justify-content: space-between; align-items: center; }
-        .variant-btn .sub { font-weight: 400; font-size: 13px; color: #555; }
+        .variant-btn .product-name { font-size: 16px; color: #1a2e24; }
+        .variant-btn .product-price { font-size: 18px; font-weight: 800; color: #14452F; }
+        .variant-btn .price-sub { font-weight: 400; font-size: 13px; color: #666; }
+        
+        .variant-btn .meta-row { display: flex; justify-content: space-between; align-items: center; margin-top: 5px; flex-wrap: wrap; gap: 4px; }
+        .variant-btn .capsule-info { font-size: 13px; color: #14452F; font-weight: 700; background: #eef5f1; padding: 2px 12px; border-radius: 20px; }
         .variant-btn .per-day { font-weight: 700; font-size: 14px; color: #14452F; }
-        .variant-btn .badge-tag { font-size: 10px; padding: 2px 8px; border-radius: 20px; font-weight: 700; }
+        
+        .badge-tag { font-size: 10px; padding: 3px 12px; border-radius: 30px; font-weight: 800; letter-spacing: 0.5px; text-transform: uppercase; }
         .badge-best { background: #D4AF37; color: #14452F; }
-        .badge-saving { background: #ff5722; color: white; }
+        .badge-saving { background: #e64a19; color: white; }
+        .badge-entry { background: #e0e0e0; color: #444; }
 
         .form-group { margin-bottom: 18px; }
         .form-group label { font-weight: 600; font-size: 14px; color: #333; display: block; margin-bottom: 5px; }
@@ -66,9 +107,13 @@
 <body>
 
 <div class="container">
+    <!-- HEADER WITH BACK BUTTON -->
     <div class="header">
-        <h1>Balwaan <span>Gold</span></h1>
-        <p style="color: #ddd; font-size: 14px; margin-top: 5px;">1-Minute Checkout</p>
+        <a href="index.html" class="back-btn"><i class="fas fa-arrow-left"></i> BACK</a>
+        <div>
+            <h1>Balwaan <span>Gold</span></h1>
+            <p>Secure Checkout</p>
+        </div>
     </div>
 
     <div class="body">
@@ -82,43 +127,46 @@
             </div>
         </div>
 
-        <!-- ========================================== -->
-        <!-- 3 VARIANTS WITH PER DAY COST (NO E-BOOK)   -->
-        <!-- ========================================== -->
+        <!-- ========================================================= -->
+        <!-- 3 VARIANTS WITH CAPSULE QUANTITY + PER DAY COST (NO EMOJI) -->
+        <!-- ========================================================= -->
         <div class="variant-selector">
             <!-- 1. Trial Pack -->
-            <div class="variant-btn" data-price="550" data-name="Trial Pack (15 Days)" onclick="selectVariant(this)">
+            <div class="variant-btn" data-price="550" data-name="Trial Pack (30 Capsules - 15 Days)" onclick="selectVariant(this)">
                 <div class="main-row">
-                    <span>Trial Pack</span>
-                    <span><strong>₹550</strong> <span class="sub">(15 Days)</span></span>
+                    <span class="product-name">Trial Pack</span>
+                    <span><span class="product-price">₹550</span> <span class="price-sub">(15 Days)</span></span>
                 </div>
-                <div class="main-row" style="margin-top: 4px;">
-                    <span class="per-day">💰 ₹36.6 / day</span>
-                    <span class="badge-tag" style="background:#eee; color:#666;">Entry</span>
+                <div class="meta-row">
+                    <span class="capsule-info">💊 30 Capsules</span>
+                    <span class="per-day">₹36.6 / day</span>
+                    <span class="badge-tag badge-entry">ENTRY</span>
                 </div>
             </div>
             
             <!-- 2. Regular Pack (DEFAULT) -->
-            <div class="variant-btn active" data-price="1110" data-name="Regular Pack (30 Days)" onclick="selectVariant(this)">
+            <div class="variant-btn active" data-price="1110" data-name="Regular Pack (60 Capsules - 30 Days)" onclick="selectVariant(this)">
                 <div class="main-row">
-                    <span>Regular Pack 🏆</span>
-                    <span><strong>₹1110</strong> <span class="sub">(30 Days)</span></span>
+                    <span class="product-name">Regular Pack</span>
+                    <span><span class="product-price">₹1110</span> <span class="price-sub">(30 Days)</span></span>
                 </div>
-                <div class="main-row" style="margin-top: 4px;">
-                    <span class="per-day">💰 ₹37 / day</span>
-                    <span class="badge-tag badge-best">🔥 Best Value</span>
+                <div class="meta-row">
+                    <span class="capsule-info">💊 60 Capsules</span>
+                    <span class="per-day">₹37 / day</span>
+                    <span class="badge-tag badge-best">BEST VALUE</span>
                 </div>
             </div>
             
             <!-- 3. Combo Pack -->
-            <div class="variant-btn" data-price="1599" data-name="Combo Pack (60 Days + Free E-Book)" onclick="selectVariant(this)">
+            <div class="variant-btn" data-price="1599" data-name="Combo Pack (120 Capsules - 60 Days + Free E-Book)" onclick="selectVariant(this)">
                 <div class="main-row">
-                    <span>Combo Pack 🚀</span>
-                    <span><strong>₹1599</strong> <span class="sub">(60 Days)</span></span>
+                    <span class="product-name">Combo Pack</span>
+                    <span><span class="product-price">₹1599</span> <span class="price-sub">(60 Days)</span></span>
                 </div>
-                <div class="main-row" style="margin-top: 4px;">
-                    <span class="per-day">💰 ₹26.6 / day</span>
-                    <span class="badge-tag badge-saving">⭐ Massive Saving</span>
+                <div class="meta-row">
+                    <span class="capsule-info">💊 120 Capsules</span>
+                    <span class="per-day">₹26.6 / day</span>
+                    <span class="badge-tag badge-saving">MASSIVE SAVING</span>
                 </div>
             </div>
         </div>
@@ -146,15 +194,13 @@
 </div>
 
 <script>
-    // =====================================================
-    // 🔥 DUMMY VERSION - NO SENSITIVE DATA (Pixel/API removed)
-    // =====================================================
+    // =============================================
+    // DUMMY VERSION - NO SENSITIVE DATA
+    // =============================================
 
-    // ---------- VARIABLE DECLARATION ----------
     let selectedPrice = 1110;
-    let selectedName = "Regular Pack (30 Days)";
+    let selectedName = "Regular Pack (60 Capsules - 30 Days)";
 
-    // ---------- VARIANT SELECTION ----------
     function selectVariant(el) {
         document.querySelectorAll('.variant-btn').forEach(b => b.classList.remove('active'));
         el.classList.add('active');
@@ -163,7 +209,6 @@
         document.getElementById('displayPrice').innerHTML = '₹' + selectedPrice;
     }
 
-    // ---------- PRE-FILL FROM QUIZ (if coming from custom protocol) ----------
     window.onload = function() {
         try {
             const data = JSON.parse(sessionStorage.getItem('checkout_userData') || '{}');
@@ -172,7 +217,6 @@
         } catch(e) { /* Ignore */ }
     };
 
-    // ---------- FORM SUBMIT ----------
     document.getElementById('checkoutForm').addEventListener('submit', function(e) {
         e.preventDefault();
         
@@ -186,30 +230,22 @@
         const product = selectedName;
         const amount = selectedPrice;
 
-        // ---------- 1. SAVE TO LOCALSTORAGE (Admin panel will read this) ----------
+        // Save to LocalStorage
         let orders = JSON.parse(localStorage.getItem('balwaanOrders') || '[]');
         orders.push({
-            orderId: orderId,
-            name: name,
-            mobile: mobile,
-            product: product,
-            amount: amount,
+            orderId, name, mobile, product, amount,
             paymentMethod: 'Cash on Delivery',
             status: 'Order Placed (Address Pending)',
             timestamp: Date.now()
         });
         localStorage.setItem('balwaanOrders', JSON.stringify(orders));
 
-        // ---------- 2. SAVE TO SESSIONSTORAGE (For Order Complete Page) ----------
+        // Save to SessionStorage
         sessionStorage.setItem('orderCompleteData', JSON.stringify({
-            orderId: orderId,
-            name: name,
-            mobile: mobile,
-            product: product,
-            amount: amount
+            orderId, name, mobile, product, amount
         }));
 
-        // ---------- 3. REDIRECT TO ORDER COMPLETE PAGE ----------
+        // Redirect
         window.location.href = 'order-complete.html';
     });
 </script>
