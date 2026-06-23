@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Complete - Balwaan Gold (Dummy)</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { 
+            font-family: 'Poppins', sans-serif; 
+            background: #f0f4f7; 
+            min-height: 100vh; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            padding: 20px; 
+            margin: 0;
+        }
+        .container { 
+            max-width: 480px; 
+            width: 100%; 
+            background: white; 
+            border-radius: 28px; 
+            box-shadow: 0 20px 40px rgba(0,0,0,0.08); 
+            overflow: hidden; 
+            text-align: center;
+            padding: 40px 30px;
+        }
+        .checkmark {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            background: #e8f5e9;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            animation: popIn 0.5s ease;
+        }
+        .checkmark i {
+            font-size: 60px;
+            color: #25D366;
+        }
+        @keyframes popIn {
+            0% { transform: scale(0); opacity: 0; }
+            70% { transform: scale(1.1); }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        h1 {
+            font-family: 'Montserrat', sans-serif;
+            color: #14452F;
+            font-size: 32px;
+            margin-bottom: 5px;
+        }
+        .sub-text {
+            color: #666;
+            font-size: 16px;
+            margin-bottom: 10px;
+        }
+        .order-id-box {
+            background: #f5f7fa;
+            padding: 10px;
+            border-radius: 8px;
+            font-weight: 700;
+            color: #14452F;
+            font-size: 18px;
+            margin: 15px 0;
+            border: 1px dashed #D4AF37;
+        }
+        .info-box {
+            background: #fffbe6;
+            border: 1px solid #D4AF37;
+            border-radius: 12px;
+            padding: 15px;
+            margin: 25px 0;
+            text-align: left;
+        }
+        .info-box p {
+            font-size: 14px;
+            color: #333;
+            margin-bottom: 5px;
+        }
+        .info-box i {
+            color: #D4AF37;
+            margin-right: 8px;
+        }
+        .highlight {
+            font-weight: 700;
+            color: #14452F;
+        }
+
+        .btn-whatsapp {
+            background: #25D366;
+            color: white;
+            border: none;
+            padding: 16px;
+            border-radius: 60px;
+            font-weight: 700;
+            font-size: 18px;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            text-decoration: none;
+            transition: 0.2s;
+            cursor: pointer;
+            margin: 20px 0 10px;
+            box-shadow: 0 8px 20px rgba(37, 211, 102, 0.3);
+        }
+        .btn-whatsapp:hover {
+            background: #1da851;
+            color: white;
+            transform: scale(1.02);
+        }
+
+        .btn-home {
+            background: transparent;
+            border: 1px solid #ccc;
+            padding: 12px;
+            border-radius: 60px;
+            width: 100%;
+            font-weight: 600;
+            color: #666;
+            cursor: pointer;
+            transition: 0.2s;
+            margin-top: 5px;
+        }
+        .btn-home:hover {
+            background: #f0f0f0;
+        }
+
+        .footnote {
+            font-size: 12px;
+            color: #999;
+            margin-top: 20px;
+        }
+        .footnote i {
+            color: #25D366;
+            margin-right: 4px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="checkmark">
+        <i class="fas fa-check-circle"></i>
+    </div>
+
+    <h1>🎉 Order Complete!</h1>
+    <p class="sub-text">Aapka order successfully place ho gaya hai.</p>
+    
+    <div class="order-id-box" id="orderDisplay">Order ID: BWG-1234</div>
+
+    <div class="info-box">
+        <p><i class="fas fa-truck"></i> <strong>Free Shipping Confirmation</strong></p>
+        <p style="font-size: 13px; margin-top: 8px; color: #555;">
+            ✅ Order already confirmed. <br>
+            📦 Kripya neeche <span class="highlight">WhatsApp</span> button par click karein aur apna 
+            <span class="highlight">Delivery Address</span> type karke bhejein. 
+            <br><br>
+            ⏳ Agar aap address nahi bhejte hain toh hum <span class="highlight">dispatch se pehle</span> aapko WhatsApp par contact karenge.
+        </p>
+    </div>
+
+    <!-- 🔥 YAHAN APNA WHATSAPP NUMBER DAALEIN (Live karne se pehle) -->
+    <a id="whatsappLink" href="#" target="_blank" class="btn-whatsapp">
+        <i class="fab fa-whatsapp fa-lg"></i> Confirm Address on WhatsApp
+    </a>
+
+    <button onclick="window.location.href='index.html';" class="btn-home">
+        <i class="fas fa-arrow-left"></i> Back to Home
+    </button>
+
+    <p class="footnote">
+        <i class="fas fa-lock"></i> Your details are safe with us
+    </p>
+</div>
+
+<script>
+    // =====================================================
+    // 🔥 DUMMY VERSION - NO SENSITIVE DATA 
+    // WhatsApp Number: CHANGE_ME_WHEN_LIVE
+    // =====================================================
+
+    // ---------- RETRIEVE ORDER DETAILS ----------
+    const data = JSON.parse(sessionStorage.getItem('orderCompleteData') || '{}');
+    
+    // Fallback values (if sessionStorage is empty)
+    const name = data.name || 'Customer';
+    const mobile = data.mobile || 'XXXXXXXXXX';
+    const orderId = data.orderId || 'BWG-XXXX';
+    const product = data.product || 'Regular Pack (30 Days)';
+    const amount = data.amount || 1110;
+
+    // Display Order ID
+    document.getElementById('orderDisplay').innerHTML = '🆔 ' + orderId;
+
+    // ---------- BUILD WHATSAPP MESSAGE ----------
+    // 🔥 LIVE KARNE SE PEHLE: Yahan apna WhatsApp number daalein (e.g. 919557133307)
+    const adminNumber = 'YOUR_WHATSAPP_NUMBER'; // <--- CHANGE THIS WHEN GOING LIVE
+    
+    const msg = `✅ *Order Placed!*\n\n` +
+                `Order ID: ${orderId}\n` +
+                `Name: ${name}\n` +
+                `Mobile: ${mobile}\n` +
+                `Product: ${product}\n` +
+                `Amount: ₹${amount}\n` +
+                `Payment: Cash on Delivery\n\n` +
+                `📦 *Free Shipping:* Kripya apna complete delivery address (House No, Area, City, Pincode) type karke bhejein.`;
+
+    // Set WhatsApp Link
+    document.getElementById('whatsappLink').href = `https://wa.me/${adminNumber}?text=${encodeURIComponent(msg)}`;
+
+    // Extra: Agar order ID missing hai toh bhi dikhao
+    if (!data.orderId) {
+        document.getElementById('orderDisplay').innerHTML = '🆔 Order Confirmed (Dummy)';
+    }
+</script>
+
+</body>
+</html>
