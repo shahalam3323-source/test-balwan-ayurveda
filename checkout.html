@@ -4,119 +4,187 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Checkout – Balwaan Gold</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         * { margin:0; padding:0; box-sizing:border-box; }
         body {
             font-family: 'Inter', sans-serif;
-            background: #f2f5f9;
+            background: #f4f7fc;
             min-height: 100vh;
             display: flex;
             align-items: center;
             justify-content: center;
-            padding: 16px;
+            padding: 20px;
         }
-        .card {
-            max-width: 480px;
+        .container {
+            max-width: 600px;
             width: 100%;
-            background: #fff;
-            border-radius: 28px;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.08);
+            background: #ffffff;
+            border-radius: 32px;
+            box-shadow: 0 20px 50px rgba(20, 69, 47, 0.12);
             overflow: hidden;
+            border: 1px solid rgba(212, 175, 55, 0.15);
         }
+        /* HEADER */
         .header {
-            background: #14452F;
-            color: #fff;
-            padding: 28px 24px;
+            background: linear-gradient(135deg, #14452F 0%, #1a5a3a 100%);
+            padding: 28px 24px 20px;
             text-align: center;
+            border-bottom: 4px solid #D4AF37;
         }
-        .header h1 { font-size: 26px; font-weight: 800; }
+        .header h1 {
+            font-size: 28px;
+            font-weight: 900;
+            color: #fff;
+            letter-spacing: -0.5px;
+        }
         .header h1 span { color: #D4AF37; }
-        .header p { font-size: 14px; opacity: 0.8; margin-top: 4px; }
+        .header p {
+            color: rgba(255,255,255,0.8);
+            font-size: 14px;
+            font-weight: 500;
+            margin-top: 4px;
+        }
 
+        /* BODY */
         .body { padding: 24px; }
 
+        /* PRODUCT CARDS */
         .variant-grid {
             display: grid;
             grid-template-columns: 1fr 1fr 1fr;
-            gap: 10px;
-            margin-bottom: 18px;
+            gap: 12px;
+            margin-bottom: 24px;
         }
-        @media (max-width: 420px) { .variant-grid { grid-template-columns: 1fr; } }
+        @media (max-width: 480px) {
+            .variant-grid { grid-template-columns: 1fr; }
+        }
 
         .variant {
-            border: 2px solid #e5eaef;
-            border-radius: 14px;
-            padding: 14px 8px;
+            background: #fafcfe;
+            border: 2px solid #e9edf2;
+            border-radius: 16px;
+            padding: 16px 10px;
             text-align: center;
             cursor: pointer;
-            transition: 0.2s;
-            background: #fafcfd;
+            transition: all 0.25s ease;
+            position: relative;
         }
-        .variant:hover { border-color: #D4AF37; }
+        .variant:hover { border-color: #D4AF37; transform: translateY(-2px); }
         .variant.active {
             border-color: #D4AF37;
-            background: #fdf7e5;
-            box-shadow: 0 0 0 2px #D4AF37;
+            background: #fdf8e9;
+            box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.2);
         }
-        .variant h4 { font-size: 14px; font-weight: 700; color: #14452F; }
-        .variant .price { font-size: 17px; font-weight: 700; color: #14452F; }
-        .variant .badge { font-size: 9px; background: #ff9800; color: #fff; padding: 2px 8px; border-radius: 20px; }
+        .variant .badge {
+            position: absolute;
+            top: -8px;
+            right: 8px;
+            font-size: 9px;
+            font-weight: 800;
+            text-transform: uppercase;
+            padding: 3px 10px;
+            border-radius: 20px;
+            color: #fff;
+            letter-spacing: 0.5px;
+        }
+        .badge-entry { background: #6c757d; }
+        .badge-best { background: #D4AF37; color: #14452F; }
+        .badge-saving { background: #e74c3c; }
 
-        .bump {
-            background: #fffae6;
-            border: 2px dashed #D4AF37;
+        .variant h4 {
+            font-size: 15px;
+            font-weight: 700;
+            color: #14452F;
+            margin-bottom: 4px;
+        }
+        .variant .price {
+            font-size: 22px;
+            font-weight: 800;
+            color: #14452F;
+        }
+        .variant .sub {
+            font-size: 12px;
+            color: #6b7a8a;
+            font-weight: 500;
+        }
+        .variant .per-day {
+            font-size: 12px;
+            font-weight: 700;
+            color: #e74c3c;
+            background: #fef0ef;
+            display: inline-block;
+            padding: 2px 10px;
             border-radius: 12px;
-            padding: 12px 14px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            margin-bottom: 18px;
+            margin-top: 4px;
         }
-        .bump input { width: 20px; height: 20px; accent-color: #14452F; flex-shrink:0; }
-        .bump label { font-size: 13px; font-weight: 600; color: #14452F; cursor: pointer; }
-        .bump .extra { font-weight: 700; color: #D4AF37; margin-left: auto; }
 
+        /* SUMMARY */
         .summary {
             background: #f5f8fc;
-            border-radius: 14px;
-            padding: 14px 18px;
+            border-radius: 16px;
+            padding: 16px 20px;
             margin-bottom: 20px;
         }
         .summary .row {
             display: flex;
             justify-content: space-between;
             font-size: 14px;
-            padding: 4px 0;
+            padding: 5px 0;
+            color: #2d4054;
         }
-        .summary .total {
+        .summary .row.total {
             border-top: 2px solid #D4AF37;
             margin-top: 8px;
-            padding-top: 10px;
+            padding-top: 12px;
             font-size: 20px;
             font-weight: 800;
             color: #14452F;
         }
 
+        /* BUMP (Optional E-Book) */
+        .bump {
+            background: #fffbe6;
+            border: 2px dashed #D4AF37;
+            border-radius: 12px;
+            padding: 12px 16px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+        .bump input[type="checkbox"] { width: 20px; height: 20px; accent-color: #14452F; flex-shrink: 0; cursor: pointer; }
+        .bump label { font-size: 13px; font-weight: 600; color: #14452F; cursor: pointer; }
+        .bump .extra { font-weight: 700; color: #D4AF37; margin-left: auto; }
+
+        /* FORM */
         .form-group { margin-bottom: 14px; }
-        .form-group label { font-weight: 600; font-size: 13px; color: #14452F; display: block; margin-bottom: 4px; }
+        .form-group label {
+            font-weight: 600;
+            font-size: 13px;
+            color: #14452F;
+            display: block;
+            margin-bottom: 4px;
+        }
         .form-group input, .form-group textarea {
             width: 100%;
             padding: 14px 16px;
-            border: 2px solid #e5eaef;
+            border: 2px solid #e9edf2;
             border-radius: 12px;
             font-size: 15px;
             font-family: inherit;
             transition: 0.2s;
+            background: #fff;
         }
         .form-group input:focus, .form-group textarea:focus {
             border-color: #D4AF37;
             outline: none;
-            box-shadow: 0 0 0 3px rgba(212,175,55,0.15);
+            box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.15);
         }
 
-        .btn {
+        /* BUTTON */
+        .btn-whatsapp {
             width: 100%;
             padding: 18px;
             background: #25D366;
@@ -130,65 +198,91 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 10px;
+            gap: 12px;
+            box-shadow: 0 6px 20px rgba(37, 211, 102, 0.25);
         }
-        .btn:hover { background: #1da851; transform: scale(1.01); }
-        .btn:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
+        .btn-whatsapp:hover { background: #1da851; transform: scale(1.01); }
+        .btn-whatsapp:disabled { opacity: 0.6; cursor: not-allowed; transform: none; box-shadow: none; }
 
-        .footnote {
+        .footer-note {
             text-align: center;
             font-size: 12px;
-            color: #999;
-            margin-top: 16px;
+            color: #8a9aa8;
+            margin-top: 18px;
             padding-top: 16px;
-            border-top: 1px solid #e5eaef;
+            border-top: 1px solid #e9edf2;
         }
-        .footnote i { margin-right: 4px; }
+        .footer-note i { margin-right: 4px; }
     </style>
 </head>
 <body>
 
-<div class="card">
+<div class="container">
+    <!-- HEADER -->
     <div class="header">
         <h1>Balwaan <span>Gold</span></h1>
-        <p>Select package &amp; order on WhatsApp</p>
+        <p>Secure Checkout - 100% Ayurvedic Guarantee</p>
     </div>
 
+    <!-- BODY -->
     <div class="body">
 
-        <!-- Products -->
+        <!-- 1️⃣ CHOOSE PACKAGE -->
         <div class="variant-grid" id="variantGrid">
-            <div class="variant active" data-price="550" data-name="Starter Pack">
-                <h4>Starter</h4>
+            <!-- Trial Pack -->
+            <div class="variant" data-price="550" data-name="Trial Pack (30 Capsules)" data-detail="30 Capsules - ENTRY">
+                <span class="badge badge-entry">ENTRY</span>
+                <h4>Trial Pack</h4>
                 <div class="price">₹550</div>
+                <div class="sub">30 Capsules</div>
             </div>
-            <div class="variant" data-price="990" data-name="Regular Pack">
-                <h4>Regular</h4>
-                <div class="price">₹990</div>
+
+            <!-- Regular Pack (Default Selected) -->
+            <div class="variant active" data-price="1110" data-name="Regular Pack (60 Capsules)" data-detail="60 Capsules - BEST VALUE">
+                <span class="badge badge-best">BEST VALUE</span>
+                <h4>Regular Pack</h4>
+                <div class="price">₹1110</div>
+                <div class="sub">60 Capsules</div>
             </div>
-            <div class="variant" data-price="1599" data-name="Customized">
-                <h4>Customized</h4>
+
+            <!-- Combo Pack -->
+            <div class="variant" data-price="1599" data-name="Combo Pack (120 Capsules)" data-detail="120 Capsules - MASSIVE SAVING">
+                <span class="badge badge-saving">MASSIVE SAVING</span>
+                <h4>Combo Pack</h4>
                 <div class="price">₹1599</div>
-                <span class="badge">Popular</span>
+                <div class="sub">120 Capsules</div>
+                <div class="per-day">₹26.6 / day</div>
             </div>
         </div>
 
-        <!-- E-Book Bump -->
+        <!-- 📊 ORDER SUMMARY -->
+        <div class="summary" id="summary">
+            <div class="row">
+                <span><i class="fas fa-box me-2"></i>Selected Package</span>
+                <span id="sName">Regular Pack (60 Capsules)</span>
+            </div>
+            <div class="row">
+                <span>Base Price</span>
+                <span id="sPrice">₹1110</span>
+            </div>
+            <div class="row" id="bumpRow" style="display:none;">
+                <span>Diet E-Book</span>
+                <span>+₹99</span>
+            </div>
+            <div class="row total">
+                <span>Total Amount</span>
+                <span id="sTotal">₹1110</span>
+            </div>
+        </div>
+
+        <!-- 📘 BUMP (Optional E-Book) -->
         <div class="bump">
-            <input type="checkbox" id="bump">
-            <label for="bump">Add <b>Diet E-Book</b> (PDF)</label>
+            <input type="checkbox" id="bumpCheck">
+            <label for="bumpCheck">Add <b>Ayurvedic Diet E-Book</b> (PDF) for faster results</label>
             <span class="extra">+₹99</span>
         </div>
 
-        <!-- Summary -->
-        <div class="summary" id="summary">
-            <div class="row"><span>Product</span> <span id="sName">Starter Pack</span></div>
-            <div class="row"><span>Price</span> <span id="sPrice">₹550</span></div>
-            <div class="row" id="bumpRow" style="display:none;"><span>E-Book</span> <span>+₹99</span></div>
-            <div class="row total"><span>Total</span> <span id="sTotal">₹550</span></div>
-        </div>
-
-        <!-- Form -->
+        <!-- 📝 CUSTOMER DETAILS -->
         <form id="orderForm">
             <div class="form-group">
                 <label>Full Name *</label>
@@ -200,37 +294,39 @@
             </div>
             <div class="form-group">
                 <label>Delivery Address *</label>
-                <textarea id="address" rows="3" placeholder="House, Area, City, Pincode" required></textarea>
+                <textarea id="address" rows="3" placeholder="House No, Area, City, Pincode" required></textarea>
             </div>
 
-            <button type="submit" class="btn" id="orderBtn">
+            <button type="submit" class="btn-whatsapp" id="orderBtn">
                 <i class="fab fa-whatsapp fa-lg"></i> Order via WhatsApp
             </button>
         </form>
 
-        <div class="footnote">
-            <i class="fas fa-shield-alt"></i> COD Available · Discreet Packaging
+        <div class="footer-note">
+            <i class="fas fa-shield-alt"></i> Cash on Delivery Available · 100% Discreet Packaging
         </div>
     </div>
 </div>
 
 <script>
-    // ----- VARIANT SELECTION -----
+    // ---------- ELEMENTS ----------
     const cards = document.querySelectorAll('.variant');
     const sName = document.getElementById('sName');
     const sPrice = document.getElementById('sPrice');
     const sTotal = document.getElementById('sTotal');
     const bumpRow = document.getElementById('bumpRow');
-    const bump = document.getElementById('bump');
+    const bumpCheck = document.getElementById('bumpCheck');
     const form = document.getElementById('orderForm');
     const btn = document.getElementById('orderBtn');
 
-    let currentPrice = 550;
-    let currentName = 'Starter Pack';
+    // ---------- STATE ----------
+    let currentPrice = 1110;
+    let currentName = 'Regular Pack (60 Capsules)';
 
-    cards.forEach(c => {
-        c.addEventListener('click', function() {
-            cards.forEach(x => x.classList.remove('active'));
+    // ---------- CARD SELECTION ----------
+    cards.forEach(card => {
+        card.addEventListener('click', function() {
+            cards.forEach(c => c.classList.remove('active'));
             this.classList.add('active');
             currentName = this.dataset.name;
             currentPrice = parseInt(this.dataset.price);
@@ -238,13 +334,15 @@
         });
     });
 
-    bump.addEventListener('change', updateSummary);
+    // ---------- BUMP TOGGLE ----------
+    bumpCheck.addEventListener('change', updateSummary);
 
     function updateSummary() {
         let total = currentPrice;
         sName.textContent = currentName;
         sPrice.textContent = '₹' + currentPrice;
-        if (bump.checked) {
+
+        if (bumpCheck.checked) {
             total += 99;
             bumpRow.style.display = 'flex';
         } else {
@@ -253,7 +351,7 @@
         sTotal.textContent = '₹' + total;
     }
 
-    // ----- FORM SUBMIT -----
+    // ---------- FORM SUBMIT (WhatsApp) ----------
     form.addEventListener('submit', function(e) {
         e.preventDefault();
 
@@ -261,59 +359,69 @@
         const mobile = document.getElementById('mobile').value.trim();
         const address = document.getElementById('address').value.trim();
 
+        // Validation
         if (!name || !mobile || !address) {
-            alert('Please fill all fields.');
+            alert('Please fill all the details.');
             return;
         }
         if (!/^\d{10}$/.test(mobile)) {
-            alert('Enter a valid 10-digit mobile number.');
+            alert('Please enter a valid 10-digit mobile number.');
             return;
         }
 
+        // Prepare order
         let product = currentName;
         let total = currentPrice;
-        if (bump.checked) {
-            product += ' + E-Book';
+        if (bumpCheck.checked) {
+            product += ' + Diet E-Book';
             total += 99;
         }
 
         const orderId = 'BWG' + Date.now().toString().slice(-6);
 
-        // ----- SAVE TO LOCALSTORAGE (Admin Panel) -----
+        // 📌 1. SAVE TO LOCALSTORAGE (Admin Panel)
         let orders = JSON.parse(localStorage.getItem('balwaanOrders') || '[]');
         orders.push({
-            orderId, name, mobile, product, amount: total,
-            paymentMethod: 'COD', address, timestamp: Date.now()
+            orderId,
+            name,
+            mobile,
+            product,
+            amount: total,
+            paymentMethod: 'Cash on Delivery',
+            address,
+            timestamp: Date.now()
         });
         localStorage.setItem('balwaanOrders', JSON.stringify(orders));
 
-        // ----- WHATSAPP REDIRECT -----
-        const msg = 
+        // 📌 2. WHATSAPP REDIRECT
+        const msg =
 `Hi Balwaan Team,%0A%0A*Order ID:* ${orderId}%0A*Name:* ${name}%0A*Mobile:* ${mobile}%0A*Product:* ${product}%0A*Amount:* ₹${total}%0A*Payment:* Cash on Delivery%0A*Address:* ${address}%0A%0APlease confirm my order.`;
 
         btn.disabled = true;
         btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Redirecting...';
 
+        // Redirect to WhatsApp
         window.location.href = `https://wa.me/919557133307?text=${msg}`;
 
-        // Backup: re-enable after 5s if redirect fails
+        // Safety: Re-enable button if redirect fails (after 6 seconds)
         setTimeout(() => {
             btn.disabled = false;
             btn.innerHTML = '<i class="fab fa-whatsapp fa-lg"></i> Order via WhatsApp';
-        }, 5000);
+        }, 6000);
     });
 
-    // ----- PRE-FILL from Custom Protocol -----
-    const sd = sessionStorage.getItem('checkout_userData');
-    if (sd) {
+    // ---------- PRE-FILL FROM CUSTOM PROTOCOL ----------
+    const sessionData = sessionStorage.getItem('checkout_userData');
+    if (sessionData) {
         try {
-            const d = JSON.parse(sd);
-            if (d.name) document.getElementById('fullName').value = d.name;
-            if (d.mobile) document.getElementById('mobile').value = d.mobile;
+            const data = JSON.parse(sessionData);
+            if (data.name) document.getElementById('fullName').value = data.name;
+            if (data.mobile) document.getElementById('mobile').value = data.mobile;
             sessionStorage.removeItem('checkout_userData');
         } catch(e) {}
     }
 
+    // ---------- INIT ----------
     updateSummary();
 </script>
 
