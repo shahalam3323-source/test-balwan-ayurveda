@@ -3,251 +3,318 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Checkout - Balwaan Gold (Dummy)</title>
-    
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <title>Checkout – Balwaan Gold</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: 'Poppins', sans-serif; background: #f0f4f7; min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 20px; }
-        .container { max-width: 480px; width: 100%; background: white; border-radius: 28px; box-shadow: 0 20px 40px rgba(0,0,0,0.08); overflow: hidden; position: relative; }
-        
-        /* ----- HEADER WITH BACK BUTTON ----- */
-        .header { 
-            background: #14452F; 
-            padding: 20px 20px; 
-            text-align: center; 
-            border-bottom: 4px solid #D4AF37; 
-            display: flex; 
-            align-items: center; 
-            justify-content: center;
-            position: relative;
-        }
-        .back-btn {
-            position: absolute;
-            left: 20px;
-            top: 50%;
-            transform: translateY(-50%);
-            color: white;
-            font-size: 22px;
-            text-decoration: none;
+        * { margin:0; padding:0; box-sizing:border-box; }
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #f2f5f9;
+            min-height: 100vh;
             display: flex;
             align-items: center;
-            gap: 6px;
-            font-weight: 600;
-            font-size: 16px;
-            opacity: 0.8;
-            transition: 0.2s;
-            background: rgba(255,255,255,0.1);
-            padding: 6px 14px;
-            border-radius: 30px;
-            border: 1px solid rgba(255,255,255,0.15);
+            justify-content: center;
+            padding: 16px;
         }
-        .back-btn:hover { opacity: 1; background: rgba(255,255,255,0.2); }
-        .back-btn i { font-size: 14px; }
-        
-        .header h1 { color: white; font-family: 'Montserrat', sans-serif; font-size: 22px; margin: 0; }
+        .card {
+            max-width: 480px;
+            width: 100%;
+            background: #fff;
+            border-radius: 28px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.08);
+            overflow: hidden;
+        }
+        .header {
+            background: #14452F;
+            color: #fff;
+            padding: 28px 24px;
+            text-align: center;
+        }
+        .header h1 { font-size: 26px; font-weight: 800; }
         .header h1 span { color: #D4AF37; }
-        .header p { color: #ddd; font-size: 12px; margin: 0; }
-        
-        .body { padding: 25px; }
-        
-        /* Product Card */
-        .product-card { background: #f9f9f9; border-radius: 16px; padding: 15px; display: flex; align-items: center; gap: 15px; margin-bottom: 20px; border: 1px solid #eee; flex-wrap: wrap; }
-        .product-card img { width: 70px; height: 70px; object-fit: cover; border-radius: 10px; border: 2px solid #D4AF37; background: #eee; }
-        .product-card .details { flex: 1; }
-        .product-card h4 { font-size: 16px; color: #14452F; margin-bottom: 2px; }
-        .product-card .price { font-weight: 800; color: #D4AF37; font-size: 20px; }
-        .product-card .badge-cod { background: #25D366; color: white; font-size: 11px; padding: 2px 10px; border-radius: 20px; font-weight: 600; }
-        
-        /* Variant Selector - 3 Options with Capsule Quantity & Per Day Cost */
-        .variant-selector { display: flex; flex-direction: column; gap: 10px; margin: 15px 0 20px; }
-        .variant-btn { 
-            padding: 14px 16px; 
-            border: 2px solid #e8ecf0; 
-            border-radius: 14px; 
-            cursor: pointer; 
-            transition: 0.25s ease; 
-            background: white; 
-            font-weight: 600; 
-            text-align: left; 
-            display: flex;
-            flex-direction: column;
-            line-height: 1.5;
+        .header p { font-size: 14px; opacity: 0.8; margin-top: 4px; }
+
+        .body { padding: 24px; }
+
+        .variant-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 10px;
+            margin-bottom: 18px;
         }
-        .variant-btn.active { border-color: #D4AF37; background: #fffcf0; box-shadow: 0 0 0 3px rgba(212, 175, 55, 0.15); }
-        .variant-btn .main-row { display: flex; justify-content: space-between; align-items: center; }
-        .variant-btn .product-name { font-size: 16px; color: #1a2e24; }
-        .variant-btn .product-price { font-size: 18px; font-weight: 800; color: #14452F; }
-        .variant-btn .price-sub { font-weight: 400; font-size: 13px; color: #666; }
-        
-        .variant-btn .meta-row { display: flex; justify-content: space-between; align-items: center; margin-top: 5px; flex-wrap: wrap; gap: 4px; }
-        .variant-btn .capsule-info { font-size: 13px; color: #14452F; font-weight: 700; background: #eef5f1; padding: 2px 12px; border-radius: 20px; }
-        .variant-btn .per-day { font-weight: 700; font-size: 14px; color: #14452F; }
-        
-        .badge-tag { font-size: 10px; padding: 3px 12px; border-radius: 30px; font-weight: 800; letter-spacing: 0.5px; text-transform: uppercase; }
-        .badge-best { background: #D4AF37; color: #14452F; }
-        .badge-saving { background: #e64a19; color: white; }
-        .badge-entry { background: #e0e0e0; color: #444; }
+        @media (max-width: 420px) { .variant-grid { grid-template-columns: 1fr; } }
 
-        .form-group { margin-bottom: 18px; }
-        .form-group label { font-weight: 600; font-size: 14px; color: #333; display: block; margin-bottom: 5px; }
-        .form-group input { width: 100%; padding: 14px 16px; border: 2px solid #e0e0e0; border-radius: 12px; font-size: 16px; transition: 0.2s; }
-        .form-group input:focus { border-color: #D4AF37; outline: none; background: #fffcf0; }
-        
-        .btn-submit { width: 100%; padding: 18px; background: linear-gradient(135deg, #D4AF37, #b38f2c); color: #14452F; border: none; border-radius: 50px; font-size: 20px; font-weight: 800; cursor: pointer; box-shadow: 0 8px 20px rgba(212,175,55,0.3); transition: 0.2s; }
-        .btn-submit:hover { transform: scale(1.02); }
-        .btn-submit i { margin-right: 10px; }
+        .variant {
+            border: 2px solid #e5eaef;
+            border-radius: 14px;
+            padding: 14px 8px;
+            text-align: center;
+            cursor: pointer;
+            transition: 0.2s;
+            background: #fafcfd;
+        }
+        .variant:hover { border-color: #D4AF37; }
+        .variant.active {
+            border-color: #D4AF37;
+            background: #fdf7e5;
+            box-shadow: 0 0 0 2px #D4AF37;
+        }
+        .variant h4 { font-size: 14px; font-weight: 700; color: #14452F; }
+        .variant .price { font-size: 17px; font-weight: 700; color: #14452F; }
+        .variant .badge { font-size: 9px; background: #ff9800; color: #fff; padding: 2px 8px; border-radius: 20px; }
 
-        .footer-text { text-align: center; font-size: 12px; color: #999; margin-top: 20px; }
-        .footer-text i { color: #25D366; }
+        .bump {
+            background: #fffae6;
+            border: 2px dashed #D4AF37;
+            border-radius: 12px;
+            padding: 12px 14px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 18px;
+        }
+        .bump input { width: 20px; height: 20px; accent-color: #14452F; flex-shrink:0; }
+        .bump label { font-size: 13px; font-weight: 600; color: #14452F; cursor: pointer; }
+        .bump .extra { font-weight: 700; color: #D4AF37; margin-left: auto; }
+
+        .summary {
+            background: #f5f8fc;
+            border-radius: 14px;
+            padding: 14px 18px;
+            margin-bottom: 20px;
+        }
+        .summary .row {
+            display: flex;
+            justify-content: space-between;
+            font-size: 14px;
+            padding: 4px 0;
+        }
+        .summary .total {
+            border-top: 2px solid #D4AF37;
+            margin-top: 8px;
+            padding-top: 10px;
+            font-size: 20px;
+            font-weight: 800;
+            color: #14452F;
+        }
+
+        .form-group { margin-bottom: 14px; }
+        .form-group label { font-weight: 600; font-size: 13px; color: #14452F; display: block; margin-bottom: 4px; }
+        .form-group input, .form-group textarea {
+            width: 100%;
+            padding: 14px 16px;
+            border: 2px solid #e5eaef;
+            border-radius: 12px;
+            font-size: 15px;
+            font-family: inherit;
+            transition: 0.2s;
+        }
+        .form-group input:focus, .form-group textarea:focus {
+            border-color: #D4AF37;
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(212,175,55,0.15);
+        }
+
+        .btn {
+            width: 100%;
+            padding: 18px;
+            background: #25D366;
+            color: #fff;
+            border: none;
+            border-radius: 60px;
+            font-size: 18px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+        .btn:hover { background: #1da851; transform: scale(1.01); }
+        .btn:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
+
+        .footnote {
+            text-align: center;
+            font-size: 12px;
+            color: #999;
+            margin-top: 16px;
+            padding-top: 16px;
+            border-top: 1px solid #e5eaef;
+        }
+        .footnote i { margin-right: 4px; }
     </style>
 </head>
 <body>
 
-<div class="container">
-    <!-- HEADER WITH BACK BUTTON -->
+<div class="card">
     <div class="header">
-        <a href="index.html" class="back-btn"><i class="fas fa-arrow-left"></i> BACK</a>
-        <div>
-            <h1>Balwaan <span>Gold</span></h1>
-            <p>Secure Checkout</p>
-        </div>
+        <h1>Balwaan <span>Gold</span></h1>
+        <p>Select package &amp; order on WhatsApp</p>
     </div>
 
     <div class="body">
-        <!-- Product Display -->
-        <div class="product-card">
-            <img src="images/gallery-1.webp" alt="Product" onerror="this.src='https://placehold.co/70x70/14452F/D4AF37?text=BW'">
-            <div class="details">
-                <h4>Men's Vitality Booster</h4>
-                <span class="price" id="displayPrice">₹1110</span> 
-                <span class="badge-cod"><i class="fas fa-rupee-sign"></i> Pay on Delivery</span>
+
+        <!-- Products -->
+        <div class="variant-grid" id="variantGrid">
+            <div class="variant active" data-price="550" data-name="Starter Pack">
+                <h4>Starter</h4>
+                <div class="price">₹550</div>
+            </div>
+            <div class="variant" data-price="990" data-name="Regular Pack">
+                <h4>Regular</h4>
+                <div class="price">₹990</div>
+            </div>
+            <div class="variant" data-price="1599" data-name="Customized">
+                <h4>Customized</h4>
+                <div class="price">₹1599</div>
+                <span class="badge">Popular</span>
             </div>
         </div>
 
-        <!-- ========================================================= -->
-        <!-- 3 VARIANTS WITH CAPSULE QUANTITY + PER DAY COST (NO EMOJI) -->
-        <!-- ========================================================= -->
-        <div class="variant-selector">
-            <!-- 1. Trial Pack -->
-            <div class="variant-btn" data-price="550" data-name="Trial Pack (30 Capsules - 15 Days)" onclick="selectVariant(this)">
-                <div class="main-row">
-                    <span class="product-name">Trial Pack</span>
-                    <span><span class="product-price">₹550</span> <span class="price-sub">(15 Days)</span></span>
-                </div>
-                <div class="meta-row">
-                    <span class="capsule-info">💊 30 Capsules</span>
-                    <span class="per-day">₹36.6 / day</span>
-                    <span class="badge-tag badge-entry">ENTRY</span>
-                </div>
-            </div>
-            
-            <!-- 2. Regular Pack (DEFAULT) -->
-            <div class="variant-btn active" data-price="1110" data-name="Regular Pack (60 Capsules - 30 Days)" onclick="selectVariant(this)">
-                <div class="main-row">
-                    <span class="product-name">Regular Pack</span>
-                    <span><span class="product-price">₹1110</span> <span class="price-sub">(30 Days)</span></span>
-                </div>
-                <div class="meta-row">
-                    <span class="capsule-info">💊 60 Capsules</span>
-                    <span class="per-day">₹37 / day</span>
-                    <span class="badge-tag badge-best">BEST VALUE</span>
-                </div>
-            </div>
-            
-            <!-- 3. Combo Pack -->
-            <div class="variant-btn" data-price="1599" data-name="Combo Pack (120 Capsules - 60 Days + Free E-Book)" onclick="selectVariant(this)">
-                <div class="main-row">
-                    <span class="product-name">Combo Pack</span>
-                    <span><span class="product-price">₹1599</span> <span class="price-sub">(60 Days)</span></span>
-                </div>
-                <div class="meta-row">
-                    <span class="capsule-info">💊 120 Capsules</span>
-                    <span class="per-day">₹26.6 / day</span>
-                    <span class="badge-tag badge-saving">MASSIVE SAVING</span>
-                </div>
-            </div>
+        <!-- E-Book Bump -->
+        <div class="bump">
+            <input type="checkbox" id="bump">
+            <label for="bump">Add <b>Diet E-Book</b> (PDF)</label>
+            <span class="extra">+₹99</span>
         </div>
 
-        <!-- Customer Form -->
-        <form id="checkoutForm">
+        <!-- Summary -->
+        <div class="summary" id="summary">
+            <div class="row"><span>Product</span> <span id="sName">Starter Pack</span></div>
+            <div class="row"><span>Price</span> <span id="sPrice">₹550</span></div>
+            <div class="row" id="bumpRow" style="display:none;"><span>E-Book</span> <span>+₹99</span></div>
+            <div class="row total"><span>Total</span> <span id="sTotal">₹550</span></div>
+        </div>
+
+        <!-- Form -->
+        <form id="orderForm">
             <div class="form-group">
-                <label><i class="fas fa-user"></i> Full Name</label>
-                <input type="text" id="userName" placeholder="e.g. Rahul Sharma" required>
+                <label>Full Name *</label>
+                <input type="text" id="fullName" placeholder="e.g. Rajesh Kumar" required>
             </div>
             <div class="form-group">
-                <label><i class="fab fa-whatsapp"></i> WhatsApp Number</label>
-                <input type="tel" id="userMobile" placeholder="9876543210" pattern="[0-9]{10}" required>
-                <small style="color: #888;">✅ Order confirmation & delivery details will be sent here</small>
+                <label>WhatsApp Number *</label>
+                <input type="tel" id="mobile" placeholder="10-digit number" pattern="[0-9]{10}" maxlength="10" required>
+            </div>
+            <div class="form-group">
+                <label>Delivery Address *</label>
+                <textarea id="address" rows="3" placeholder="House, Area, City, Pincode" required></textarea>
             </div>
 
-            <button type="submit" class="btn-submit">
-                <i class="fas fa-bolt"></i> Place Order (COD)
+            <button type="submit" class="btn" id="orderBtn">
+                <i class="fab fa-whatsapp fa-lg"></i> Order via WhatsApp
             </button>
         </form>
-        <div class="footer-text">
-            <i class="fas fa-lock"></i> 100% Secure • Free Shipping • No Hidden Charges
+
+        <div class="footnote">
+            <i class="fas fa-shield-alt"></i> COD Available · Discreet Packaging
         </div>
     </div>
 </div>
 
 <script>
-    // =============================================
-    // DUMMY VERSION - NO SENSITIVE DATA
-    // =============================================
+    // ----- VARIANT SELECTION -----
+    const cards = document.querySelectorAll('.variant');
+    const sName = document.getElementById('sName');
+    const sPrice = document.getElementById('sPrice');
+    const sTotal = document.getElementById('sTotal');
+    const bumpRow = document.getElementById('bumpRow');
+    const bump = document.getElementById('bump');
+    const form = document.getElementById('orderForm');
+    const btn = document.getElementById('orderBtn');
 
-    let selectedPrice = 1110;
-    let selectedName = "Regular Pack (60 Capsules - 30 Days)";
+    let currentPrice = 550;
+    let currentName = 'Starter Pack';
 
-    function selectVariant(el) {
-        document.querySelectorAll('.variant-btn').forEach(b => b.classList.remove('active'));
-        el.classList.add('active');
-        selectedPrice = parseInt(el.dataset.price);
-        selectedName = el.dataset.name;
-        document.getElementById('displayPrice').innerHTML = '₹' + selectedPrice;
+    cards.forEach(c => {
+        c.addEventListener('click', function() {
+            cards.forEach(x => x.classList.remove('active'));
+            this.classList.add('active');
+            currentName = this.dataset.name;
+            currentPrice = parseInt(this.dataset.price);
+            updateSummary();
+        });
+    });
+
+    bump.addEventListener('change', updateSummary);
+
+    function updateSummary() {
+        let total = currentPrice;
+        sName.textContent = currentName;
+        sPrice.textContent = '₹' + currentPrice;
+        if (bump.checked) {
+            total += 99;
+            bumpRow.style.display = 'flex';
+        } else {
+            bumpRow.style.display = 'none';
+        }
+        sTotal.textContent = '₹' + total;
     }
 
-    window.onload = function() {
-        try {
-            const data = JSON.parse(sessionStorage.getItem('checkout_userData') || '{}');
-            if (data.name) document.getElementById('userName').value = data.name;
-            if (data.mobile) document.getElementById('userMobile').value = data.mobile;
-        } catch(e) { /* Ignore */ }
-    };
-
-    document.getElementById('checkoutForm').addEventListener('submit', function(e) {
+    // ----- FORM SUBMIT -----
+    form.addEventListener('submit', function(e) {
         e.preventDefault();
-        
-        const name = document.getElementById('userName').value.trim();
-        const mobile = document.getElementById('userMobile').value.trim();
 
-        if (!name) { alert('Please enter your name.'); return; }
-        if (!/^\d{10}$/.test(mobile)) { alert('Please enter a valid 10-digit number.'); return; }
+        const name = document.getElementById('fullName').value.trim();
+        const mobile = document.getElementById('mobile').value.trim();
+        const address = document.getElementById('address').value.trim();
+
+        if (!name || !mobile || !address) {
+            alert('Please fill all fields.');
+            return;
+        }
+        if (!/^\d{10}$/.test(mobile)) {
+            alert('Enter a valid 10-digit mobile number.');
+            return;
+        }
+
+        let product = currentName;
+        let total = currentPrice;
+        if (bump.checked) {
+            product += ' + E-Book';
+            total += 99;
+        }
 
         const orderId = 'BWG' + Date.now().toString().slice(-6);
-        const product = selectedName;
-        const amount = selectedPrice;
 
-        // Save to LocalStorage
+        // ----- SAVE TO LOCALSTORAGE (Admin Panel) -----
         let orders = JSON.parse(localStorage.getItem('balwaanOrders') || '[]');
         orders.push({
-            orderId, name, mobile, product, amount,
-            paymentMethod: 'Cash on Delivery',
-            status: 'Order Placed (Address Pending)',
-            timestamp: Date.now()
+            orderId, name, mobile, product, amount: total,
+            paymentMethod: 'COD', address, timestamp: Date.now()
         });
         localStorage.setItem('balwaanOrders', JSON.stringify(orders));
 
-        // Save to SessionStorage
-        sessionStorage.setItem('orderCompleteData', JSON.stringify({
-            orderId, name, mobile, product, amount
-        }));
+        // ----- WHATSAPP REDIRECT -----
+        const msg = 
+`Hi Balwaan Team,%0A%0A*Order ID:* ${orderId}%0A*Name:* ${name}%0A*Mobile:* ${mobile}%0A*Product:* ${product}%0A*Amount:* ₹${total}%0A*Payment:* Cash on Delivery%0A*Address:* ${address}%0A%0APlease confirm my order.`;
 
-        // Redirect
-        window.location.href = 'order-complete.html';
+        btn.disabled = true;
+        btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Redirecting...';
+
+        window.location.href = `https://wa.me/919557133307?text=${msg}`;
+
+        // Backup: re-enable after 5s if redirect fails
+        setTimeout(() => {
+            btn.disabled = false;
+            btn.innerHTML = '<i class="fab fa-whatsapp fa-lg"></i> Order via WhatsApp';
+        }, 5000);
     });
+
+    // ----- PRE-FILL from Custom Protocol -----
+    const sd = sessionStorage.getItem('checkout_userData');
+    if (sd) {
+        try {
+            const d = JSON.parse(sd);
+            if (d.name) document.getElementById('fullName').value = d.name;
+            if (d.mobile) document.getElementById('mobile').value = d.mobile;
+            sessionStorage.removeItem('checkout_userData');
+        } catch(e) {}
+    }
+
+    updateSummary();
 </script>
 
 </body>
