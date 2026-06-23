@@ -29,7 +29,31 @@
             overflow: hidden; 
             text-align: center;
             padding: 40px 30px;
+            position: relative;
         }
+        
+        /* Back Button Inside Container (Top Left) */
+        .back-btn {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            color: #14452F;
+            font-size: 14px;
+            font-weight: 600;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            opacity: 0.7;
+            transition: 0.2s;
+            background: #f5f7fa;
+            padding: 6px 14px;
+            border-radius: 30px;
+            border: 1px solid #e0e0e0;
+        }
+        .back-btn:hover { opacity: 1; background: #eef2f7; }
+        .back-btn i { font-size: 12px; }
+
         .checkmark {
             width: 100px;
             height: 100px;
@@ -38,7 +62,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            margin: 0 auto 20px;
+            margin: 30px auto 20px;
             animation: popIn 0.5s ease;
         }
         .checkmark i {
@@ -76,14 +100,14 @@
             background: #fffbe6;
             border: 1px solid #D4AF37;
             border-radius: 12px;
-            padding: 15px;
+            padding: 18px 15px;
             margin: 25px 0;
             text-align: left;
         }
         .info-box p {
             font-size: 14px;
             color: #333;
-            margin-bottom: 5px;
+            margin-bottom: 0;
         }
         .info-box i {
             color: #D4AF37;
@@ -149,23 +173,23 @@
 <body>
 
 <div class="container">
+    <!-- BACK BUTTON -->
+    <a href="checkout.html" class="back-btn"><i class="fas fa-arrow-left"></i> BACK</a>
+
     <div class="checkmark">
         <i class="fas fa-check-circle"></i>
     </div>
 
     <h1>🎉 Order Complete!</h1>
-    <p class="sub-text">Aapka order successfully place ho gaya hai.</p>
+    <p class="sub-text">Your order has been successfully placed.</p>
     
     <div class="order-id-box" id="orderDisplay">Order ID: BWG-1234</div>
 
     <div class="info-box">
         <p><i class="fas fa-truck"></i> <strong>Free Shipping Confirmation</strong></p>
         <p style="font-size: 13px; margin-top: 8px; color: #555;">
-            ✅ Order already confirmed. <br>
-            📦 Kripya neeche <span class="highlight">WhatsApp</span> button par click karein aur apna 
-            <span class="highlight">Delivery Address</span> type karke bhejein. 
-            <br><br>
-            ⏳ Agar aap address nahi bhejte hain toh hum <span class="highlight">dispatch se pehle</span> aapko WhatsApp par contact karenge.
+            ✅ Order confirmed successfully. <br>
+            📦 Click the WhatsApp button below and type your <span class="highlight">Delivery Address</span> to confirm.
         </p>
     </div>
 
@@ -184,27 +208,23 @@
 </div>
 
 <script>
-    // =====================================================
-    // 🔥 DUMMY VERSION - NO SENSITIVE DATA 
+    // =============================================
+    // DUMMY VERSION - NO SENSITIVE DATA
     // WhatsApp Number: CHANGE_ME_WHEN_LIVE
-    // =====================================================
+    // =============================================
 
-    // ---------- RETRIEVE ORDER DETAILS ----------
     const data = JSON.parse(sessionStorage.getItem('orderCompleteData') || '{}');
     
-    // Fallback values (if sessionStorage is empty)
     const name = data.name || 'Customer';
     const mobile = data.mobile || 'XXXXXXXXXX';
     const orderId = data.orderId || 'BWG-XXXX';
-    const product = data.product || 'Regular Pack (30 Days)';
+    const product = data.product || 'Regular Pack (60 Capsules - 30 Days)';
     const amount = data.amount || 1110;
 
-    // Display Order ID
     document.getElementById('orderDisplay').innerHTML = '🆔 ' + orderId;
 
-    // ---------- BUILD WHATSAPP MESSAGE ----------
-    // 🔥 LIVE KARNE SE PEHLE: Yahan apna WhatsApp number daalein (e.g. 919557133307)
-    const adminNumber = 'YOUR_WHATSAPP_NUMBER'; // <--- CHANGE THIS WHEN GOING LIVE
+    // 🔥 LIVE KARNE SE PEHLE: Yahan apna WhatsApp number daalein (e.g., 919557133307)
+    const adminNumber = 'YOUR_WHATSAPP_NUMBER'; 
     
     const msg = `✅ *Order Placed!*\n\n` +
                 `Order ID: ${orderId}\n` +
@@ -213,12 +233,10 @@
                 `Product: ${product}\n` +
                 `Amount: ₹${amount}\n` +
                 `Payment: Cash on Delivery\n\n` +
-                `📦 *Free Shipping:* Kripya apna complete delivery address (House No, Area, City, Pincode) type karke bhejein.`;
+                `📦 *Free Shipping:* Please type your complete delivery address (House No, Area, City, Pincode).`;
 
-    // Set WhatsApp Link
     document.getElementById('whatsappLink').href = `https://wa.me/${adminNumber}?text=${encodeURIComponent(msg)}`;
 
-    // Extra: Agar order ID missing hai toh bhi dikhao
     if (!data.orderId) {
         document.getElementById('orderDisplay').innerHTML = '🆔 Order Confirmed (Dummy)';
     }
