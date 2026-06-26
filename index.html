@@ -121,7 +121,632 @@
         .btn-reveal:hover { background: #D4AF37; border-color: #D4AF37; color: #000; box-shadow: 0 0 10px rgba(212, 175, 55, 0.5);}
         .solution-modal-header { background: linear-gradient(135deg, #14452F, #0a2418); color: white; border-bottom: 3px solid #D4AF37; }
         .herb-highlight { display: inline-block; background: #fdf5d3; color: #856404; padding: 5px 12px; border-radius: 20px; font-weight: bold; font-size: 13px; margin-bottom: 10px; border: 1px solid #ffeeba; }
+<!-- ============================================================
+     LAYERED CONSULTATION HUB (Expert Prescribed Reviews)
+     ============================================================ -->
+<section class="consult-hub-section" aria-label="Expert Consultation Cases">
+    <div class="container">
+        <!-- Section Heading -->
+        <div class="hub-header text-center">
+            <span class="badge hub-badge">EXPERT PRESCRIBED</span>
+            <h2 class="hub-title">Real Patients, <span class="text-gold">Real Transformations</span></h2>
+            <p class="hub-subtitle">Ayurvedic Experts ne in 3 patients ko alag-alag root causes ke liye Balwaan Gold prescribe kiya.</p>
+        </div>
 
+        <!-- Tabs / Filters -->
+        <div class="hub-tabs" role="tablist" aria-label="Patient cases">
+            <button class="hub-tab active" data-tab="energy" role="tab" aria-selected="true" aria-controls="panel-energy" id="tab-energy">
+                <i class="fas fa-bolt"></i> Fatigue
+            </button>
+            <button class="hub-tab" data-tab="vitality" role="tab" aria-selected="false" aria-controls="panel-vitality" id="tab-vitality">
+                <i class="fas fa-heart"></i> Vitality
+            </button>
+            <button class="hub-tab" data-tab="focus" role="tab" aria-selected="false" aria-controls="panel-focus" id="tab-focus">
+                <i class="fas fa-brain"></i> Focus
+            </button>
+        </div>
+
+        <!-- Dynamic Layered Content -->
+        <div class="hub-stage">
+            <!-- Layer 1: Background Glow -->
+            <div class="hub-bg-glow"></div>
+
+            <!-- Layer 2: Patient Image (Changed via JS) -->
+            <figure class="hub-image-wrap">
+                <img id="hubPatientImg" src="images/patient-1.webp" alt="Patient consulting Ayurvedic expert" class="hub-patient-img" loading="lazy">
+                <figcaption class="hub-image-caption">🩺 Live Consultation</figcaption>
+            </figure>
+
+            <!-- Layer 3: Glassmorphism Text Card (Changed via JS) -->
+            <div class="hub-card glass-effect" role="tabpanel" id="panel-energy">
+                <!-- Star Rating -->
+                <div class="hub-stars">
+                    <i class="fas fa-star"></i><i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i><i class="fas fa-star"></i>
+                    <i class="fas fa-star"></i>
+                    <span class="hub-verified">✔ Verified Patient</span>
+                </div>
+
+                <!-- Dynamic Content Area -->
+                <div class="hub-content" id="hubDynamicContent">
+                    <h3 id="hubHeading" class="hub-patient-heading">Rebuild Your Stamina</h3>
+                    <div class="hub-meta">
+                        <span id="hubPatientName" class="hub-name">Rahul S.</span>
+                        <span id="hubPatientDetail" class="hub-detail">34, IT Professional</span>
+                    </div>
+                    <div class="hub-prescription">
+                        <span class="hub-herb-tag">🌿 Prescribed: <strong id="hubHerbs">Shilajit + Ashwagandha</strong></span>
+                        <span class="hub-doctor">🩺 By: <strong id="hubDoctor">Hakeem Basit Khan</strong></span>
+                    </div>
+                    <blockquote class="hub-review" id="hubQuote">
+                        <i class="fas fa-quote-left"></i>
+                        <span id="hubQuoteText">"Subah uthne par fresh feel hota hai, raat ko deep neend aati hai. 30 din mein meri thakan gayab ho gayi."</span>
+                        <i class="fas fa-quote-right"></i>
+                    </blockquote>
+                </div>
+
+                <!-- CTA Button -->
+                <a href="checkout.html" class="hub-cta-btn">Get Your Personalized Dose →</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ============================================================
+     STYLES (Super Fast & Mobile Optimized)
+     ============================================================ -->
+<style>
+    /* ----- Root Variables (Matches your site) ----- */
+    :root {
+        --primary-green: #14452F;
+        --dark-gold: #D4AF37;
+        --light-gold: #f5e27a;
+        --glass-bg: rgba(255, 255, 255, 0.07);
+        --glass-border: rgba(255, 255, 255, 0.15);
+    }
+
+    /* ----- Section Container ----- */
+    .consult-hub-section {
+        padding: 50px 0 70px 0;
+        background: radial-gradient(circle at 20% 30%, #1e5e41, #0d2d1e);
+        border-top: 4px solid var(--dark-gold);
+        border-bottom: 4px solid var(--dark-gold);
+        position: relative;
+        overflow: hidden;
+    }
+
+    /* Subtle background pattern overlay (Layer 0) */
+    .consult-hub-section::before {
+        content: '';
+        position: absolute;
+        top: -50%;
+        left: -50%;
+        width: 200%;
+        height: 200%;
+        background: radial-gradient(circle at 70% 80%, rgba(212, 175, 55, 0.04) 0%, transparent 70%);
+        pointer-events: none;
+        z-index: 0;
+    }
+
+    .consult-hub-section .container {
+        position: relative;
+        z-index: 1;
+    }
+
+    /* ----- Header Texts ----- */
+    .hub-header {
+        margin-bottom: 28px;
+    }
+    .hub-badge {
+        background: var(--dark-gold);
+        color: #0d2d1e;
+        font-size: 11px;
+        font-weight: 800;
+        letter-spacing: 1.5px;
+        padding: 6px 18px;
+        border-radius: 50px;
+        text-transform: uppercase;
+        margin-bottom: 12px;
+    }
+    .hub-title {
+        font-family: 'Montserrat', sans-serif;
+        font-weight: 800;
+        color: #ffffff;
+        font-size: 28px;
+        margin-bottom: 6px;
+    }
+    .hub-title .text-gold {
+        color: var(--dark-gold);
+    }
+    .hub-subtitle {
+        color: rgba(255, 255, 255, 0.75);
+        font-size: 15px;
+        font-weight: 400;
+        max-width: 500px;
+        margin: 0 auto;
+        line-height: 1.5;
+    }
+
+    /* ----- Tabs (Mobile First - Horizontal Scroll) ----- */
+    .hub-tabs {
+        display: flex;
+        gap: 10px;
+        justify-content: center;
+        margin-bottom: 30px;
+        flex-wrap: wrap;
+    }
+    .hub-tab {
+        background: rgba(255, 255, 255, 0.06);
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        color: #ccc;
+        padding: 10px 22px;
+        border-radius: 50px;
+        font-weight: 700;
+        font-size: 14px;
+        letter-spacing: 0.6px;
+        cursor: pointer;
+        transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        backdrop-filter: blur(4px);
+        -webkit-backdrop-filter: blur(4px);
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        font-family: 'Poppins', sans-serif;
+        flex: 1 1 auto;
+        justify-content: center;
+        min-width: 100px;
+    }
+    .hub-tab i {
+        font-size: 14px;
+        color: var(--dark-gold);
+    }
+    .hub-tab:hover {
+        background: rgba(212, 175, 55, 0.15);
+        border-color: var(--dark-gold);
+        color: #fff;
+        transform: translateY(-2px);
+    }
+    .hub-tab.active {
+        background: var(--dark-gold);
+        border-color: var(--dark-gold);
+        color: #0d2d1e;
+        box-shadow: 0 8px 25px rgba(212, 175, 55, 0.25);
+    }
+    .hub-tab.active i {
+        color: #0d2d1e;
+    }
+
+    /* ----- The Layered Stage ----- */
+    .hub-stage {
+        position: relative;
+        max-width: 800px;
+        margin: 0 auto;
+        border-radius: 28px;
+        overflow: hidden;
+        min-height: 420px;
+        background: rgba(0, 0, 0, 0.25);
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+        border: 1px solid rgba(212, 175, 55, 0.15);
+    }
+
+    /* Layer 1: Background Glow */
+    .hub-bg-glow {
+        position: absolute;
+        inset: 0;
+        background: radial-gradient(circle at 30% 40%, rgba(212, 175, 55, 0.15) 0%, transparent 70%),
+            radial-gradient(circle at 80% 70%, rgba(20, 69, 47, 0.9) 0%, transparent 60%);
+        z-index: 1;
+        pointer-events: none;
+    }
+
+    /* Layer 2: Image */
+    .hub-image-wrap {
+        position: relative;
+        z-index: 2;
+        margin: 0;
+        padding: 0;
+        height: 280px;
+        overflow: hidden;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: #0a1f15;
+    }
+    .hub-patient-img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: opacity 0.5s ease, transform 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        will-change: opacity, transform;
+        opacity: 0.95;
+        transform: scale(1.02);
+    }
+    /* Image smooth transition on tab change */
+    .hub-patient-img.transitioning {
+        opacity: 0.4;
+        transform: scale(0.98);
+    }
+    .hub-image-caption {
+        position: absolute;
+        bottom: 16px;
+        left: 16px;
+        background: rgba(0, 0, 0, 0.6);
+        backdrop-filter: blur(8px);
+        -webkit-backdrop-filter: blur(8px);
+        color: #fff;
+        padding: 6px 16px;
+        border-radius: 30px;
+        font-size: 12px;
+        font-weight: 600;
+        letter-spacing: 0.5px;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    /* Layer 3: Glassmorphism Text Card */
+    .hub-card {
+        position: relative;
+        z-index: 3;
+        margin: -60px 20px 20px 20px;
+        padding: 24px 22px 22px 22px;
+        background: var(--glass-bg);
+        backdrop-filter: blur(18px);
+        -webkit-backdrop-filter: blur(18px);
+        border: 1px solid var(--glass-border);
+        border-radius: 24px;
+        box-shadow: 0 15px 45px rgba(0, 0, 0, 0.35);
+        transition: all 0.3s ease;
+    }
+    /* Glass effect fallback for older browsers */
+    @supports not (backdrop-filter: blur(1px)) {
+        .hub-card {
+            background: rgba(10, 30, 20, 0.92);
+        }
+    }
+
+    /* ----- Card Inner Elements (Dynamic) ----- */
+    .hub-stars {
+        display: flex;
+        align-items: center;
+        gap: 4px;
+        margin-bottom: 12px;
+        color: var(--dark-gold);
+        font-size: 14px;
+    }
+    .hub-stars .hub-verified {
+        color: #7ddf9a;
+        font-size: 11px;
+        font-weight: 600;
+        margin-left: 10px;
+        background: rgba(125, 223, 154, 0.15);
+        padding: 2px 12px;
+        border-radius: 20px;
+        border: 1px solid rgba(125, 223, 154, 0.2);
+    }
+
+    .hub-content {
+        min-height: 150px;
+        transition: opacity 0.25s ease;
+    }
+    .hub-content.fade-out {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    .hub-content.fade-in {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    .hub-patient-heading {
+        font-family: 'Montserrat', sans-serif;
+        font-weight: 800;
+        color: #ffffff;
+        font-size: 22px;
+        margin-bottom: 6px;
+        letter-spacing: -0.3px;
+    }
+    .hub-meta {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        flex-wrap: wrap;
+        margin-bottom: 10px;
+    }
+    .hub-name {
+        color: #fff;
+        font-weight: 700;
+        font-size: 15px;
+    }
+    .hub-detail {
+        color: rgba(255, 255, 255, 0.6);
+        font-size: 13px;
+        background: rgba(255, 255, 255, 0.06);
+        padding: 2px 12px;
+        border-radius: 20px;
+    }
+
+    .hub-prescription {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-bottom: 14px;
+        font-size: 13px;
+    }
+    .hub-herb-tag {
+        background: rgba(212, 175, 55, 0.15);
+        color: var(--dark-gold);
+        padding: 4px 14px;
+        border-radius: 30px;
+        border: 1px solid rgba(212, 175, 55, 0.2);
+    }
+    .hub-doctor {
+        color: #a8d5ba;
+        padding: 4px 14px;
+        border-radius: 30px;
+        background: rgba(255, 255, 255, 0.04);
+    }
+
+    .hub-review {
+        margin: 0 0 16px 0;
+        padding: 0;
+        color: rgba(255, 255, 255, 0.88);
+        font-size: 15px;
+        line-height: 1.6;
+        font-style: italic;
+        display: flex;
+        gap: 8px;
+        align-items: flex-start;
+    }
+    .hub-review i {
+        color: var(--dark-gold);
+        font-size: 14px;
+        opacity: 0.6;
+        margin-top: 4px;
+    }
+    .hub-review .fa-quote-right {
+        align-self: flex-end;
+        margin-top: 0;
+    }
+
+    .hub-cta-btn {
+        display: inline-block;
+        background: linear-gradient(135deg, #D4AF37, #f5e27a);
+        color: #0d2d1e !important;
+        font-weight: 800;
+        padding: 12px 28px;
+        border-radius: 50px;
+        text-decoration: none;
+        font-size: 14px;
+        letter-spacing: 0.5px;
+        transition: transform 0.25s ease, box-shadow 0.25s ease;
+        box-shadow: 0 6px 20px rgba(212, 175, 55, 0.25);
+        border: none;
+        text-align: center;
+        width: 100%;
+        display: block;
+    }
+    .hub-cta-btn:hover {
+        transform: translateY(-3px) scale(1.01);
+        box-shadow: 0 10px 35px rgba(212, 175, 55, 0.35);
+        color: #0d2d1e;
+    }
+
+    /* ----- Responsive Tweaks (Mobile First) ----- */
+    @media (max-width: 480px) {
+        .consult-hub-section {
+            padding: 30px 0 50px 0;
+        }
+        .hub-title {
+            font-size: 24px;
+        }
+        .hub-tabs {
+            gap: 6px;
+        }
+        .hub-tab {
+            padding: 8px 14px;
+            font-size: 12px;
+            min-width: 70px;
+            flex: 1;
+        }
+        .hub-tab i {
+            font-size: 12px;
+        }
+        .hub-stage {
+            min-height: 340px;
+            border-radius: 20px;
+        }
+        .hub-image-wrap {
+            height: 200px;
+        }
+        .hub-card {
+            margin: -40px 12px 12px 12px;
+            padding: 18px 16px 16px 16px;
+            border-radius: 18px;
+        }
+        .hub-patient-heading {
+            font-size: 18px;
+        }
+        .hub-review {
+            font-size: 14px;
+        }
+        .hub-prescription {
+            font-size: 12px;
+        }
+        .hub-cta-btn {
+            padding: 10px 20px;
+            font-size: 13px;
+        }
+        .hub-image-caption {
+            font-size: 10px;
+            bottom: 10px;
+            left: 10px;
+            padding: 4px 12px;
+        }
+    }
+
+    @media (min-width: 768px) {
+        .hub-stage {
+            min-height: 500px;
+        }
+        .hub-image-wrap {
+            height: 380px;
+        }
+        .hub-card {
+            margin: -80px 40px 30px 40px;
+            padding: 32px 35px 28px 35px;
+        }
+        .hub-patient-heading {
+            font-size: 28px;
+        }
+        .hub-cta-btn {
+            width: auto;
+            display: inline-block;
+        }
+    }
+
+    /* Animation for content swap */
+    .hub-content {
+        transition: opacity 0.3s ease, transform 0.3s ease;
+    }
+</style>
+
+<!-- ============================================================
+     SCRIPT (Lightning Fast Vanilla JS)
+     ============================================================ -->
+<script>
+    (function() {
+        'use strict';
+
+        // ----- DATA (Aap isme apna text/image aasani se badal sakte hain) -----
+        const cases = {
+            energy: {
+                img: 'images/patient-1.webp',
+                heading: 'Rebuild Your Stamina',
+                name: 'Rahul S.',
+                detail: '34, IT Professional',
+                herbs: 'Shilajit + Ashwagandha',
+                doctor: 'Hakeem Basit Khan',
+                quote: '"Subah uthne par fresh feel hota hai, raat ko deep neend aati hai. 30 din mein meri thakan gayab ho gayi, office me focus aur raat ko neend dono behtar hui."'
+            },
+            vitality: {
+                img: 'images/patient-2.webp',
+                heading: 'Regain Your Inner Power',
+                name: 'Amit V.',
+                detail: '42, Businessman',
+                herbs: 'Safed Musli + Kaunch Beej',
+                doctor: 'Dr. Rana',
+                quote: '"1 mahine mein meri vitality wapas aayi aur meri personally life mein bhi confidence aa gaya. Thanks to Dr. Rana for the personalized compound."'
+            },
+            focus: {
+                img: 'images/patient-3.webp',
+                heading: 'Unlock 2x Productivity',
+                name: 'Vikram P.',
+                detail: '29, UPSC Aspirant',
+                herbs: 'KSM-66 Ashwagandha + Moringa',
+                doctor: 'Hakeem Basit Khan',
+                quote: '"12 ghante padhai ke baad bhi mera dimag shant aur focused rehta hai. Yeh mere liye game-changer hai, brain fog totally khatam."'
+            }
+        };
+
+        // ----- DOM Refs -----
+        const tabs = document.querySelectorAll('.hub-tab');
+        const img = document.getElementById('hubPatientImg');
+        const heading = document.getElementById('hubHeading');
+        const name = document.getElementById('hubPatientName');
+        const detail = document.getElementById('hubPatientDetail');
+        const herbs = document.getElementById('hubHerbs');
+        const doctor = document.getElementById('hubDoctor');
+        const quoteText = document.getElementById('hubQuoteText');
+        const contentWrap = document.getElementById('hubDynamicContent');
+
+        let currentTab = 'energy';
+        let isTransitioning = false;
+
+        // ----- Update Function -----
+        function updateHub(tabId) {
+            if (isTransitioning || tabId === currentTab) return;
+            isTransitioning = true;
+
+            const data = cases[tabId];
+            if (!data) return;
+
+            // 1. Image Transition (Cross-fade effect)
+            img.classList.add('transitioning');
+            setTimeout(() => {
+                img.src = data.img;
+                img.alt = `${data.name} consulting Ayurvedic expert for ${data.heading}`;
+                img.classList.remove('transitioning');
+            }, 250);
+
+            // 2. Text Transition (Slide + Fade)
+            contentWrap.classList.add('fade-out');
+            setTimeout(() => {
+                heading.textContent = data.heading;
+                name.textContent = data.name;
+                detail.textContent = data.detail;
+                herbs.textContent = data.herbs;
+                doctor.textContent = data.doctor;
+                quoteText.textContent = data.quote;
+
+                contentWrap.classList.remove('fade-out');
+                contentWrap.classList.add('fade-in');
+            }, 200);
+
+            // 3. Tabs UI Update
+            tabs.forEach(t => {
+                t.classList.remove('active');
+                t.setAttribute('aria-selected', 'false');
+            });
+            const activeTab = document.querySelector(`.hub-tab[data-tab="${tabId}"]`);
+            if (activeTab) {
+                activeTab.classList.add('active');
+                activeTab.setAttribute('aria-selected', 'true');
+            }
+
+            // 4. Update ARIA Panel
+            const panels = document.querySelectorAll('[role="tabpanel"]');
+            panels.forEach(p => p.removeAttribute('aria-labelledby'));
+            const panel = document.getElementById(`panel-${tabId}`);
+            if (panel) {
+                panel.setAttribute('aria-labelledby', `tab-${tabId}`);
+            }
+
+            currentTab = tabId;
+            setTimeout(() => {
+                isTransitioning = false;
+                contentWrap.classList.remove('fade-in');
+            }, 400);
+        }
+
+        // ----- Event Listeners -----
+        tabs.forEach(tab => {
+            tab.addEventListener('click', function(e) {
+                const tabId = this.getAttribute('data-tab');
+                updateHub(tabId);
+            });
+
+            // Keyboard Accessibility (Enter/Space)
+            tab.addEventListener('keydown', function(e) {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    const tabId = this.getAttribute('data-tab');
+                    updateHub(tabId);
+                }
+            });
+        });
+
+        // Set initial state for accessibility
+        document.querySelector('.hub-tab.active')?.setAttribute('aria-selected', 'true');
+        const firstPanel = document.getElementById('panel-energy');
+        if (firstPanel) firstPanel.setAttribute('aria-labelledby', 'tab-energy');
+
+        // (Optional) Fix for missing images - placeholder fallback
+        img.addEventListener('error', function() {
+            this.src = 'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI0MDAiIGhlaWdodD0iMzAwIiB2aWV3Qm94PSIwIDAgNDAwIDMwMCI+PHJlY3Qgd2lkdGg9IjQwMCIgaGVpZ2h0PSIzMDAiIGZpbGw9IiMxNDQ1MkYiLz48dGV4dCB4PSI1MCUiIHk9IjUwJSIgZm9udC1mYW1pbHk9IkFyaWFsIiBmb250LXNpemU9IjI0IiBmaWxsPSIjRDRBRjM3IiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBkeT0iLjNlbSI+Q29uc3VsdGF0aW9uIEltYWdlPC90ZXh0Pjwvc3ZnPg==';
+        });
+
+        console.log('✅ Consultation Hub initialized successfully!');
+    })();
+</script>
         /* ============================================
            INGREDIENTS
            ============================================ */
